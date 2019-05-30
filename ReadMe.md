@@ -1,4 +1,5 @@
 # Site Planner Application
+
  An app for a Site Maintenance Manager. The Site Maintenance Manager will be able to add a list of the maintenance engineers, and for each engineer, add the sites that the engineer maintains. The engineers work independently, so each site only belongs to a single engineer.
 
 
@@ -14,7 +15,7 @@
 
 * create a new folder on your desired location in your local machine
 * git init using your terminal
-* git clone https://github.com/emakuthi/infotechApp.git
+* git clone https://github.com/emakuthi/sitePlanner.git
 * make sure you have intellij installed in you laptop.
 * launch intellij and go to files>open project.
 * enjoy the code.
@@ -66,8 +67,8 @@ $< https://powerful-mesa-27568.herokuapp.com/>
 
 # clone into repository
 
-$ git clone https://github.com/emakuthi/sitePlanner.git
-### Open using your favorite editor and view the code or just open the index.html on the browser
+* git clone https://github.com/emakuthi/sitePlanner.git
+* Open using your favorite editor and view the code or just open the index.html on the browser
 
 ## Feedback
 
