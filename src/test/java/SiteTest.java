@@ -1,3 +1,4 @@
+import models.Site;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -11,7 +12,7 @@ public class SiteTest {
 
     @Test
     public void Site_InstantiatesCorrectly_true() {
-        Site testSite = new Site ("kibira", true, LocalDateTime.now(), 0, 0, "NM1078");
+        Site testSite = new Site("kibira", true, LocalDateTime.now(), 0, 0, "NM1078");
         assertEquals(true,testSite instanceof Site);
     }
 }

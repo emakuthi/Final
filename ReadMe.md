@@ -1,14 +1,14 @@
-# Site Planner Application
+# models.Site Planner Application
 
- An app for a Site Maintenance Manager. The Site Maintenance Manager will be able to add a list of the maintenance engineers, and for each engineer, add the sites that the engineer maintains. The engineers work independently, so each site only belongs to a single engineer.
+ An app for a models.Site Maintenance Manager. The models.Site Maintenance Manager will be able to add a list of the maintenance engineers, and for each engineer, add the sites that the engineer maintains. The engineers work independently, so each site only belongs to a single engineer.
 
 
 ## Behavior of the programm
 
  | Behavior                                       |  Input | Output    |
  | ---------------------------------------------- | ------ | --------- |
- |Adding new Engineer|  Click on the add Engineer tab   |  New record will be adde to the list of Engieers|
- |Adding a new Site| click On add new site tab  |  New form will be dispalayed to add more sites |
+ |Adding new models.Engineer|  Click on the add models.Engineer tab   |  New record will be adde to the list of Engieers|
+ |Adding a new models.Site| click On add new site tab  |  New form will be dispalayed to add more sites |
  |Displaying the list of Engineers| click on home page |  all the Engineers and thier details will be displayed|
  
 ## Setup/Installation Requirements

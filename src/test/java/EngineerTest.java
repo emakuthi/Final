@@ -1,3 +1,4 @@
+import models.Engineer;
 import org.junit.Rule;
 import org.junit.Test;
 
