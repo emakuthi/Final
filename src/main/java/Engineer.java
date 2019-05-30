@@ -17,4 +17,24 @@ public class Engineer {
         this.createdAt = createdAt;
         this.completed = completed;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEkNumber() {
+        return ekNumber;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
 }
