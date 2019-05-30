@@ -1,14 +1,14 @@
 # Site Planner Application
-app will throw an error indicating that the there is already an exiting record with the same name
+ An app for a Site Maintenance Manager. The Site Maintenance Manager will be able to add a list of the maintenance engineers, and for each engineer, add the sites that the engineer maintains. The engineers work independently, so each site only belongs to a single engineer.
 
 
 ## Behavior of the programm
 
  | Behavior                                       |  Input | Output    |
  | ---------------------------------------------- | ------ | --------- |
- | create a department name  | Enter the name of the department     |  Department will be added on the options |
- |Adding a section| click add section   |  new for will be added with an input |
- |Displaying the records| click on home page  |  all the sections will be displayed as a link for more information|
+ |Adding new Engineer|  Click on the add Engineer tab   |  New record will be adde to the list of Engieers|
+ |Adding a new Site| click On add new site tab  |  New form will be dispalayed to add more sites |
+ |Displaying the list of Engineers| click on home page |  all the Engineers and thier details will be displayed|
  
 ## Setup/Installation Requirements
 
@@ -18,6 +18,28 @@ app will throw an error indicating that the there is already an exiting record w
 * make sure you have intellij installed in you laptop.
 * launch intellij and go to files>open project.
 * enjoy the code.
+## Database installation instructions
+Make sure you have postgres Db installed locally in your machine and follow below commands.
+
+######Creating a role and credentials
+
+postgres=# create user elvis with password 'elvis';
+
+
+######Creating database
+postgres=# create database site_maintenance;
+
+
+######connecting into the created database
+postgres=# \c site_maintenance;
+
+######Creating Engineers table.
+
+site_maintenance=# create table engineers (id int PRIMARY KEY, name varchar, ek_Number varchar, site_id varchar, created_at date);
+
+###### Creating sites table
+
+site_maintenance=# create table sites (id int PRIMARY KEY, name varchar, engineer_id varchar, site_Number varchar, created_at date);
 
 ## Known Bugs
 
@@ -31,7 +53,7 @@ there are currently no known bugs experienced on the website but feedback on bug
 
 **Main Languages used:**
 
-* java for web application and spark as a frame work
+* java for web application and spark as a framework
 
 
 **Other Technologies:**
@@ -44,14 +66,14 @@ $< https://powerful-mesa-27568.herokuapp.com/>
 
 # clone into repository
 
-$ git clone https://github.com/emakuthi/infotechApp.git
+$ git clone https://github.com/emakuthi/sitePlanner.git
 ### Open using your favorite editor and view the code or just open the index.html on the browser
 
 ## Feedback
 
 Incase of any issues or feedback please add using any of below links.
 
-* [Issues](https://github.com/emakuthi/infotechApp/issues). To submit any issues.
+* [Issues](https://github.com/emakuthi/sitePlanner/issues). To submit any issues.
 
 * [email](emakuthi@gmail.com) for any other feedback.
 
