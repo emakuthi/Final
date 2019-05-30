@@ -8,12 +8,12 @@ public class Site {
     private int categoryId;
     private String siteNumber;
 
-    public Site(String name, boolean completed, LocalDateTime createdAt, int id, int categoryId, String siteNumber) {
+    public Site(String name, boolean completed, LocalDateTime createdAt, int id, int engineerId, String siteNumber) {
         this.name = name;
         this.completed = completed;
         this.createdAt = createdAt;
         this.id = id;
-        this.categoryId = categoryId;
+        this.categoryId = engineerId;
         this.siteNumber = siteNumber;
     }
 }
