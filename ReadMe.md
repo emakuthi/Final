@@ -1,4 +1,4 @@
-# models.Site Planner Application
+# Site Planner Application
 
  An app for a models.Site Maintenance Manager. The models.Site Maintenance Manager will be able to add a list of the maintenance engineers, and for each engineer, add the sites that the engineer maintains. The engineers work independently, so each site only belongs to a single engineer.
 
@@ -22,19 +22,19 @@
 ## Database installation instructions
 Make sure you have postgres Db installed locally in your machine and follow below commands.
 
-######Creating a role and credentials
+###### Creating a role and credentials
 
 postgres=# create user elvis with password 'elvis';
 
 
-######Creating database
+###### Creating database
 postgres=# create database site_maintenance;
 
 
-######connecting into the created database
+###### connecting into the created database
 postgres=# \c site_maintenance;
 
-######Creating Engineers table.
+###### Creating Engineers table.
 
 site_maintenance=# create table engineers (id int PRIMARY KEY, name varchar, ek_Number varchar, site_id varchar, created_at date);
 
