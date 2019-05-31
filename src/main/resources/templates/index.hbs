@@ -1,0 +1,15 @@
+{{#partial "content"}}
+
+    <p> List of Departments in Technology Division</p>
+
+    {{#if categories}}
+        {{#each categories }}
+            <p><a href="/categories/{{id}}">{{name}}</a></p>
+        {{/each}}
+    {{else}}
+        <p>No Departments</p>
+    {{/if}}
+    {{name}}
+{{/partial}}
+
+{{> layout.hbs}}

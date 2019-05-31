@@ -1,47 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{#block "title"}}site planner{{/block}}</title>
+    <title>{{#block "title"}}saftechinfo{{/block}}</title>
     <link href="https://fonts.googleapis.com/css?family=Old+Standard+TT&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel='stylesheet' href='/App.css'>
+
 </head>
 <body>
 <div class="panel">
-<!--    <ul class="nav nav-tabs">-->
-<!--        <li role="presentation" class="active"><a href="/">Home</a></li>-->
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="/">Home</a></li>
 
 
-<!--        <li role="presentation" class="dropdown">-->
-<!--            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">-->
-<!--                Add departments <span class="caret"></span>-->
-<!--            </a>-->
-<!--            <ul class="dropdown-menu">-->
-<!--                {{#if categories}}-->
-<!--                    {{#each categories}}-->
-<!--                        <li><a href="/categories/{{id}}">{{name}}</a></li>-->
-<!--                    {{/each}}-->
-<!--                    <li><a href="/categories/new">Add Department</a></li>-->
+        <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                Add departments <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                {{#if categories}}
+                    {{#each categories}}
+                        <li><a href="/categories/{{id}}">{{name}}</a></li>
+                    {{/each}}
+                    <li><a href="/categories/new">Add Department</a></li>
 
-<!--                {{else}}-->
-<!--                    <li><a href="/categories/new">Add Department</a></li>-->
-<!--                {{/if}}-->
-<!--            </ul>-->
-<!--        </li>-->
-<!--        <li role="presentation"><a href="/tasks/new">Add sections</a></li>-->
-<!--        <li role="presentation"><a href="/employees/new">Add employees</a></li>-->
-<!--        <a class="logo" href="#">-->
-<!--            <img src="/images/saflogo.png" width="150px" height="50px" alt="">-->
-<!--        </a>-->
-<!--    </ul>-->
+                {{else}}
+                    <li><a href="/categories/new">Add Department</a></li>
+                {{/if}}
+            </ul>
+        </li>
+        <li role="presentation"><a href="/tasks/new">Add sections</a></li>
+        <li role="presentation"><a href="/employees/new">Add employees</a></li>
+        <a class="logo" href="#">
+            <img src="/images/saflogo.png" width="150px" height="50px" alt="">
+        </a>
+    </ul>
     <div class="panel">
         <!--begin main template-->
         <div class="panel-title">
-            <h3>Site Maintenance Planner</h3>
-        </div>
-        <div class="panel-heading">
-        <a class="btn btn-danger btn-sm"href="/engineers/new">Add new Engineer</a>
-        <a class="btn btn-danger btn-sm"href="/sites/new">Add new Site</a>
+            <h3>Technology Division information</h3>
         </div>
 
         <div class="panel-body">
@@ -56,8 +53,8 @@
             <div class="container">
 
                 <p class="text-muted">
-                    <a class="btn btn-danger btn-sm"href="/engineers/delete">DELETE</a>
-                    <a class="btn btn-danger btn-sm" href="/sites/delete">Delete all Sites</a>
+                    <a class="btn btn-danger btn-sm"href="/categories/delete">DELETE</a>
+                    <a class="btn btn-danger btn-sm" href="/tasks/delete">delete all sections</a>
                 </p>
             </div>
         </footer>
