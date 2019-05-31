@@ -1,1 +1,1 @@
-web: ./build/install/sitePlanner/bin/sitePlanner
+web: ./build/install/siteplanner/bin/siteplanner
