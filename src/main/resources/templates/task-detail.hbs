@@ -1,18 +1,18 @@
 {{#partial "content"}}
-    <p>Department: {{ category.name }}</p>
-    <p>Section: {{ task.description }}</p>
+    <p>Engineer: {{ category.name }}</p>
+    <p>Site: {{ task.description }}</p>
 
     <div class="panel">
         <div class="panel-heading">
-            List of Employess
+            List of sites
         </div>
     <table class="table">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Employee name</th>
-            <th scope="col">Employee number</th>
-            <th scope="col">Designation</th>
+            <th scope="col">site name</th>
+            <th scope="col">site number</th>
+            <th scope="col">Region</th>
         </tr>
         </thead>
 
@@ -32,7 +32,7 @@
         </table>
         {{else}}
             <div class="panel-body">
-                <p>No employees</p>
+                <p>No records</p>
             </div>
         {{/if}}
 

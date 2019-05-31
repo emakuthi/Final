@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{#block "title"}}saftechinfo{{/block}}</title>
+    <title>{{#block "title"}}site planner{{/block}}</title>
     <link href="https://fonts.googleapis.com/css?family=Old+Standard+TT&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel='stylesheet' href='/App.css'>
@@ -15,22 +15,22 @@
 
         <li role="presentation" class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                Add departments <span class="caret"></span>
+                Add Engineers <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
                 {{#if categories}}
                     {{#each categories}}
                         <li><a href="/categories/{{id}}">{{name}}</a></li>
                     {{/each}}
-                    <li><a href="/categories/new">Add Department</a></li>
+                    <li><a href="/categories/new">Add Engineers</a></li>
 
                 {{else}}
-                    <li><a href="/categories/new">Add Department</a></li>
+                    <li><a href="/categories/new">Add Engineers</a></li>
                 {{/if}}
             </ul>
         </li>
-        <li role="presentation"><a href="/tasks/new">Add sections</a></li>
-        <li role="presentation"><a href="/employees/new">Add employees</a></li>
+        <li role="presentation"><a href="/tasks/new">Add Sites</a></li>
+        <li role="presentation"><a href="/employees/new">Add Sites Details</a></li>
         <a class="logo" href="#">
             <img src="/images/saflogo.png" width="150px" height="50px" alt="">
         </a>
@@ -38,7 +38,7 @@
     <div class="panel">
         <!--begin main template-->
         <div class="panel-title">
-            <h3>Technology Division information</h3>
+            <h3>Site Maintenance Planner</h3>
         </div>
 
         <div class="panel-body">
@@ -54,7 +54,7 @@
 
                 <p class="text-muted">
                     <a class="btn btn-danger btn-sm"href="/categories/delete">DELETE</a>
-                    <a class="btn btn-danger btn-sm" href="/tasks/delete">delete all sections</a>
+                    <a class="btn btn-danger btn-sm" href="/tasks/delete">delete all sites</a>
                 </p>
             </div>
         </footer>
