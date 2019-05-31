@@ -1,6 +1,8 @@
 package dao;
 
-import jdk.vm.ci.code.site.Site;
+
+
+import models.Site;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,7 +12,7 @@ public interface SiteDao {
     List<Site> getAll();
 
     // CREATE
-    void add(Site task);
+    void add(Site site);
 
     // READ
     Site findById(int id);

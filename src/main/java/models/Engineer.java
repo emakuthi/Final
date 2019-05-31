@@ -12,7 +12,7 @@ public class Engineer {
     private boolean completed;
 
 
-    public Engineer(int id, String name, String ekNumber, LocalDateTime createdAt, boolean completed) {
+    public Engineer(String name, String ekNumber) {
         this.id = id;
         this.name = name;
         this.ekNumber = ekNumber;

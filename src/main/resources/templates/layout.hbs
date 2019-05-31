@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{#block "title"}}site planner{{/block}}</title>
+    <link href="https://fonts.googleapis.com/css?family=Old+Standard+TT&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='/App.css'>
+</head>
+<body>
+<div class="panel">
+<!--    <ul class="nav nav-tabs">-->
+<!--        <li role="presentation" class="active"><a href="/">Home</a></li>-->
+
+
+<!--        <li role="presentation" class="dropdown">-->
+<!--            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">-->
+<!--                Add departments <span class="caret"></span>-->
+<!--            </a>-->
+<!--            <ul class="dropdown-menu">-->
+<!--                {{#if categories}}-->
+<!--                    {{#each categories}}-->
+<!--                        <li><a href="/categories/{{id}}">{{name}}</a></li>-->
+<!--                    {{/each}}-->
+<!--                    <li><a href="/categories/new">Add Department</a></li>-->
+
+<!--                {{else}}-->
+<!--                    <li><a href="/categories/new">Add Department</a></li>-->
+<!--                {{/if}}-->
+<!--            </ul>-->
+<!--        </li>-->
+<!--        <li role="presentation"><a href="/tasks/new">Add sections</a></li>-->
+<!--        <li role="presentation"><a href="/employees/new">Add employees</a></li>-->
+<!--        <a class="logo" href="#">-->
+<!--            <img src="/images/saflogo.png" width="150px" height="50px" alt="">-->
+<!--        </a>-->
+<!--    </ul>-->
+    <div class="panel">
+        <!--begin main template-->
+        <div class="panel-title">
+            <h3>Site Maintenance Planner</h3>
+        </div>
+        <div class="panel-heading">
+        <a class="btn btn-danger btn-sm"href="/engineers/new">Add new Engineer</a>
+        <a class="btn btn-danger btn-sm"href="/sites/new">Add new Site</a>
+        </div>
+
+        <div class="panel-body">
+            {{#block "content"}}
+            {{/block}}
+
+        </div>
+    </div>
+    <!--end main template-->
+{{#block "footer"}}
+        <footer class="footer">
+            <div class="container">
+
+                <p class="text-muted">
+                    <a class="btn btn-danger btn-sm"href="/engineers/delete">DELETE</a>
+                    <a class="btn btn-danger btn-sm" href="/sites/delete">Delete all Sites</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </html>
+{{/block}}

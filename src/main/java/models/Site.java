@@ -6,6 +6,9 @@ public class Site {
     private String name;
     private boolean completed;
     private LocalDateTime createdAt;
+
+    public void setId(int id) { this.id = id; }
+
     private int id;
     private int engineerId;
     private String siteNumber;

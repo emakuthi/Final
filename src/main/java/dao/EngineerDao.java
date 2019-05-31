@@ -11,7 +11,7 @@ import static dao.DB.*;
 
 public interface EngineerDao {
 
-    Sql2o s = sql2o;
+    Sql2o database = sql2o;
    //List
  List<Engineer> getAll();
  ///CREATE
