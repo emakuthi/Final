@@ -4,7 +4,7 @@ import org.junit.Test;
 import java.time.LocalDateTime;
 import static org.junit.Assert.*;
 
-public class TaskTest {
+public class SiteTest {
     @Test
     public void NewTaskObjectGetsCorrectlyCreated_true() throws Exception {
         Task task = setupNewTask();

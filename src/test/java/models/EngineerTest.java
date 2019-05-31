@@ -4,7 +4,7 @@ package models;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class CategoryTest {
+public class EngineerTest {
 
     @Test
     public void NewCategoryObjectGetsCorrectlyCreated_true() throws Exception {
