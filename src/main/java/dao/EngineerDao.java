@@ -1,20 +1,20 @@
 package dao;
 
-import models.Category;
-import models.Task;
+import models.Engineer;
+import models.Site;
 import java.util.List;
 
 public interface EngineerDao {
 
     //LIST
-    List<Category> getAll();
+    List<Engineer> getAll();
 
     //CREATE
-    void add (Category category);
+    void add (Engineer engineer);
 
     //READ
-    Category findById(int id);
-    List<Task> getAllTasksByCategory(int categoryId);
+    Engineer findById(int id);
+    List<Site> getAllTasksByCategory(int categoryId);
 
     //UPDATE
     void update(int id, String name);

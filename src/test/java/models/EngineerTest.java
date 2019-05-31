@@ -8,18 +8,18 @@ public class EngineerTest {
 
     @Test
     public void NewCategoryObjectGetsCorrectlyCreated_true() throws Exception {
-        Category category = setupNewCategory();
-        assertEquals(true, category instanceof Category);
+        Engineer engineer = setupNewCategory();
+        assertEquals(true, engineer instanceof Engineer);
     }
 
     @Test
     public void CategoryInstantiatesWithName_school() throws Exception {
-        Category category = setupNewCategory();
-        assertEquals("school", category.getName());
+        Engineer engineer = setupNewCategory();
+        assertEquals("school", engineer.getName());
     }
 
     //helper methods
-    public Category setupNewCategory(){
-        return new Category("school");
+    public Engineer setupNewCategory(){
+        return new Engineer("school");
     }
 }

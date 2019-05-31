@@ -1,9 +1,9 @@
 {{#partial "content"}}
     {{#if editCategory}}
         <h1>Edit this Engineer!</h1>
-        <form action="/categories/{{category.id}}" method="post">
+        <form action="/categories/{{engineer.id}}" method="post">
             <label for="name">Edit this Engineer's name</label>
-            <input id="newCategoryName" name="newCategoryName" type="text" value="{{category.name}}">
+            <input id="newCategoryName" name="newCategoryName" type="text" value="{{engineer.name}}">
             <button type="submit" class="btn btn-warning">submit</button>
         </form>
     {{else}}

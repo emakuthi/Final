@@ -7,30 +7,30 @@ import static org.junit.Assert.*;
 public class SiteTest {
     @Test
     public void NewTaskObjectGetsCorrectlyCreated_true() throws Exception {
-        Task task = setupNewTask();
-        assertEquals(true, task instanceof Task);
+        Site site = setupNewTask();
+        assertEquals(true, site instanceof Site);
     }
 
     @Test
     public void TaskInstantiatesWithDescription_true() throws Exception {
-        Task task = setupNewTask();
-        assertEquals("Mow the lawn", task.getDescription());
+        Site site = setupNewTask();
+        assertEquals("Mow the lawn", site.getDescription());
     }
 
     @Test
     public void isCompletedPropertyIsFalseAfterInstantiation() throws Exception {
-        Task task = setupNewTask();
-        assertEquals(false, task.getCompleted()); //should never start as completed
+        Site site = setupNewTask();
+        assertEquals(false, site.getCompleted()); //should never start as completed
     }
 
     @Test
     public void getCreatedAtInstantiatesWithCurrentTimeToday() throws Exception {
-        Task task = setupNewTask();
-        assertEquals(LocalDateTime.now().getDayOfWeek(), task.getCreatedAt().getDayOfWeek());
+        Site site = setupNewTask();
+        assertEquals(LocalDateTime.now().getDayOfWeek(), site.getCreatedAt().getDayOfWeek());
     }
 
     //helper methods
-    public Task setupNewTask(){
-        return new Task("Mow the lawn", 1);
+    public Site setupNewTask(){
+        return new Site("Mow the lawn", 1);
     }
 }

@@ -1,6 +1,6 @@
 package dao;
 
-import models.Task;
+import models.Site;
 import org.sql2o.*;
 import java.util.List;
 
@@ -13,34 +13,34 @@ public class Sql2OSiteDao implements SiteDao { //implementing our interface
     }
 
     @Override
-    public void add(Task task) {
+    public void add(Site site) {
         String sql = "INSERT INTO tasks (description, categoryId) VALUES (:description, :categoryId)"; //raw sql
         try(Connection con = sql2o.open()){ //try to open a connection
             int id = (int) con.createQuery(sql, true) //make a new variable
-                    .bind(task)
+                    .bind(site)
                     .executeUpdate() //run it all
                     .getKey(); //int id is now the row number (row “key”) of db
-            task.setId(id); //update object to set id now from database
+            site.setId(id); //update object to set id now from database
         } catch (Sql2oException ex) {
             System.out.println(ex); //oops we have an error!
         }
     }
 
     @Override
-    public List<Task> getAll() {
+    public List<Site> getAll() {
         try(Connection con = sql2o.open()){
             return con.createQuery("SELECT * FROM tasks") //raw sql
-                    .executeAndFetch(Task.class); //fetch a list
+                    .executeAndFetch(Site.class); //fetch a list
         }
     }
 
 
     @Override
-    public Task findById(int id) {
+    public Site findById(int id) {
         try(Connection con = sql2o.open()){
             /*
              *
-             * Category found by id - test
+             * Engineer found by id - test
              *
              * test.add(task)
              *
@@ -49,7 +49,7 @@ public class Sql2OSiteDao implements SiteDao { //implementing our interface
              * */
             return con.createQuery("SELECT * FROM tasks WHERE id = :id")
                     .addParameter("id", id) //key/value pair, key must match above
-                    .executeAndFetchFirst(Task.class); //fetch an individual item
+                    .executeAndFetchFirst(Site.class); //fetch an individual item
         }
     }
 

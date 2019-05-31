@@ -1,10 +1,10 @@
 {{#partial "content"}}
     {{#if editTask}}
         <h1>edit this sites</h1>
-        <form action="/tasks/{{task.id}}" method="post">
+        <form action="/sites/{{site.id}}" method="post">
             <br>
             <label for="description">edit this sites details</label>
-            <input id="description" name="description" type="text" value="{{task.description}}">
+            <input id="description" name="description" type="text" value="{{site.description}}">
             <br>
             <label for="categoryId">Update this site's engineer:</label>
             <select id="categoryId" name="categoryId">
@@ -17,7 +17,7 @@
         </form>
     {{else}}
         <h5>Add a new site!</h5>
-        <form action="/tasks" method="post">
+        <form action="/sites" method="post">
             {{#if categories}}
                 <label for="description">Site details</label>
                 <input id="description" name="description" type="text"></br></br>

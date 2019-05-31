@@ -1,6 +1,6 @@
 {{#partial "content"}}
-    <p>Engineer: {{ category.name }}</p>
-    <p>Site: {{ task.description }}</p>
+    <p>Engineer: {{ engineer.name }}</p>
+    <p>Site: {{ site.description }}</p>
 
     <div class="panel">
         <div class="panel-heading">
@@ -39,8 +39,8 @@
         <div class="panel-footer">
             <p>
 
-                <a class="btn btn-warning btn-sm"href="/tasks/{{task.id}}/edit">edit</a>
-                <a class="btn btn-warning btn-sm" href="/categories/{{task.categoryId}}/tasks/{{task.id}}/delete">delete</a>
+                <a class="btn btn-warning btn-sm"href="/sites/{{site.id}}/edit">edit</a>
+                <a class="btn btn-warning btn-sm" href="/categories/{{site.categoryId}}/sites/{{site.id}}/delete">delete</a>
             </p>
         </div>
     </div>
