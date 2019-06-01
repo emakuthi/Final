@@ -14,12 +14,12 @@ public interface EngineerDao {
 
     //READ
     Engineer findById(int id);
-    List<Site> getAllTasksByCategory(int categoryId);
+    List<Site> getAllSitesByEngineer(int engineerId);
 
     //UPDATE
     void update(int id, String name);
 
     //DELETE
     void deleteById(int id);
-    void clearAllCategories();
+    void clearAllEngineers();
 }

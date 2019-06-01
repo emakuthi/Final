@@ -25,7 +25,7 @@ public class Sql2OEngineerDao implements EngineerDao {
                     .getKey();
             engineer.setId(id);
         } catch (Sql2oException ex) {
-            System.out.println(ex);
+            System.out.println();
         }
     }
 
@@ -55,7 +55,7 @@ public class Sql2OEngineerDao implements EngineerDao {
                     .addParameter("id", id)
                     .executeUpdate();
         } catch (Sql2oException ex) {
-            System.out.println(ex);
+            System.out.println();
         }
     }
 
@@ -67,26 +67,26 @@ public class Sql2OEngineerDao implements EngineerDao {
                     .addParameter("id", id)
                     .executeUpdate();
         } catch (Sql2oException ex){
-            System.out.println(ex);
+            System.out.println();
         }
     }
 
     @Override
-    public void clearAllCategories() {
+    public void clearAllEngineers() {
         String sql = "DELETE from categories"; //raw sql
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .executeUpdate();
         } catch (Sql2oException ex){
-            System.out.println(ex);
+            System.out.println();
         }
     }
 
     @Override
-    public List<Site> getAllTasksByCategory(int categoryId) {
+    public List<Site> getAllSitesByEngineer(int engineerId) {
         try(Connection con = sql2o.open()){
             return con.createQuery("SELECT * FROM tasks WHERE categoryId = :categoryId")
-                    .addParameter("categoryId", categoryId)
+                    .addParameter("categoryId", engineerId)
                     .executeAndFetch(Site.class);
         }
     }

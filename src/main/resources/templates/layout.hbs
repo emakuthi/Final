@@ -8,37 +8,15 @@
 
 </head>
 <body>
-<div class="panel">
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="/">Home</a></li>
-
-
-        <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                Add Engineers <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                {{#if categories}}
-                    {{#each categories}}
-                        <li><a href="/categories/{{id}}">{{name}}</a></li>
-                    {{/each}}
-                    <li><a href="/categories/new">Add Engineers</a></li>
-
-                {{else}}
-                    <li><a href="/categories/new">Add Engineers</a></li>
-                {{/if}}
-            </ul>
-        </li>
-        <li role="presentation"><a href="/sites/new">Add Sites</a></li>
-        <li role="presentation"><a href="/employees/new">Add Sites Details</a></li>
-        <a class="logo" href="#">
-            <img src="/images/saflogo.png" width="150px" height="50px" alt="">
-        </a>
-    </ul>
     <div class="panel">
-        <!--begin main template-->
         <div class="panel-title">
             <h3>Site Maintenance Planner</h3>
+            <a class="logo" href="#"><img src="/images/saflogo.png" width="150px" height="50px" alt=""></a>
+        </div>
+        <div class="Panel-heading">
+            <a href="/">Home</a>
+            <a href="/engineers/new">Add Engineers</a>
+            <a href="/sites/new">Add Sites</a>
         </div>
 
         <div class="panel-body">
@@ -47,19 +25,18 @@
 
         </div>
     </div>
-    <!--end main template-->
+
 {{#block "footer"}}
         <footer class="footer">
             <div class="container">
 
                 <p class="text-muted">
-                    <a class="btn btn-danger btn-sm"href="/categories/delete">delete</a>
+                    <a class="btn btn-danger btn-sm" href="/engineers/delete">delete</a>
                     <a class="btn btn-danger btn-sm" href="/sites/delete">delete all sites</a>
                 </p>
             </div>
         </footer>
-    </div>
-    </body>
+</body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </html>

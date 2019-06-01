@@ -1,16 +1,23 @@
 {{#partial "content"}}
-    {{#if editCategory}}
+    {{#if editEngineer}}
         <h1>Edit this Engineer!</h1>
-        <form action="/categories/{{engineer.id}}" method="post">
+        <form action="/engineers/{{engineer.id}}" method="post">
             <label for="name">Edit this Engineer's name</label>
-            <input id="newCategoryName" name="newCategoryName" type="text" value="{{engineer.name}}">
+            <input id="newEngineerName" name="newEngineerName" type="text" value="{{engineer.name}}">
             <button type="submit" class="btn btn-warning">submit</button>
         </form>
     {{else}}
-        <h5>Add a new Engineer!</h5>
-        <form action="/categories" method="post">
-            <label for="name">Engineer Name</label>
+        <h5>Add a New Engineer!</h5>
+        <form action="/engineers" method="post">
+            <label for="name">NAME: </label>
             <input id="name" name="name" type="text">
+
+            <label for="ekNo">EK NO: </label>
+            <input id="ekNo" name="ekNo" type="text">
+
+            <label for="region">REGION: </label>
+            <input id="region" name="region" type="text">
+
             <button type="submit" class="btn btn-success btn-sm">submit</button>
         </form>
     {{/if}}

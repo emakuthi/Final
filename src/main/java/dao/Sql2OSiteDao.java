@@ -22,7 +22,7 @@ public class Sql2OSiteDao implements SiteDao { //implementing our interface
                     .getKey(); //int id is now the row number (row “key”) of db
             site.setId(id); //update object to set id now from database
         } catch (Sql2oException ex) {
-            System.out.println(ex); //oops we have an error!
+            System.out.println(); //oops we have an error!
         }
     }
 
@@ -38,15 +38,6 @@ public class Sql2OSiteDao implements SiteDao { //implementing our interface
     @Override
     public Site findById(int id) {
         try(Connection con = sql2o.open()){
-            /*
-             *
-             * Engineer found by id - test
-             *
-             * test.add(task)
-             *
-             * test.getAllTasks()
-             *
-             * */
             return con.createQuery("SELECT * FROM tasks WHERE id = :id")
                     .addParameter("id", id) //key/value pair, key must match above
                     .executeAndFetchFirst(Site.class); //fetch an individual item
@@ -54,16 +45,16 @@ public class Sql2OSiteDao implements SiteDao { //implementing our interface
     }
 
     @Override
-    public void update(int id, String newDescription, int newCategoryId){
+    public void update(int id, String newDescription, int newEngineerId){
         String sql = "UPDATE tasks SET (description, categoryId) = (:description, :categoryId) WHERE id=:id"; //raw sql
         try(Connection con = sql2o.open()){
             con.createQuery(sql)
                     .addParameter("description", newDescription)
-                    .addParameter("categoryId", newCategoryId)
+                    .addParameter("categoryId", newEngineerId)
                     .addParameter("id", id)
                     .executeUpdate();
         } catch (Sql2oException ex) {
-            System.out.println(ex);
+            System.out.println();
         }
     }
 
@@ -75,18 +66,18 @@ public class Sql2OSiteDao implements SiteDao { //implementing our interface
                     .addParameter("id", id)
                     .executeUpdate();
         } catch (Sql2oException ex){
-            System.out.println(ex);
+            System.out.println();
         }
     }
 
     @Override
-    public void clearAllTasks() {
+    public void clearAllSites() {
         String sql = "DELETE from tasks";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .executeUpdate();
         } catch (Sql2oException ex){
-            System.out.println(ex);
+            System.out.println();
         }
     }
 }
