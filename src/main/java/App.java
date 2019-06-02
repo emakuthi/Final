@@ -1,4 +1,5 @@
 
+import dao.DB;
 import models.Engineer;
 import models.Site;
 import dao.Sql2OEngineerDao;
@@ -14,10 +15,10 @@ import static spark.Spark.*;
 public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
-        String connectionString = "jdbc:h2:~/todolist.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
-        Sql2OSiteDao taskDao = new Sql2OSiteDao(sql2o);
-        Sql2OEngineerDao categoryDao = new Sql2OEngineerDao(sql2o);
+//        String connectionString = "jdbc:h2:~/todolist.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
+//        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        Sql2OSiteDao taskDao = new Sql2OSiteDao(DB.sql2o);
+        Sql2OEngineerDao categoryDao = new Sql2OEngineerDao(DB.sql2o);
 
 
         ProcessBuilder process = new ProcessBuilder();
@@ -51,7 +52,7 @@ public class App {
             return new ModelAndView(model, "engineer-form.hbs"); //new
         }, new HandlebarsTemplateEngine());
 
-        //post: process new category form
+        //post: process new engineer form
         post("/engineers", (req, res) -> { //new
             Map<String, Object> model = new HashMap<>();
             String name = req.queryParams("name");
@@ -61,7 +62,7 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
-        //get: delete all categories and all tasks
+        //get: delete all engineers and all sites
         get("/engineers/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             categoryDao.clearAllEngineers();
