@@ -42,6 +42,7 @@ public class Sql2OEngineerDao implements EngineerDao {
     public Engineer findById(int id) {
         try(Connection con = sql2o.open()){
             return con.createQuery("SELECT * FROM engineers WHERE id = :id")
+                    .throwOnMappingFailure(false)
                     .addParameter("id", id)
                     .executeAndFetchFirst(Engineer.class);
         }
