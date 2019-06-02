@@ -3,23 +3,69 @@
     <h1>{{engineer.name}}</h1>
 
     <p>Here are all the Sites listed in this Engineer:</p>
-    <ol>
-    {{#if sites}}
-        {{#each sites}}
-            <li>
-                <p><a href="/engineers/{{engineer.id}}/sites/{{id}}">{{description}}</a></p>
-            </li>
-        {{/each}}
-    </ol>
+<!--    <ol>-->
+<!--    {{#if sites}}-->
+<!--        {{#each sites}}-->
+<!--            <li>-->
+<!--                <p><a href="/engineers/{{engineer.id}}/sites/{{id}}">{{description}}</a></p>-->
+<!--            </li>-->
+<!--        {{/each}}-->
+<!--    </ol>-->
 
-    {{else}}
-        <div class="panel-body">
-            <p>No records</p>
+<!--    {{else}}-->
+<!--        <div class="panel-body">-->
+<!--            <p>No records</p>-->
+<!--        </div>-->
+<!--    {{/if}}-->
+
+<!--    <a class="btn btn-warning btn-sm" href="/engineers/{{engineer.id}}/edit">edit Engineer</a>-->
+<!--    <a class="btn btn-warning btn-sm" href="/engineers/{{engineer.id}}/delete">delete Engineer</a>-->
+
+    <div class="panel">
+        <div class="panel-heading">
+            List of sites
         </div>
-    {{/if}}
 
-    <a class="btn btn-warning btn-sm" href="/engineers/{{engineer.id}}/edit">edit Engineer</a>
-    <a class="btn btn-warning btn-sm" href="/engineers/{{engineer.id}}/delete">delete Engineer</a>
+
+    <div class="panel-body">
+
+        <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">site name</th>
+            <th scope="col">site number</th>
+            <th scope="col">Region</th>
+        </tr>
+        </thead>
+
+        {{#if sites}}
+            {{#each sites }}
+
+                    <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>{{description}}</td>
+                        <td>{{siteNumber}}</td>
+                        <td>{{region}}</td>
+                    </tr>
+                    </tbody>
+
+            {{/each}}
+
+        {{else}}
+            <div class="panel-body">
+                <p>No records</p>
+            </div>
+        {{/if}}
+    </table>
+    </div>
+        <div class="panel-footer">
+            <a class="btn btn-warning btn-sm" href="/sites/{{site.id}}/edit">edit</a>
+            <a class="btn btn-warning btn-sm" href="/engineers/{{site.categoryId}}/sites/{{site.id}}/delete">delete</a>
+        </div>
+    </div>
+
 {{/partial}}
 
 {{> layout.hbs}}
