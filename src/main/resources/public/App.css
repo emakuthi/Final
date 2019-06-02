@@ -6,8 +6,6 @@ margin-top:0px;
 }
 body{
 font-family: 'Old Standard TT', serif;
-margin-left:5%;
-margin-right:5%;
 background-repeat:no-repeat;
 background-size:cover;
 height:75%;
@@ -20,14 +18,26 @@ color:white;
 margin-top: 0px;
 float:right;
 }
-.panel{
-
+.card{
+padding:5px;
 background: rgba(98,125,77,1);
 }
-.panel-body{
+.card-body{
 color:black;
 background: rgba(226,226,226,1);
+padding:5px;
+
+}
+
+.card-footer{
+background: rgba(98,125,77,1);
 }
 a{
 color:blue;
+}
+
+.title{
+margin-left:40%;
+font-size:30px;
+
 }
