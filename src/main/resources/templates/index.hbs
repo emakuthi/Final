@@ -1,10 +1,25 @@
 {{#partial "content"}}
 
-    <p> List of Field Operation Engineers</p>
+    {{#if engineers}}
+
+        <p> List of Field Operation Engineers (<small>click engineers name to view the sites allocated</small>)</p>
+
+        {{else}}
+
+        click <a  href="/engineers/new">here </a> to add new engineer!!
+
+
+    {{/if}}
 
     {{#if engineers}}
         {{#each engineers }}
-            <p><a href="/engineers/{{id}}">{{name}}</a></p>
+            <ol>
+                <li>
+                    <a href="/engineers/{{id}}">{{name}}</a>
+                </li>
+
+            </ol>
+
         {{/each}}
     {{else}}
         <p>No Records</p>
