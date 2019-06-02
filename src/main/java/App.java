@@ -1,8 +1,6 @@
 
-import dao.Sql2oEmployeeDao;
 import models.Engineer;
 import models.Site;
-import models.Employee;
 import dao.Sql2OEngineerDao;
 import dao.Sql2OSiteDao;
 import java.util.List;
@@ -20,7 +18,7 @@ public class App {
         Sql2o sql2o = new Sql2o(connectionString, "", "");
         Sql2OSiteDao taskDao = new Sql2OSiteDao(sql2o);
         Sql2OEngineerDao categoryDao = new Sql2OEngineerDao(sql2o);
-        Sql2oEmployeeDao employeeDao = new Sql2oEmployeeDao(sql2o);
+
 
         ProcessBuilder process = new ProcessBuilder();
         Integer port;
@@ -152,11 +150,11 @@ public class App {
             Site foundSite = taskDao.findById(idOfTaskToFind);
             int idOfCategoryToFind = Integer.parseInt(req.params("engineer_id"));
             Engineer foundEngineer = categoryDao.findById(idOfCategoryToFind);
-            List<Employee> employees = employeeDao.getAll();
+
             model.put("site", foundSite);
             model.put("engineer", foundEngineer);
             model.put("engineers", categoryDao.getAll()); //refresh list of links for navbar
-            model.put("employees", employeeDao.getAll());
+
             return new ModelAndView(model, "site-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -178,80 +176,6 @@ public class App {
             String newContent = req.queryParams("description");
             int newCategoryId = Integer.parseInt(req.queryParams("engineerId"));
             taskDao.update(taskToEditId, newContent, newCategoryId);
-            res.redirect("/");
-            return null;
-        }, new HandlebarsTemplateEngine());
-
-
-        ////////////////////////////////////////////////////////////////////////////////////////
-
-
-        //get: show new employee form
-        get("/employees/new", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            List<Site> sites = taskDao.getAll();
-            model.put("sites", sites);
-            return new ModelAndView(model, "employee-form.hbs");
-        }, new HandlebarsTemplateEngine());
-
-
-        //task: process new employee form
-        post("/employees", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            List<Site> allSites = taskDao.getAll();
-            model.put("sites", allSites);
-            String employeeName = req.queryParams("employeeName");
-            String ekNo = req.queryParams("ekNo");
-            String designation = req.queryParams("designation");
-            int taskId = Integer.parseInt(req.queryParams("taskId"));
-            Employee newEmployee = new Employee(employeeName, ekNo, designation,taskId ); //ignore the hardcoded categoryId
-            employeeDao.add(newEmployee);
-            res.redirect("/");
-            return null;
-        }, new HandlebarsTemplateEngine());
-
-        //get: show an individual employee that is nested in a section
-        get("/sites/:site_id/employees/:employee_id", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            int idOfEmployeeToFind = Integer.parseInt(req.params("employee_id"));
-            Employee foundEmployee = employeeDao.findById(idOfEmployeeToFind);
-            int idOfTaskToFind = Integer.parseInt(req.params("site_id"));
-            Site foundSite = taskDao.findById(idOfTaskToFind);
-            model.put("employee", foundEmployee);
-            model.put("site", foundSite);
-            model.put("sites", taskDao.getAll()); //refresh list of links for navbar
-            return new ModelAndView(model, "employee-detail.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        //get: show a form to update a employee
-        get("/employees/:id/edit", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            List<Site> allSites = taskDao.getAll();
-            model.put("sites", allSites);
-            Employee employee = employeeDao.findById(Integer.parseInt(req.params("id")));
-            model.put("employee", employee);
-            model.put("editEmployee", true);
-            return new ModelAndView(model, "employee-form.hbs");
-        }, new HandlebarsTemplateEngine());
-
-
-        //post: process a form to update a employee
-        post("/employees/:id", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            int employeeToEditId = Integer.parseInt(req.params("id"));
-            String newEmployeeName = req.queryParams("employeeName");
-            String newEKNo = req.queryParams("ekNo");
-            String newDesignation = req.queryParams("designation");
-            int newTaskId = Integer.parseInt(req.queryParams("siteId"));
-            employeeDao.update(employeeToEditId, newEmployeeName, newTaskId,newDesignation, newEKNo);
-            res.redirect("/");
-            return null;
-        }, new HandlebarsTemplateEngine());
-
-        //get: delete all tasks
-        get("/employees/delete", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            employeeDao.clearAllEmployees();
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());

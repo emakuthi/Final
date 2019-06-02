@@ -17,7 +17,7 @@ public class Sql2OEngineerDao implements EngineerDao {
 
     @Override
     public void add(Engineer engineer) {
-        String sql = "INSERT INTO categories (name) VALUES (:name)";
+        String sql = "INSERT INTO engineers (name) VALUES (:name)";
         try(Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql, true)
                     .bind(engineer)
@@ -32,7 +32,8 @@ public class Sql2OEngineerDao implements EngineerDao {
     @Override
     public List<Engineer> getAll() {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM categories")
+            return con.createQuery("SELECT * FROM engineers")
+                    .throwOnMappingFailure(false)
                     .executeAndFetch(Engineer.class);
         }
     }
@@ -40,7 +41,7 @@ public class Sql2OEngineerDao implements EngineerDao {
     @Override
     public Engineer findById(int id) {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM categories WHERE id = :id")
+            return con.createQuery("SELECT * FROM engineers WHERE id = :id")
                     .addParameter("id", id)
                     .executeAndFetchFirst(Engineer.class);
         }
@@ -48,7 +49,7 @@ public class Sql2OEngineerDao implements EngineerDao {
 
     @Override
     public void update(int id, String newName){
-        String sql = "UPDATE categories SET name = :name WHERE id=:id";
+        String sql = "UPDATE engineers SET name = :name WHERE id=:id";
         try(Connection con = sql2o.open()){
             con.createQuery(sql)
                     .addParameter("name", newName)
@@ -61,7 +62,7 @@ public class Sql2OEngineerDao implements EngineerDao {
 
     @Override
     public void deleteById(int id) {
-        String sql = "DELETE from categories WHERE id=:id"; //raw sql
+        String sql = "DELETE from engineers WHERE id=:id"; //raw sql
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("id", id)
@@ -73,7 +74,7 @@ public class Sql2OEngineerDao implements EngineerDao {
 
     @Override
     public void clearAllEngineers() {
-        String sql = "DELETE from categories"; //raw sql
+        String sql = "DELETE from engineers"; //raw sql
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .executeUpdate();
@@ -85,7 +86,7 @@ public class Sql2OEngineerDao implements EngineerDao {
     @Override
     public List<Site> getAllSitesByEngineer(int engineerId) {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM tasks WHERE categoryId = :categoryId")
+            return con.createQuery("SELECT * FROM sites WHERE categoryId = :categoryId")
                     .addParameter("categoryId", engineerId)
                     .executeAndFetch(Site.class);
         }

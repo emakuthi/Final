@@ -14,7 +14,7 @@ public class Sql2OSiteDao implements SiteDao { //implementing our interface
 
     @Override
     public void add(Site site) {
-        String sql = "INSERT INTO tasks (description, categoryId) VALUES (:description, :categoryId)"; //raw sql
+        String sql = "INSERT INTO sites (description, categoryId) VALUES (:description, :categoryId)"; //raw sql
         try(Connection con = sql2o.open()){ //try to open a connection
             int id = (int) con.createQuery(sql, true) //make a new variable
                     .bind(site)
@@ -29,7 +29,7 @@ public class Sql2OSiteDao implements SiteDao { //implementing our interface
     @Override
     public List<Site> getAll() {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM tasks") //raw sql
+            return con.createQuery("SELECT * FROM sites") //raw sql
                     .executeAndFetch(Site.class); //fetch a list
         }
     }
@@ -38,7 +38,7 @@ public class Sql2OSiteDao implements SiteDao { //implementing our interface
     @Override
     public Site findById(int id) {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM tasks WHERE id = :id")
+            return con.createQuery("SELECT * FROM sites WHERE id = :id")
                     .addParameter("id", id) //key/value pair, key must match above
                     .executeAndFetchFirst(Site.class); //fetch an individual item
         }
@@ -46,7 +46,7 @@ public class Sql2OSiteDao implements SiteDao { //implementing our interface
 
     @Override
     public void update(int id, String newDescription, int newEngineerId){
-        String sql = "UPDATE tasks SET (description, categoryId) = (:description, :categoryId) WHERE id=:id"; //raw sql
+        String sql = "UPDATE sites SET (description, categoryId) = (:description, :categoryId) WHERE id=:id"; //raw sql
         try(Connection con = sql2o.open()){
             con.createQuery(sql)
                     .addParameter("description", newDescription)
@@ -60,7 +60,7 @@ public class Sql2OSiteDao implements SiteDao { //implementing our interface
 
     @Override
     public void deleteById(int id) {
-        String sql = "DELETE from tasks WHERE id=:id";
+        String sql = "DELETE from sites WHERE id=:id";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("id", id)
@@ -72,7 +72,7 @@ public class Sql2OSiteDao implements SiteDao { //implementing our interface
 
     @Override
     public void clearAllSites() {
-        String sql = "DELETE from tasks";
+        String sql = "DELETE from sites";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .executeUpdate();
