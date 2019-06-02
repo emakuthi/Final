@@ -1,4 +1,5 @@
 
+import dao.DB;
 import models.Engineer;
 import models.Site;
 import dao.Sql2OEngineerDao;
@@ -6,7 +7,6 @@ import dao.Sql2OSiteDao;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
-import org.sql2o.Sql2o;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import static spark.Spark.*;
@@ -14,10 +14,10 @@ import static spark.Spark.*;
 public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
-        String connectionString = "jdbc:h2:~/todolist.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
-        Sql2OSiteDao taskDao = new Sql2OSiteDao(sql2o);
-        Sql2OEngineerDao categoryDao = new Sql2OEngineerDao(sql2o);
+//        String connectionString = "jdbc:h2:~/todolist.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
+//        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        Sql2OSiteDao siteDao = new Sql2OSiteDao(DB.sql2o);
+        Sql2OEngineerDao engineerDao = new Sql2OEngineerDao(DB.sql2o);
 
 
         ProcessBuilder process = new ProcessBuilder();
@@ -36,9 +36,9 @@ public class App {
         //get: show all tasks in all categories and show all categories
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Engineer> allCategories = categoryDao.getAll();
+            List<Engineer> allCategories = engineerDao.getAll();
             model.put("engineers", allCategories);
-            List<Site> sites = taskDao.getAll();
+            List<Site> sites = siteDao.getAll();
             model.put("sites", sites);
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
@@ -46,7 +46,7 @@ public class App {
         //show new category form
         get("/engineers/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Engineer> categories = categoryDao.getAll(); //refresh list of links for navbar
+            List<Engineer> categories = engineerDao.getAll(); //refresh list of links for navbar
             model.put("engineers", categories);
             return new ModelAndView(model, "engineer-form.hbs"); //new
         }, new HandlebarsTemplateEngine());
@@ -56,7 +56,7 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             String name = req.queryParams("name");
             Engineer newEngineer = new Engineer(name);
-            categoryDao.add(newEngineer);
+            engineerDao.add(newEngineer);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -64,8 +64,8 @@ public class App {
         //get: delete all categories and all tasks
         get("/engineers/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            categoryDao.clearAllEngineers();
-            taskDao.clearAllSites();
+            engineerDao.clearAllEngineers();
+            siteDao.clearAllSites();
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -73,7 +73,7 @@ public class App {
         //get: delete all tasks
         get("/sites/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            taskDao.clearAllSites();
+            siteDao.clearAllSites();
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -82,11 +82,11 @@ public class App {
         get("/engineers/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfCategoryToFind = Integer.parseInt(req.params("id")); //new
-            Engineer foundEngineer = categoryDao.findById(idOfCategoryToFind);
+            Engineer foundEngineer = engineerDao.findById(idOfCategoryToFind);
             model.put("engineer", foundEngineer);
-            List<Site> allTasksByCategory = categoryDao.getAllSitesByEngineer(idOfCategoryToFind);
+            List<Site> allTasksByCategory = engineerDao.getAllSitesByEngineer(idOfCategoryToFind);
             model.put("sites", allTasksByCategory);
-            model.put("engineers", categoryDao.getAll()); //refresh list of links for navbar
+            model.put("engineers", engineerDao.getAll()); //refresh list of links for navbar
             return new ModelAndView(model, "engineer-detail.hbs"); //new
         }, new HandlebarsTemplateEngine());
 
@@ -94,9 +94,9 @@ public class App {
         get("/engineers/:id/edit", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             model.put("editEngineer", true);
-            Engineer engineer = categoryDao.findById(Integer.parseInt(req.params("id")));
+            Engineer engineer = engineerDao.findById(Integer.parseInt(req.params("id")));
             model.put("engineer", engineer);
-            model.put("engineers", categoryDao.getAll()); //refresh list of links for navbar
+            model.put("engineers", engineerDao.getAll()); //refresh list of links for navbar
             return new ModelAndView(model, "engineer-form.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -105,7 +105,7 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             int idOfCategoryToEdit = Integer.parseInt(req.params("id"));
             String newName = req.queryParams("newCategoryName");
-            categoryDao.update(idOfCategoryToEdit, newName);
+            engineerDao.update(idOfCategoryToEdit, newName);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -117,7 +117,7 @@ public class App {
         get("/engineers/:engineer_id/sites/:site_id/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfTaskToDelete = Integer.parseInt(req.params("task_id"));
-            taskDao.deleteById(idOfTaskToDelete);
+            siteDao.deleteById(idOfTaskToDelete);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -125,7 +125,7 @@ public class App {
         //get: show new task form
         get("/sites/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Engineer> categories = categoryDao.getAll();
+            List<Engineer> categories = engineerDao.getAll();
             model.put("engineers", categories);
             return new ModelAndView(model, "site-form.hbs");
         }, new HandlebarsTemplateEngine());
@@ -133,12 +133,12 @@ public class App {
         //task: process new task form
         post("/sites", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Engineer> allCategories = categoryDao.getAll();
+            List<Engineer> allCategories = engineerDao.getAll();
             model.put("engineers", allCategories);
             String description = req.queryParams("description");
             int categoryId = Integer.parseInt(req.queryParams("engineerId"));
             Site newSite = new Site(description, categoryId ); //ignore the hardcoded categoryId
-            taskDao.add(newSite);
+            siteDao.add(newSite);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -147,13 +147,13 @@ public class App {
         get("/engineers/:engineer_id/sites/:site_id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfTaskToFind = Integer.parseInt(req.params("site_id"));
-            Site foundSite = taskDao.findById(idOfTaskToFind);
+            Site foundSite = siteDao.findById(idOfTaskToFind);
             int idOfCategoryToFind = Integer.parseInt(req.params("engineer_id"));
-            Engineer foundEngineer = categoryDao.findById(idOfCategoryToFind);
+            Engineer foundEngineer = engineerDao.findById(idOfCategoryToFind);
 
             model.put("site", foundSite);
             model.put("engineer", foundEngineer);
-            model.put("engineers", categoryDao.getAll()); //refresh list of links for navbar
+            model.put("engineers", engineerDao.getAll()); //refresh list of links for navbar
 
             return new ModelAndView(model, "site-detail.hbs");
         }, new HandlebarsTemplateEngine());
@@ -161,9 +161,9 @@ public class App {
         //get: show a form to update a task
         get("/sites/:id/edit", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Engineer> allCategories = categoryDao.getAll();
+            List<Engineer> allCategories = engineerDao.getAll();
             model.put("engineers", allCategories);
-            Site site = taskDao.findById(Integer.parseInt(req.params("id")));
+            Site site = siteDao.findById(Integer.parseInt(req.params("id")));
             model.put("site", site);
             model.put("editSite", true);
             return new ModelAndView(model, "site-form.hbs");
@@ -175,7 +175,7 @@ public class App {
             int taskToEditId = Integer.parseInt(req.params("id"));
             String newContent = req.queryParams("description");
             int newCategoryId = Integer.parseInt(req.queryParams("engineerId"));
-            taskDao.update(taskToEditId, newContent, newCategoryId);
+            siteDao.update(taskToEditId, newContent, newCategoryId);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());

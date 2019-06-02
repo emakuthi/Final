@@ -21,13 +21,13 @@
 <!--    <a class="btn btn-warning btn-sm" href="/engineers/{{engineer.id}}/edit">edit Engineer</a>-->
 <!--    <a class="btn btn-warning btn-sm" href="/engineers/{{engineer.id}}/delete">delete Engineer</a>-->
 
-    <div class="panel">
-        <div class="panel-heading">
+    <div class="card">
+        <div class="card-header">
             List of sites
         </div>
 
 
-    <div class="panel-body">
+    <div class="card-body">
 
         <table class="table">
         <thead>
@@ -54,13 +54,13 @@
             {{/each}}
 
         {{else}}
-            <div class="panel-body">
+            <div class="card-body">
                 <p>No records</p>
             </div>
         {{/if}}
     </table>
     </div>
-        <div class="panel-footer">
+        <div class="card-footer">
             <a class="btn btn-warning btn-sm" href="/sites/{{site.id}}/edit">edit</a>
             <a class="btn btn-warning btn-sm" href="/engineers/{{site.categoryId}}/sites/{{site.id}}/delete">delete</a>
         </div>
