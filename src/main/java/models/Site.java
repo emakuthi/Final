@@ -1,57 +1,95 @@
 package models;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Site {
 
+
+
     private String site_name;
+    private String site_number;
     private boolean completed;
     private LocalDateTime createdAt;
     private int id;
     private int engineerid;
 
-    public Site(String description, int categoryId) {
-        this.site_name = description;
-        this.completed = false;
-        this.createdAt = LocalDateTime.now();
-        this.categoryId = categoryId;
+
+
+
+    public Site(String site_name, String site_number, int id, int engineerid) {
+        this.site_name = site_name;
+        this.site_number = site_number;
+        this.completed = completed;
+        this.createdAt = createdAt;
+        this.id = id;
+        this.engineerid = engineerid;
+    }
+    public String getSite_name() {
+        return site_name;
     }
 
-    public void setDescription(String description) { this.description = description; }
-    public String getDescription() {
-        return description;
+    public void setSite_name(String site_name) {
+        this.site_name = site_name;
     }
 
-    public void setCompleted(boolean completed) { this.completed = completed; }
-    public boolean getCompleted(){
-        return this.completed;
+    public String getSite_number() {
+        return site_number;
     }
 
-    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setSite_number(String site_number) {
+        this.site_number = site_number;
+    }
 
-    public void setId(int id) { this.id = id; }
-    public int getId() { return id; }
+    public boolean isCompleted() {
+        return completed;
+    }
 
-    public int getCategoryId() { return categoryId; }
-    public void setCategoryId(int categoryId) { this.categoryId = categoryId; }
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getEngineerid() {
+        return engineerid;
+    }
+
+    public void setEngineerid(int engineerid) {
+        this.engineerid = engineerid;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Site site = (Site) o;
-        if (completed != site.completed) return false;
-        if (id != site.id) return false;
-        if (categoryId != site.categoryId) return false;
-        return description != null ? description.equals(site.description) : site.description == null;
+        return isCompleted() == site.isCompleted() &&
+                getId() == site.getId() &&
+                getEngineerid() == site.getEngineerid() &&
+                Objects.equals(getSite_name(), site.getSite_name()) &&
+                Objects.equals(getSite_number(), site.getSite_number()) &&
+                Objects.equals(getCreatedAt(), site.getCreatedAt());
     }
 
     @Override
     public int hashCode() {
-        int result = description != null ? description.hashCode() : 0;
-        result = 31 * result + (completed ? 1 : 0);
-        result = 31 * result + id;
-        result = 31 * result + categoryId;
-        return result;
+        return Objects.hash(getSite_name(), getSite_number(), isCompleted(), getCreatedAt(), getId(), getEngineerid());
     }
+
+
 }

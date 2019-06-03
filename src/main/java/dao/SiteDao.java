@@ -15,7 +15,7 @@ public interface SiteDao {
     Site findById(int id);
 
     // UPDATE
-    void update(int id, String description, int engineerId);
+    void update(String site_name, String site_number, int id, int engineerid);
 
     // DELETE
     void deleteById(int id);
