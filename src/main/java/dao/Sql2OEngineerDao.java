@@ -17,13 +17,15 @@ public class Sql2OEngineerDao implements EngineerDao {
 
     @Override
     public void add(Engineer engineer) {
-        String sql = "INSERT INTO engineers (name) VALUES (:name)";
+        String sql = "INSERT INTO engineers (name) VALUES (:name);";
+
         try(Connection con = DB.sql2o.open()){
             int id = (int) con.createQuery(sql, true)
                     .bind(engineer)
                     .executeUpdate()
                     .getKey();
             engineer.setId(id);
+            System.out.println(sql);
         } catch (Sql2oException ex) {
             System.out.println();
         }

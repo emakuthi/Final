@@ -21,17 +21,33 @@ public class Engineer {
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Engineer engineer = (Engineer) o;
+//        return id == engineer.id &&
+//                Objects.equals(name, engineer.name);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(name, id);
+//    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Engineer engineer = (Engineer) o;
-        return id == engineer.id &&
-                Objects.equals(name, engineer.name);
+        return getId() == engineer.getId() &&
+                Objects.equals(getName(), engineer.getName()) &&
+                Objects.equals(sites, engineer.sites);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, id);
+        return Objects.hash(getName(), getId(), sites);
     }
 }
