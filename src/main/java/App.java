@@ -55,14 +55,17 @@ public class App {
         post("/engineers", (req, res) -> { //new
             Map<String, Object> model = new HashMap<>();
             String name = req.queryParams("name");
-            Engineer newEngineer = new Engineer(name);
+            String ekNumber = req.queryParams("ek_number");
+            String region = req.queryParams("region");
+
+            Engineer newEngineer = new Engineer(name, ekNumber, region);
             System.out.println(name);
             engineerDao.add(newEngineer);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
 
-        //get: delete all Engineers and all tasks
+        //get: delete all Engineers and all sites
         get("/engineers/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             engineerDao.clearAllEngineers();
@@ -105,8 +108,10 @@ public class App {
         post("/engineers/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfEngineerToEdit = Integer.parseInt(req.params("id"));
-            String newName = req.queryParams("newCategoryName");
-            engineerDao.update(idOfEngineerToEdit, newName);
+            String newName = req.queryParams("newName");
+            String newEkNumber = req.queryParams("newEkNumber");
+            String newRegion = req.queryParams("newRegion");
+            engineerDao.update(idOfEngineerToEdit, newName, newEkNumber, newRegion);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -117,7 +122,7 @@ public class App {
         //get: delete an individual site
         get("/engineers/:engineer_id/sites/:site_id/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            int idOfSiteToDelete = Integer.parseInt(req.params("task_id"));
+            int idOfSiteToDelete = Integer.parseInt(req.params("site_id"));
             siteDao.deleteById(idOfSiteToDelete);
             res.redirect("/");
             return null;
@@ -126,8 +131,8 @@ public class App {
         //get: show new site form
         get("/sites/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Engineer> categories = engineerDao.getAll();
-            model.put("engineers", categories);
+            List<Engineer> engineers = engineerDao.getAll();
+            model.put("engineers", engineers);
             return new ModelAndView(model, "site-form.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -136,9 +141,11 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             List<Engineer> allEngineers = engineerDao.getAll();
             model.put("engineers", allEngineers);
-            String description = req.queryParams("description");
-            int categoryId = Integer.parseInt(req.queryParams("engineerId"));
-            Site newSite = new Site(description, categoryId );
+            int newId = Integer.parseInt(req.params("id"));
+            String siteName = req.queryParams("site_name");
+            String siteNumber = req.queryParams("site_name");
+            int engineerId = Integer.parseInt(req.queryParams("engineerid"));
+            Site newSite = new Site(siteName, siteNumber, newId, engineerId );
             siteDao.add(newSite);
             res.redirect("/");
             return null;
@@ -151,11 +158,9 @@ public class App {
             Site foundSite = siteDao.findById(idOfSiteToFind);
             int idOfEngineerToFind = Integer.parseInt(req.params("engineer_id"));
             Engineer foundEngineer = engineerDao.findById(idOfEngineerToFind);
-
             model.put("site", foundSite);
             model.put("engineer", foundEngineer);
-            model.put("engineers", engineerDao.getAll()); 
-
+            model.put("engineers", engineerDao.getAll());
             return new ModelAndView(model, "site-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -174,9 +179,10 @@ public class App {
         post("/sites/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int siteToEditId = Integer.parseInt(req.params("id"));
-            String newContent = req.queryParams("description");
-            int newCategoryId = Integer.parseInt(req.queryParams("engineerId"));
-            siteDao.update(siteToEditId, newContent, newCategoryId);
+            String newSiteName = req.queryParams("site_name");
+            String newSiteNumber = req.queryParams("site_number");
+            int newEngineerId = Integer.parseInt(req.queryParams("engineerid"));
+            siteDao.update(newSiteName, newSiteNumber, siteToEditId,  newEngineerId);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
