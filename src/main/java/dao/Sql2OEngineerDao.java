@@ -17,7 +17,7 @@ public class Sql2OEngineerDao implements EngineerDao {
 
     @Override
     public void add(Engineer engineer) {
-        String sql = "INSERT INTO engineers (name) VALUES (:name);";
+        String sql = "INSERT INTO engineers (name, ek_number, region) VALUES (:name, :ek_number, :region);";
 
         try(Connection con = DB.sql2o.open()){
             int id = (int) con.createQuery(sql, true)
@@ -51,12 +51,14 @@ public class Sql2OEngineerDao implements EngineerDao {
     }
 
     @Override
-    public void update(int id, String newName){
-        String sql = "UPDATE engineers SET name = :name WHERE id=:id";
+    public void update(int id, String newName, String newEk_Number, String newRegion){
+        String sql = "UPDATE sites SET (name, ek_number, region) = (:name, :ek_number, :region) WHERE id=:id";
         try(Connection con = DB.sql2o.open()){
             con.createQuery(sql)
                     .addParameter("name", newName)
                     .addParameter("id", id)
+                    .addParameter("ek_number", newEk_Number)
+                    .addParameter("region", newRegion)
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println();

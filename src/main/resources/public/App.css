@@ -41,3 +41,15 @@ margin-left:40%;
 font-size:30px;
 
 }
+
+.table{
+counter-reset: rowNumber;
+}
+
+
+table tr td:first-child::before {
+  content: counter(rowNumber);
+  counter-increment: rowNumber;
+  min-width: 1em;
+  margin-right: 0.5em;
+}

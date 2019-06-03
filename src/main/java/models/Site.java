@@ -4,14 +4,14 @@ import java.time.LocalDateTime;
 
 public class Site {
 
-    private String description;
+    private String site_name;
     private boolean completed;
     private LocalDateTime createdAt;
     private int id;
-    private int categoryId;
+    private int engineerid;
 
     public Site(String description, int categoryId) {
-        this.description = description;
+        this.site_name = description;
         this.completed = false;
         this.createdAt = LocalDateTime.now();
         this.categoryId = categoryId;

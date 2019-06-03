@@ -19,5 +19,6 @@ public interface SiteDao {
 
     // DELETE
     void deleteById(int id);
+
     void clearAllSites();
 }

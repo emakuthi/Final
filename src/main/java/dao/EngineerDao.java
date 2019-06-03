@@ -17,7 +17,7 @@ public interface EngineerDao {
     List<Site> getAllSitesByEngineer(int engineerId);
 
     //UPDATE
-    void update(int id, String name);
+    void update(int id, String name, String ek_number, String region);
 
     //DELETE
     void deleteById(int id);
