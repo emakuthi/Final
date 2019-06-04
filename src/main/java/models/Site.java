@@ -5,17 +5,12 @@ import java.util.Objects;
 
 public class Site {
 
-
-
     private String site_name;
     private String site_number;
     private boolean completed;
     private LocalDateTime createdAt;
     private int id;
     private int engineerid;
-
-
-
 
     public Site(String site_name, String site_number, int engineerid) {
         this.site_name = site_name;
