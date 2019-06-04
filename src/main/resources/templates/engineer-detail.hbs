@@ -27,9 +27,9 @@
                     <tbody>
                     <tr>
                         <th scope="row">1</th>
-                        <td>{{description}}</td>
-                        <td>{{siteNumber}}</td>
-                        <td>{{region}}</td>
+                        <td>{{site_name}}</td>
+                        <td>{{site_number}}</td>
+                        <td>{{engineer.region}}</td>
                     </tr>
                     </tbody>
 
@@ -44,7 +44,7 @@
     </div>
         <div class="card-footer">
             <a class="btn btn-warning btn-sm" href="/sites/{{site.id}}/edit">edit</a>
-            <a class="btn btn-warning btn-sm" href="/engineers/{{site.categoryId}}/sites/{{site.id}}/delete">delete</a>
+            <a class="btn btn-warning btn-sm" href="/engineers/{{site.engineerid}}/sites/{{site.id}}/delete">delete</a>
         </div>
     </div>
 
