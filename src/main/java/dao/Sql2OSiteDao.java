@@ -14,7 +14,7 @@ public class Sql2OSiteDao implements SiteDao { //implementing our interface
 
     @Override
     public void add(Site site) {
-        String sql = "INSERT INTO sites (site_name, site_number, engineerid) VALUES (:site_name, site_number, engineerid)"; //raw sql
+        String sql = "INSERT INTO sites (site_name, site_number, engineerid) VALUES (:site_name, :site_number, :engineerid)"; //raw sql
         try(Connection con = DB.sql2o.open()){ //try to open a connection
             int id = (int) con.createQuery(sql, true) //make a new variable
                     .bind(site)
@@ -45,7 +45,7 @@ public class Sql2OSiteDao implements SiteDao { //implementing our interface
     }
 
     @Override
-    public void update(String newSite_Name, String newSite_Number , int newId,int newEngineerId){
+    public void update(String newSite_Name, String newSite_Number ,int newEngineerId){
         String sql = "UPDATE sites SET (site_name, site_number, engineerid) = (:site_name, :site_number, :engineerid) WHERE id=:id"; //raw sql
         try(Connection con = DB.sql2o.open()){
             con.createQuery(sql)

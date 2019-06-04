@@ -17,7 +17,7 @@ public class Site {
 
 
 
-    public Site(String site_name, String site_number, int id, int engineerid) {
+    public Site(String site_name, String site_number, int engineerid) {
         this.site_name = site_name;
         this.site_number = site_number;
         this.completed = completed;
