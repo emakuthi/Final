@@ -3,6 +3,7 @@
     <p class="button">{{engineer.name}}</p>
     <p class="button">{{engineer.ek_number}}</p>
     <p class="button">{{engineer.region}}</p>
+    <a class="btn btn-warning btn-sm" href="/engineers/{{editEngineer.id}}/edit">edit Engineer</a>
 </div>
 
     <p>Here are all the Sites listed in this Engineer:</p>
@@ -46,7 +47,9 @@
     </table>
     </div>
         <div class="card-footer">
-            <a class="btn btn-warning btn-sm" href="/sites/{{site.id}}/edit">edit</a>
+
+            <a class="btn btn-warning btn-sm" href="/engineers/{{editEngineer.id}}/edit">edit Engineer</a>
+            <a class="btn btn-warning btn-sm" href="/sites/{{site.id}}/edit">edit Site</a>
             <a class="btn btn-warning btn-sm" href="/engineers/{{site.engineerid}}/sites/{{site.id}}/delete">delete</a>
         </div>
     </div>

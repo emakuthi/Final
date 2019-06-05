@@ -1,7 +1,7 @@
 {{#partial "content"}}
     {{#if editSite}}
         <h1>edit this sites</h1>
-        <form action="/sites/{{site.id}}" method="post">
+        <form action="/sites/{{site.id}}/edit" method="post">
             <br>
             <label for="site_name">edit this sites details</label>
             <input id="site_name" name="site_name" type="text" value="{{site.site_name}}">

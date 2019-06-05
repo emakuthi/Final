@@ -3,16 +3,36 @@
     <p> List of Field Operation Engineers</p>
 
     {{#if engineers}}
-     <p> click on the Enginneer's Name to view the sites Allocated !!</p>
+     <p> click on the Engineer's Name to view the sites Allocated !!</p>
         {{else}}
-        <p>click<a href="/engineers/new">here</a>to add an Engieer</p>
+        <p>click<a href="/engineers/new">here</a>to add an Engineer</p>
     {{/if}}
 
     {{#if engineers}}
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">NAME</th>
+                <th scope="col">EK NUMBER</th>
+                <th scope="col">REGION</th>
+            </tr>
+            </thead>
+
         {{#each engineers }}
 
-            <p><a href="/engineers/{{id}}">{{name}}</a></p>
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td><a href="/engineers/{{id}}">{{name}}</td>
+                    <td>{{ek_number}}</td>
+                    <td>{{region}}</td>
+                </tr>
+                </tbody>
         {{/each}}
+        </table>
+
     {{else}}
         <p>No Records</p>
     {{/if}}

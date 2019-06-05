@@ -4,6 +4,8 @@ import models.Engineer;
 import models.Site;
 import dao.Sql2OEngineerDao;
 import dao.Sql2OSiteDao;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -82,7 +84,8 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
-        //get: show an individual Engineer and sites it contains
+//        get: show an individual Engineer and sites it contains
+
         get("/engineers/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfEngineerToFind = Integer.parseInt(req.params("id")); //new
@@ -94,18 +97,19 @@ public class App {
             return new ModelAndView(model, "engineer-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //get: show a form to update a engineer
-        get("/engineers/:id/edit", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            model.put("editEngineer", true);
-            Engineer engineer = engineerDao.findById(Integer.parseInt(req.params("id")));
-            model.put("engineer", engineer);
-            model.put("engineers", engineerDao.getAll());
-            return new ModelAndView(model, "engineer-form.hbs");
+
+
+//        //get: show a form to update a engineer
+        get("/engineers/:id/edit", (request, response) -> {
+            Map<String, Object> model=new HashMap<>();
+            int idOfEngineerToUpdate=Integer.parseInt(request.params("id"));
+            Engineer editEngineer=engineerDao.findById(idOfEngineerToUpdate);
+            model.put("editEngineer",editEngineer);
+            return new ModelAndView(model,"engineer-form.hbs");
         }, new HandlebarsTemplateEngine());
 
         //post: process a form to update a engineer
-        post("/engineers/:id", (req, res) -> {
+        post("/engineers/:id/edit", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfEngineerToEdit = Integer.parseInt(req.params("id"));
             String newName = req.queryParams("newName");
@@ -116,8 +120,6 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
-        //get: delete a engineer and sites it contains
-        //  /categories/:id/delete
 
         //get: delete an individual site
         get("/engineers/:engineer_id/sites/:site_id/delete", (req, res) -> {
@@ -187,6 +189,31 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+
+//        get("/sites/:id/edit", (req, res) -> {
+//            Map<String, Object> model = new HashMap<>();
+//            List<Engineer> allEngineers = engineerDao.getAll();
+//            model.put("engineers", allEngineers);
+//            Site site = siteDao.findById(Integer.parseInt(req.params("id")));
+//            model.put("site", site);
+//            model.put("editSite", true);
+//            return new ModelAndView(model, "section-form.hbs");
+//        }, new HandlebarsTemplateEngine());
+//
+//        //post: process a form to update a site
+//        post("/sites/:id", (req, res) -> {
+//            Map<String, Object> model = new HashMap<>();
+//            int siteToEditId = Integer.parseInt(req.params("id"));
+//            String newSiteName = req.queryParams("site_name");
+//            String newSiteNumber = req.queryParams("site_number")
+//            int newEngineerId = Integer.parseInt(req.queryParams("engineerid"));
+//            taskDao.update(siteToEditId, newSiteName, newEngineerId);
+//            res.redirect("/");
+//            return null;
+//        }, new HandlebarsTemplateEngine());
+
+
     }
+
 
 }
