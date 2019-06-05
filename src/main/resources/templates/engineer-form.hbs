@@ -1,7 +1,7 @@
 {{#partial "content"}}
     {{#if editEngineer}}
         <h1>Edit this Engineer!</h1>
-        <form action="/engineers/{{engineer.id}}/edit" method="post">
+        <form action="/engineers/{{engineer.id}}" method="post">
             <div class="form-group">
                 <label for="name">Edit this Engineer's name</label>
                 <input class="form-control" id="newName" name="newName" type="text" value="{{engineer.name}}">

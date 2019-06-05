@@ -96,13 +96,14 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
 
-//        //get: show a form to update a engineer
-        get("/engineers/:id/edit", (request, response) -> {
-            Map<String, Object> model=new HashMap<>();
-            int idOfEngineerToUpdate=Integer.parseInt(request.params("id"));
-            Engineer editEngineer=engineerDao.findById(idOfEngineerToUpdate);
-            model.put("editEngineer",editEngineer);
-            return new ModelAndView(model,"engineer-form.hbs");
+        //get: show a form to update a engineer
+        get("/engineers/:id/edit", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("editEngineer", true);
+            Engineer engineer = engineerDao.findById(Integer.parseInt(req.params("id")));
+            model.put("engineer", engineer);
+            model.put("engineers", engineerDao.getAll()); //refresh list of links for navbar
+            return new ModelAndView(model, "engineer-form.hbs");
         }, new HandlebarsTemplateEngine());
 
         //post: process a form to update a engineer
