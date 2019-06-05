@@ -52,7 +52,7 @@ public class Sql2OEngineerDao implements EngineerDao {
 
     @Override
     public void update(int id, String newName, String newEk_Number, String newRegion){
-        String sql = "UPDATE sites SET (name, ek_number, region) = (:name, :ek_number, :region) WHERE id=:id";
+        String sql = "UPDATE engineers SET (name, ek_number, region) = (:name, :ek_number, :region) WHERE id=:id";
         try(Connection con = DB.sql2o.open()){
             con.createQuery(sql)
                     .addParameter("name", newName)
