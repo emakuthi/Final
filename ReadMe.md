@@ -1,14 +1,14 @@
 # Site Planner Application
 
- An app for a models.Site Maintenance Manager. The models.Site Maintenance Manager will be able to add a list of the maintenance engineers, and for each engineer, add the sites that the engineer maintains. The engineers work independently, so each site only belongs to a single engineer.
+ An app for a models.Employee Maintenance Manager. The models.Employee Maintenance Manager will be able to add a list of the maintenance departments, and for each department, add the employee that the department maintains. The departments work independently, so each employee only belongs to a single department.
 
 
 ## Behavior of the programm
 
  | Behavior                                       |  Input | Output    |
  | ---------------------------------------------- | ------ | --------- |
- |Adding new models.Engineer|  Click on the add models.Engineer tab   |  New record will be adde to the list of Engieers|
- |Adding a new models.Site| click On add new site tab  |  New form will be dispalayed to add more sites |
+ |Adding new models.Department|  Click on the add models.Department tab   |  New record will be adde to the list of Engieers|
+ |Adding a new models.Employee| click On add new employee tab  |  New form will be dispalayed to add more employee |
  |Displaying the list of Engineers| click on home page |  all the Engineers and thier details will be displayed|
  
 ## Setup/Installation Requirements
@@ -36,11 +36,11 @@ postgres=# \c site_maintenance;
 
 ###### Creating Engineers table.
 
-site_maintenance=# create table engineers (id int PRIMARY KEY, name varchar, ek_Number varchar, site_id varchar, created_at date);
+site_maintenance=# create table departments (id int PRIMARY KEY, name varchar, ek_Number varchar, site_id varchar, created_at date);
 
-###### Creating sites table
+###### Creating employee table
 
-site_maintenance=# create table sites (id int PRIMARY KEY, name varchar, engineer_id varchar, site_Number varchar, created_at date);
+site_maintenance=# create table employee (id int PRIMARY KEY, name varchar, engineer_id varchar, site_Number varchar, created_at date);
 
 ## Known Bugs
 

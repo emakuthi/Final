@@ -1,22 +1,16 @@
 {{#partial "content"}}
-    {{#if editEngineer}}
-        <h1>Edit this Engineer!</h1>
-        <form action="/engineers/{{engineer.id}}" method="post">
+    {{#if editDepartment}}
+        <h1>Edit this Department!</h1>
+        <form action="/departments/{{department.id}}" method="post">
             <div class="form-group">
-                <label for="name">Edit this Engineer's name</label>
-                <input class="form-control" id="newName" name="newName" type="text" value="{{engineer.name}}">
+                <label for="name">Edit this Department's name</label>
+                <input class="form-control" id="newName" name="newName" type="text" value="{{department.name}}">
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="form-group">
-                <label for="ek_number">Edit this Engineer's EKnunber</label>
-                <input class="form-control" id="newEkNumber" name="newEkNumber" type="text" value="{{engineer.ek_number}}">
-                <div class="valid-feedback">Valid.</div>
-                <div class="invalid-feedback">Please fill out this field.</div>
-            </div>
-            <div class="form-group">
-                <label for="region">Edit this Engineer's Region</label>
-                <input class="form-control" id="newRegion" name="newRegion" type="text" value="{{engineer.region}}">
+                <label for="description">Edit this Department's Description</label>
+                <input class="form-control" id="newDescription" name="newDescription" type="text" value="{{department.description}}">
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
@@ -30,24 +24,17 @@
             <button type="submit" class="btn btn-warning">submit</button>
         </form>
     {{else}}
-        <h5>Add a New Engineer!</h5>
-        <form action="/engineers" method="post">
+        <h5>Add a New Department!</h5>
+        <form action="/departments" method="post">
             <div class="form-group">
                 <label for="name">NAME: </label>
-                <input class="form-control" id="name" placeholder="Enter the Engineer Name"  name="name" type="text" required>
+                <input class="form-control" id="name" placeholder="Enter the Department Name"  name="name" type="text" required>
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="form-group">
-                <label for="ek_number">EK NUMBER:</label>
-                <input class="form-control" id="ek_number" name="ek_number" type="text" placeholder="Enter the Employee Number" required>
-                <div class="valid-feedback">Valid.</div>
-                <div class="invalid-feedback">Please fill out this field.</div>
-            </div>
-
-            <div class="form-group">
-                <label for="region">REGION:</label>
-                <input class="form-control" id="region" name="region" type="text" placeholder="Enter the Region" required><br><br>
+                <label for="description">DESCRIPTION:</label>
+                <input class="form-control" id="description" name="description" type="text" placeholder="Enter the Employee Number" required>
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>

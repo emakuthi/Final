@@ -1,0 +1,58 @@
+{{#partial "content"}}
+<div >
+    <p class="button">{{department.name}}</p>
+    <p class="button">{{department.description}}</p>
+
+    <a class="btn btn-warning btn-sm" href="/departments/{{department.id}}/edit">edit Department</a>
+</div>
+
+    <p>Here are all the Sites listed in this Department:</p>
+    <div class="card">
+        <div class="card-header">
+            List of employee
+        </div>
+
+
+    <div class="card-body">
+
+        <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">No.</th>
+            <th scope="col">employee name</th>
+            <th scope="col">employee number</th>
+
+        </tr>
+        </thead>
+
+        {{#if employee}}
+            {{#each employee }}
+
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td>{{employee_name}}</td>
+                        <td>{{employee_number}}</td>
+                    </tr>
+                    </tbody>
+
+            {{/each}}
+
+        {{else}}
+            <div class="card-body">
+                <p>No records</p>
+            </div>
+        {{/if}}
+    </table>
+    </div>
+        <div class="card-footer">
+
+            <a class="btn btn-warning btn-sm" href="/departments/{{editDepartment.id}}/edit">edit Department</a>
+            <a class="btn btn-warning btn-sm" href="/employees/{{employee.id}}/edit">edit Site</a>
+            <a class="btn btn-warning btn-sm" href="/departments/{{employee.engineerid}}/employees/{{employee.id}}/delete">delete</a>
+        </div>
+    </div>
+
+{{/partial}}
+
+{{> layout.hbs}}

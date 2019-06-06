@@ -1,14 +1,14 @@
 
 import dao.DB;
-import models.Engineer;
-import models.Site;
-import dao.Sql2OEngineerDao;
-import dao.Sql2OSiteDao;
+import models.Department;
+import models.Employee;
+import dao.Sql2ODepartmentDao;
+import dao.Sql2OEmployeeDao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import static spark.Spark.*;
@@ -18,8 +18,8 @@ public class App {
         staticFileLocation("/public");
 //        String connectionString = "jdbc:h2:~/todolist.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
 //        Sql2o sql2o = new Sql2o(connectionString, "", "");
-        Sql2OSiteDao siteDao = new Sql2OSiteDao(DB.sql2o);
-        Sql2OEngineerDao engineerDao = new Sql2OEngineerDao(DB.sql2o);
+        Sql2OEmployeeDao employeeDao = new Sql2OEmployeeDao(DB.sql2o);
+        Sql2ODepartmentDao departmentDao = new Sql2ODepartmentDao(DB.sql2o);
 
 
         ProcessBuilder process = new ProcessBuilder();
@@ -33,157 +33,157 @@ public class App {
         port(port);
 
 
-        //get: delete all Engineers and all sites
-        get("/engineers/delete", (req, res) -> {
+        //get: delete all Departments and all employees
+        get("/departments/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            engineerDao.clearAllEngineers();
-            siteDao.clearAllSites();
+            departmentDao.clearAllDepartments();
+            employeeDao.clearAllEmployees();
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
 
-        //get: delete all sites
-        get("/sites/delete", (req, res) -> {
+        //get: delete all employees
+        get("/employees/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            siteDao.clearAllSites();
+            employeeDao.clearAllEmployees();
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
 
-        //get: show all sites in all engineers and show all Engineers
+        //get: show all employees in all departments and show all Departments
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Engineer> allEngineers = engineerDao.getAll();
-            model.put("engineers", allEngineers);
-            List<Site> sites = siteDao.getAll();
-            model.put("sites", sites);
+            List<Department> allDepartments = departmentDao.getAll();
+            model.put("departments", allDepartments);
+            List<Employee> employees = employeeDao.getAll();
+            model.put("employees", employees);
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //show new Engineer form
-        get("/engineers/new", (req, res) -> {
+        //show new Department form
+        get("/departments/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Engineer> engineers = engineerDao.getAll();
-            model.put("engineers", engineers);
-            return new ModelAndView(model, "engineer-form.hbs");
+            List<Department> departments = departmentDao.getAll();
+            model.put("departments", departments);
+            return new ModelAndView(model, "department-form.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //post: process new Engineer form
-        post("/engineers", (req, res) -> {
+        //post: process new Department form
+        post("/departments", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Engineer> engineers = engineerDao.getAll();
+            List<Department> departments = departmentDao.getAll();
             String name = req.queryParams("name");
-            String ekNumber = req.queryParams("ek_number");
+            String description = req.queryParams("description");
             String region = req.queryParams("region");
-            Engineer newEngineer = new Engineer(name, ekNumber, region);
+            Department newDepartment = new Department(name, description);
             System.out.println(name);
-            engineerDao.add(newEngineer);
+            departmentDao.add(newDepartment);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
 
-//        get: show an individual Engineer and sites it contains
+//        get: show an individual Department and employees it contains
 
-        get("/engineers/:id", (req, res) -> {
+        get("/departments/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            int idOfEngineerToFind = Integer.parseInt(req.params("id")); //new
-            Engineer foundEngineer = engineerDao.findById(idOfEngineerToFind);
-            model.put("engineer", foundEngineer);
-            List<Site> allSitesByEngineer = engineerDao.getAllSitesByEngineer(idOfEngineerToFind);
-            model.put("sites", allSitesByEngineer);
-            model.put("engineers", engineerDao.getAll());
-            return new ModelAndView(model, "engineer-detail.hbs");
+            int idOfDepartmentToFind = Integer.parseInt(req.params("id")); //new
+            Department foundDepartment = departmentDao.findById(idOfDepartmentToFind);
+            model.put("department", foundDepartment);
+            List<Employee> allEmployeesByDepartment = departmentDao.getAllEmployeesByDepartment(idOfDepartmentToFind);
+            model.put("employees", allEmployeesByDepartment);
+            model.put("departments", departmentDao.getAll());
+            return new ModelAndView(model, "department-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
 
-        //get: show a form to update a engineer
-        get("/engineers/:id/edit", (req, res) -> {
+        //get: show a form to update a department
+        get("/departments/:id/edit", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("editEngineer", true);
-            Engineer engineer = engineerDao.findById(Integer.parseInt(req.params("id")));
-            model.put("engineer", engineer);
-            model.put("engineers", engineerDao.getAll()); //refresh list of links for navbar
-            return new ModelAndView(model, "engineer-form.hbs");
+            model.put("editDepartment", true);
+            Department department = departmentDao.findById(Integer.parseInt(req.params("id")));
+            model.put("department", department);
+            model.put("departments", departmentDao.getAll()); //refresh list of links for navbar
+            return new ModelAndView(model, "department-form.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //post: process a form to update a engineer
-        post("/engineers/:id/edit", (req, res) -> {
+        //post: process a form to update a department
+        post("/departments/:id/edit", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            int idOfEngineerToEdit = Integer.parseInt(req.params("id"));
+            int idOfDepartmentToEdit = Integer.parseInt(req.params("id"));
             String newName = req.queryParams("newName");
-            String newEkNumber = req.queryParams("newEkNumber");
-            String newRegion = req.queryParams("newRegion");
-            engineerDao.update(idOfEngineerToEdit, newName, newEkNumber, newRegion);
+            String newDescription = req.queryParams("newDescription");
+            departmentDao.update(idOfDepartmentToEdit, newName, newDescription);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
 
-        //get: show new site form
-        get("/sites/new", (req, res) -> {
+
+        //get: show new employee form
+        get("/employees/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Engineer> engineers = engineerDao.getAll();
-            model.put("engineers", engineers);
-            return new ModelAndView(model, "site-form.hbs");
+            List<Department> departments = departmentDao.getAll();
+            model.put("departments", departments);
+            return new ModelAndView(model, "employee-form.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //task: process new site form
-        post("/sites", (req, res) -> {
+        //task: process new employee form
+        post("/employees/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Engineer> allEngineers = engineerDao.getAll();
-            model.put("engineers", allEngineers);
+            List<Department> allDepartments = departmentDao.getAll();
+            model.put("departments", allDepartments);
             int newId = Integer.parseInt(req.params("id"));
-            String siteName = req.queryParams("site_name");
-            String siteNumber = req.queryParams("site_number");
-            int engineerId = Integer.parseInt(req.queryParams("engineerid"));
-            Site newSite = new Site(siteName, siteNumber,engineerId );
-            siteDao.add(newSite);
+            String employeeName = req.queryParams("employee_name");
+            String employeeNumber = req.queryParams("employee_number");
+            int DepartmentId = Integer.parseInt(req.queryParams("Departmentid"));
+            Employee newEmployee = new Employee(employeeName, employeeNumber,DepartmentId );
+            employeeDao.add(newEmployee);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
 
-        //get: show a form to update a site
-        get("/sites/:id/edit", (req, res) -> {
+        //get: show a form to update a employee
+        get("/employees/:id/edit", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Engineer> allEngineers = engineerDao.getAll();
-            model.put("engineers", allEngineers);
-            Site site = siteDao.findById(Integer.parseInt(req.params("id")));
-            model.put("site", site);
+            List<Department> allDepartments = departmentDao.getAll();
+            model.put("departments", allDepartments);
+            Employee employee = employeeDao.findById(Integer.parseInt(req.params("id")));
+            model.put("employee", employee);
             model.put("editSite", true);
-            return new ModelAndView(model, "site-form.hbs");
+            return new ModelAndView(model, "employee-form.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //post: process a form to update a site
-        post("/sites/:id", (req, res) -> {
+        //post: process a form to update a employee
+        post("/employees/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-//            int siteToEditId = Integer.parseInt(req.params("id"));
-            String newSiteName = req.queryParams("site_name");
-            String newSiteNumber = req.queryParams("site_number");
-            int newEngineerId = Integer.parseInt(req.queryParams("engineerid"));
-            siteDao.update(newSiteName, newSiteNumber,newEngineerId);
+//            int employeeToEditId = Integer.parseInt(req.params("id"));
+            String newSiteName = req.queryParams("employee_name");
+            String newSiteNumber = req.queryParams("employee_number");
+            int newDepartmentId = Integer.parseInt(req.queryParams("Departmentid"));
+            employeeDao.update(newSiteName, newSiteNumber,newDepartmentId);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
 
-        //get: delete an individual site
-        get("/engineers/:engineer_id/sites/:site_id/delete", (req, res) -> {
+        //get: delete an individual employee
+        get("/departments/:Department_id/employees/:employee_id/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            int idOfSiteToDelete = Integer.parseInt(req.params("site_id"));
-            siteDao.deleteById(idOfSiteToDelete);
+            int idOfSiteToDelete = Integer.parseInt(req.params("employee_id"));
+            employeeDao.deleteById(idOfSiteToDelete);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
 
-        //get: show an individual site that is nested in a engineer
-        get("/engineers/:engineer_id/sites/:site_id", (req, res) -> {
+        //get: show an individual employee that is nested in a department
+        get("/departments/:Department_id/employees/:employee_id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            int idOfSiteToFind = Integer.parseInt(req.params("site_id"));
-            Site foundSite = siteDao.findById(idOfSiteToFind);
-            int idOfEngineerToFind = Integer.parseInt(req.params("engineer_id"));
-            Engineer foundEngineer = engineerDao.findById(idOfEngineerToFind);
-            model.put("site", foundSite);
-            model.put("engineer", foundEngineer);
-            model.put("engineers", engineerDao.getAll());
-            return new ModelAndView(model, "site-detail.hbs");
+            int idOfSiteToFind = Integer.parseInt(req.params("employee_id"));
+            Employee foundEmployee = employeeDao.findById(idOfSiteToFind);
+            int idOfDepartmentToFind = Integer.parseInt(req.params("Department_id"));
+            Department foundDepartment = departmentDao.findById(idOfDepartmentToFind);
+            model.put("employee", foundEmployee);
+            model.put("department", foundDepartment);
+            model.put("departments", departmentDao.getAll());
+            return new ModelAndView(model, "employee-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
 

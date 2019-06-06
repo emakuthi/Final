@@ -1,33 +1,31 @@
 {{#partial "content"}}
 
-    <p> List of Field Operation Engineers</p>
+    <p> List of Field Operation Departments</p>
 
-    {{#if engineers}}
-     <p> click on the Engineer's Name to view the sites Allocated !!</p>
+    {{#if departments}}
+     <p> click on the Department's Name to view the employee Allocated !!</p>
         {{else}}
-        <p>click<a href="/engineers/new">here</a>to add an Engineer</p>
+        <p>click<a href="/departments/new">here</a>to add an Department</p>
     {{/if}}
 
-    {{#if engineers}}
+    {{#if departments}}
 
         <table class="table">
             <thead>
             <tr>
                 <th scope="col">No.</th>
                 <th scope="col">NAME</th>
-                <th scope="col">EK NUMBER</th>
-                <th scope="col">REGION</th>
+                <th scope="col">DESCRIPTION</th>
             </tr>
             </thead>
 
-        {{#each engineers }}
+        {{#each departments }}
 
                 <tbody>
                 <tr>
                     <td></td>
-                    <td><a href="/engineers/{{id}}">{{name}}</td>
-                    <td>{{ek_number}}</td>
-                    <td>{{region}}</td>
+                    <td><a href="/departments/{{id}}">{{name}}</td>
+                    <td>{{description}}</td>
                 </tr>
                 </tbody>
         {{/each}}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{#block "title"}}site planner{{/block}}</title>
+    <title>{{#block "title"}}employee planner{{/block}}</title>
     <link href="https://fonts.googleapis.com/css?family=Old+Standard+TT&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel='stylesheet' href='/App.css'>
@@ -12,12 +12,12 @@
 <div class="container">
     <div class="card">
         <div class="card-title">
-            <span class="title">Site Maintenance Planner</span><a class="logo" href="#"><img src="/images/saflogo.png" width="150px" height="50px" alt=""></a>
+            <span class="title">Saf News Banner</span><a class="logo" href="#"><img src="/images/saflogo.png" width="150px" height="50px" alt=""></a>
         </div>
         <div class="card-header">
             <a class="btn btn-warning"  href="/">Home</a>
-            <a class="btn btn-warning"  href="/engineers/new">Add Engineers</a>
-            <a class="btn btn-warning"  href="/sites/new">Add Sites</a>
+            <a class="btn btn-warning"  href="/departments/new">Add Departments</a>
+            <a class="btn btn-warning"  href="/employees/new">Add Employees</a>
         </div>
 
         <div class="card-body">
@@ -29,11 +29,9 @@
 
 {{#block "footer"}}
         <footer class="card-footer">
-
-
             <p class="text-muted">
-                <a class="btn btn-danger btn-sm" href="/engineers/delete">delete</a>
-                <a class="btn btn-danger btn-sm" href="/sites/delete">delete all sites</a>
+                <a class="btn btn-danger btn-sm" href="/departments/delete">delete</a>
+                <a class="btn btn-danger btn-sm" href="/employees/delete">delete all employee</a>
             </p>
 
         </footer>

@@ -1,30 +1,30 @@
 package dao;
 
-import models.Engineer;
-import models.Site;
+import models.Department;
+import models.Employee;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 import java.util.List;
 
-public class Sql2OEngineerDao implements EngineerDao {
+public class Sql2ODepartmentDao implements DepartmentDao {
 
     private final Sql2o sql2o;
 
-    public Sql2OEngineerDao(Sql2o sql2o){
+    public Sql2ODepartmentDao(Sql2o sql2o){
         this.sql2o = sql2o;
     }
 
     @Override
-    public void add(Engineer engineer) {
-        String sql = "INSERT INTO engineers (name, ek_number, region) VALUES (:name, :ek_number, :region);";
+    public void add(Department department) {
+        String sql = "INSERT INTO departments (name, description) VALUES (:name, :description);";
 
         try(Connection con = DB.sql2o.open()){
             int id = (int) con.createQuery(sql, true)
-                    .bind(engineer)
+                    .bind(department)
                     .executeUpdate()
                     .getKey();
-            engineer.setId(id);
+            department.setId(id);
             System.out.println(sql);
         } catch (Sql2oException ex) {
             System.out.println();
@@ -32,33 +32,32 @@ public class Sql2OEngineerDao implements EngineerDao {
     }
 
     @Override
-    public List<Engineer> getAll() {
+    public List<Department> getAll() {
         try(Connection con = DB.sql2o.open()){
-            return con.createQuery("SELECT * FROM engineers")
+            return con.createQuery("SELECT * FROM departments")
                     .throwOnMappingFailure(false)
-                    .executeAndFetch(Engineer.class);
+                    .executeAndFetch(Department.class);
         }
     }
 
     @Override
-    public Engineer findById(int id) {
+    public Department findById(int id) {
         try(Connection con = DB.sql2o.open()){
-            return con.createQuery("SELECT * FROM engineers WHERE id = :id")
+            return con.createQuery("SELECT * FROM departments WHERE id = :id")
                     .throwOnMappingFailure(false)
                     .addParameter("id", id)
-                    .executeAndFetchFirst(Engineer.class);
+                    .executeAndFetchFirst(Department.class);
         }
     }
 
     @Override
-    public void update(int id, String newName, String newEk_Number, String newRegion){
-        String sql = "UPDATE engineers SET (name, ek_number, region) = (:name, :ek_number, :region) WHERE id=:id";
+    public void update(int id, String newName, String newDescription){
+        String sql = "UPDATE departments SET (name, description) = (:name, :description) WHERE id=:id";
         try(Connection con = DB.sql2o.open()){
             con.createQuery(sql)
                     .addParameter("name", newName)
                     .addParameter("id", id)
-                    .addParameter("ek_number", newEk_Number)
-                    .addParameter("region", newRegion)
+                    .addParameter("description", newDescription)
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println();
@@ -67,7 +66,7 @@ public class Sql2OEngineerDao implements EngineerDao {
 
     @Override
     public void deleteById(int id) {
-        String sql = "DELETE from engineers WHERE id=:id"; //raw sql
+        String sql = "DELETE from departments WHERE id=:id"; //raw sql
         try (Connection con = DB.sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("id", id)
@@ -78,8 +77,8 @@ public class Sql2OEngineerDao implements EngineerDao {
     }
 
     @Override
-    public void clearAllEngineers() {
-        String sql = "DELETE from engineers"; //raw sql
+    public void clearAllDepartments() {
+        String sql = "DELETE from departments"; //raw sql
         try (Connection con = DB.sql2o.open()) {
             con.createQuery(sql)
                     .executeUpdate();
@@ -89,11 +88,11 @@ public class Sql2OEngineerDao implements EngineerDao {
     }
 
     @Override
-    public List<Site> getAllSitesByEngineer(int engineerId) {
+    public List<Employee> getAllEmployeesByDepartment(int departmentId) {
         try(Connection con = DB.sql2o.open()){
-            return con.createQuery("SELECT * FROM sites WHERE engineerid = :engineerid")
-                    .addParameter("engineerid", engineerId)
-                    .executeAndFetch(Site.class);
+            return con.createQuery("SELECT * FROM employees WHERE departmentid = :departmentid")
+                    .addParameter("departmentid", departmentId)
+                    .executeAndFetch(Employee.class);
         }
     }
 }
