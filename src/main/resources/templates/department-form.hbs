@@ -10,7 +10,8 @@
             </div>
             <div class="form-group">
                 <label for="description">Edit this Department's Description</label>
-                <input class="form-control" id="newDescription" name="newDescription" type="text" value="{{department.description}}">
+                <textarea class="form-control" id="newDescription" name="newDescription" type="text" value="{{department.description}}"></textarea>
+
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
@@ -34,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label for="description">DESCRIPTION:</label>
-                <input class="form-control" id="description" name="description" type="text" placeholder="Enter the Employee Number" required>
+                <textarea class="form-control rounded-0" id="description" name="description" rows="10" placeholder="Please Enter description" required></textarea>
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>

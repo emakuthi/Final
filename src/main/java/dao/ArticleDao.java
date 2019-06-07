@@ -1,13 +1,13 @@
 package dao;
 
-import models.Employee;
 import models.Article;
+
 
 import java.util.List;
 
 public interface ArticleDao {
     // LIST
-    List<Employee> getAll();
+    List<Article> getAll();
 
     // CREATE
     void add(Article article);

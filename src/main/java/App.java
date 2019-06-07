@@ -1,5 +1,9 @@
 
+import com.google.gson.Gson;
 import dao.DB;
+import dao.Sql2OArticleDao;
+import exceptions.ApiException;
+import models.Article;
 import models.Department;
 import models.Employee;
 import dao.Sql2ODepartmentDao;
@@ -16,11 +20,12 @@ import static spark.Spark.*;
 public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
-//        String connectionString = "jdbc:h2:~/todolist.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-//        Sql2o sql2o = new Sql2o(connectionString, "", "");
+
         Sql2OEmployeeDao employeeDao = new Sql2OEmployeeDao(DB.sql2o);
         Sql2ODepartmentDao departmentDao = new Sql2ODepartmentDao(DB.sql2o);
+        Sql2OArticleDao articleDao = new Sql2OArticleDao(DB.sql2o);
 
+        Gson gson = new Gson();
 
         ProcessBuilder process = new ProcessBuilder();
         Integer port;
@@ -82,6 +87,33 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+//        API route to gell add repartments listed
+
+        //READ
+        get("/departments", "application/json", (req, res) -> {
+            System.out.println(departmentDao.getAll());
+
+            if(departmentDao.getAll().size() > 0){
+                return gson.toJson(departmentDao.getAll());
+            }
+
+            else {
+                return "{\"message\":\"I'm sorry, but no departments are currently listed in the database.\"}";
+            }
+
+        });
+
+
+        //CREATE
+        post("/departments/new", "application/json", (req, res) -> {
+            Department department = gson.fromJson(req.body(), Department.class);
+            departmentDao.add(department);
+            res.status(201);
+            return gson.toJson(department);
+        });
+
+
+
 //        get: show an individual Department and employees it contains
 
         get("/departments/:id", (req, res) -> {
@@ -131,10 +163,10 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             List<Department> allDepartments = departmentDao.getAll();
             model.put("departments", allDepartments);
-            int newId = Integer.parseInt(req.params("id"));
+//            int newId = Integer.parseInt(req.params("id"));
             String employeeName = req.queryParams("employee_name");
             String employeeNumber = req.queryParams("employee_number");
-            int DepartmentId = Integer.parseInt(req.queryParams("Departmentid"));
+            int DepartmentId = Integer.parseInt(req.queryParams("departmentid"));
             Employee newEmployee = new Employee(employeeName, employeeNumber,DepartmentId );
             employeeDao.add(newEmployee);
             res.redirect("/");
@@ -186,6 +218,119 @@ public class App {
             return new ModelAndView(model, "employee-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
+
+
+        //get: show new article form
+        get("/articles/new", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Department> departments = departmentDao.getAll();
+            model.put("departments", departments);
+            return new ModelAndView(model, "article-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //task: process new article form
+        post("/articles/new", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Department> allDepartments = departmentDao.getAll();
+            model.put("departments", allDepartments);
+            String content = req.queryParams("content");
+            int departmentid = Integer.parseInt(req.queryParams("departmentid"));
+            Article newArticle = new Article(content, departmentid);
+            articleDao.add(newArticle);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+//        post("/departments", (req, res) -> {
+//            Map<String, Object> model = new HashMap<>();
+//            List<Department> departments = departmentDao.getAll();
+//            String name = req.queryParams("name");
+//            String description = req.queryParams("description");
+//            String region = req.queryParams("region");
+//            Department newDepartment = new Department(name, description);
+//            System.out.println(name);
+//            departmentDao.add(newDepartment);
+//            res.redirect("/");
+//            return null;
+//        }, new HandlebarsTemplateEngine());
+//
+
+//        post("/employees/new", (req, res) -> {
+//            Map<String, Object> model = new HashMap<>();
+//            List<Department> allDepartments = departmentDao.getAll();
+//            model.put("departments", allDepartments);
+////            int newId = Integer.parseInt(req.params("id"));
+//            String employeeName = req.queryParams("employee_name");
+//            String employeeNumber = req.queryParams("employee_number");
+//            int DepartmentId = Integer.parseInt(req.queryParams("departmentid"));
+//            Employee newEmployee = new Employee(employeeName, employeeNumber,DepartmentId );
+//            employeeDao.add(newEmployee);
+//            res.redirect("/");
+//            return null;
+//        }, new HandlebarsTemplateEngine());
+
+
+
+
+        //get: show a form to update a article
+        get("/articles/:id/edit", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Department> allDepartments = departmentDao.getAll();
+            model.put("departments", allDepartments);
+            Article article = articleDao.findById(Integer.parseInt(req.params("id")));
+            model.put("article", article);
+            model.put("editArticle", true);
+            return new ModelAndView(model, "article-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //post: process a form to update a article
+        post("/articles/:id", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            String newContent = req.queryParams("content");
+            int newDepartmentId = Integer.parseInt(req.queryParams("Departmentid"));
+            articleDao.update(newContent, newDepartmentId);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        //get: delete an individual article
+        get("/departments/:Department_id/articles/:article_id/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfArticleToDelete = Integer.parseInt(req.params("article_id"));
+            articleDao.deleteById(idOfArticleToDelete);
+            res.redirect("article-detail.hbs");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        //get: show an individual article that is nested in a department
+        get("/departments/:Department_id/articles/:article_id", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfArticleToFind = Integer.parseInt(req.params("article_id"));
+            Article foundArticle = articleDao.findById(idOfArticleToFind);
+            int idOfDepartmentToFind = Integer.parseInt(req.params("Department_id"));
+            Department foundDepartment = departmentDao.findById(idOfDepartmentToFind);
+            model.put("article", foundArticle);
+            model.put("department", foundDepartment);
+            model.put("departments", departmentDao.getAll());
+            return new ModelAndView(model, "article-detail.hbs");
+        }, new HandlebarsTemplateEngine());
+
+
+        //FILTERS
+        exception(ApiException.class, (exception, req, res) -> {
+            ApiException err = exception;
+            Map<String, Object> jsonMap = new HashMap<>();
+            jsonMap.put("status", err.getStatusCode());
+            jsonMap.put("errorMessage", err.getMessage());
+            res.type("application/json");
+            res.status(err.getStatusCode());
+            res.body(gson.toJson(jsonMap));
+        });
+
+
+        after((req, res) ->{
+            res.type("application/json");
+        });
 
 
     }

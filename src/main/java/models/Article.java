@@ -5,11 +5,12 @@ import java.util.Objects;
 public class Article {
     int id;
     String content;
-    String departmentId;
+    int departmentId;
 
-    public Article(String content) {
+    public Article(String content, int departmentId) {
         this.id = id;
         this.content = content;
+        this.departmentId = departmentId;
     }
 
     public int getId() { return id; }
@@ -20,11 +21,11 @@ public class Article {
 
     public void setContent(String content) { this.content = content; }
 
-    public String getDepartmentId() {
+    public int getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(String departmentId) {
+    public void setDepartmentId(int departmentId) {
         this.departmentId = departmentId;
     }
 
