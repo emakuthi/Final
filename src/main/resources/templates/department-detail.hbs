@@ -4,6 +4,7 @@
     <p class="button">{{department.description}}</p>
 
     <a class="btn btn-warning btn-sm" href="/departments/{{department.id}}/edit">edit Department</a>
+    <a class="btn btn-warning btn-sm" href="/departments/{{department.id}}/articles/{{article.id}}">View Articles</a>
 </div>
 
     <p>Here are all the Sites listed in this Department:</p>
@@ -14,19 +15,20 @@
 
 
     <div class="card-body">
-
+<div class="row">
+    <div class="col-sm-8">
         <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">No.</th>
-            <th scope="col">employee name</th>
-            <th scope="col">employee number</th>
+            <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">employee name</th>
+                <th scope="col">employee number</th>
 
-        </tr>
-        </thead>
+            </tr>
+            </thead>
 
-        {{#if employees}}
-            {{#each employees}}
+            {{#if employees}}
+                {{#each employees}}
 
                     <tbody>
                     <tr>
@@ -36,14 +38,28 @@
                     </tr>
                     </tbody>
 
-            {{/each}}
+                {{/each}}
 
-        {{else}}
-            <div class="card-body">
-                <p>No records</p>
-            </div>
+            {{else}}
+                <div class="card-body">
+                    <p>No records</p>
+                </div>
+            {{/if}}
+        </table>
+
+    </div>
+
+    <div class="col-sm-4">
+        {{#if articles}}
+                {{#each articles}}
+                    <p>{{content}}</p>
+                {{/each}}
         {{/if}}
-    </table>
+
+    </div>
+
+</div>
+
     </div>
         <div class="card-footer">
 

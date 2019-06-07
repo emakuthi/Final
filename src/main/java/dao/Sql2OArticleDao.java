@@ -17,7 +17,7 @@ public class Sql2OArticleDao implements ArticleDao {
     }
     @Override
     public void add(Article article) {
-        String sql = "INSERT INTO articles (content, departmentid) VALUES (:content, :departmentid)"; //raw sql
+        String sql = "INSERT INTO articles (content, departmentid) VALUES (:content, :departmentId)"; //raw sql
         try(Connection con = DB.sql2o.open()){ //try to open a connection
             int id = (int) con.createQuery(sql, true) //make a new variable
                     .bind(article)

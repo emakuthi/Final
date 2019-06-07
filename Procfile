@@ -1,1 +1,1 @@
-web: ./build/install/siteplanner/bin/siteplanner
+web: ./build/install/safnewsbanner/bin/safnewsbanner

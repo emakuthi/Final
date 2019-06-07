@@ -1,5 +1,6 @@
 package dao;
 
+import models.Article;
 import models.Department;
 import models.Employee;
 
@@ -15,7 +16,9 @@ public interface DepartmentDao {
 
     //READ
     Department findById(int id);
-    List<Employee> getAllEmployeesByDepartment(int engineerId);
+    List<Employee> getAllEmployeesByDepartment(int departmentId);
+    List<Article> getAllArticlesByDepartment(int departmentId);
+
 
     //UPDATE
     void update(int id, String name, String description);

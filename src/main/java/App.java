@@ -87,33 +87,6 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
-//        API route to gell add repartments listed
-
-        //READ
-        get("/departments", "application/json", (req, res) -> {
-            System.out.println(departmentDao.getAll());
-
-            if(departmentDao.getAll().size() > 0){
-                return gson.toJson(departmentDao.getAll());
-            }
-
-            else {
-                return "{\"message\":\"I'm sorry, but no departments are currently listed in the database.\"}";
-            }
-
-        });
-
-
-        //CREATE
-        post("/departments/new", "application/json", (req, res) -> {
-            Department department = gson.fromJson(req.body(), Department.class);
-            departmentDao.add(department);
-            res.status(201);
-            return gson.toJson(department);
-        });
-
-
-
 //        get: show an individual Department and employees it contains
 
         get("/departments/:id", (req, res) -> {
@@ -123,6 +96,8 @@ public class App {
             model.put("department", foundDepartment);
             List<Employee> allEmployeesByDepartment = departmentDao.getAllEmployeesByDepartment(idOfDepartmentToFind);
             model.put("employees", allEmployeesByDepartment);
+//            List<Article> allArticlesByDepartment = departmentDao.getAllArticlesByDepartment(idOfDepartmentToFind);
+//            model.put("articles", allArticlesByDepartment);
             model.put("departments", departmentDao.getAll());
             return new ModelAndView(model, "department-detail.hbs");
         }, new HandlebarsTemplateEngine());
@@ -173,6 +148,8 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+
+
         //get: show a form to update a employee
         get("/employees/:id/edit", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
@@ -185,12 +162,12 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //post: process a form to update a employee
-        post("/employees/:id", (req, res) -> {
+        post("/employees/:id/edit", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
 //            int employeeToEditId = Integer.parseInt(req.params("id"));
             String newSiteName = req.queryParams("employee_name");
             String newSiteNumber = req.queryParams("employee_number");
-            int newDepartmentId = Integer.parseInt(req.queryParams("Departmentid"));
+            int newDepartmentId = Integer.parseInt(req.queryParams("departmentid"));
             employeeDao.update(newSiteName, newSiteNumber,newDepartmentId);
             res.redirect("/");
             return null;
@@ -241,36 +218,6 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
-//        post("/departments", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            List<Department> departments = departmentDao.getAll();
-//            String name = req.queryParams("name");
-//            String description = req.queryParams("description");
-//            String region = req.queryParams("region");
-//            Department newDepartment = new Department(name, description);
-//            System.out.println(name);
-//            departmentDao.add(newDepartment);
-//            res.redirect("/");
-//            return null;
-//        }, new HandlebarsTemplateEngine());
-//
-
-//        post("/employees/new", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            List<Department> allDepartments = departmentDao.getAll();
-//            model.put("departments", allDepartments);
-////            int newId = Integer.parseInt(req.params("id"));
-//            String employeeName = req.queryParams("employee_name");
-//            String employeeNumber = req.queryParams("employee_number");
-//            int DepartmentId = Integer.parseInt(req.queryParams("departmentid"));
-//            Employee newEmployee = new Employee(employeeName, employeeNumber,DepartmentId );
-//            employeeDao.add(newEmployee);
-//            res.redirect("/");
-//            return null;
-//        }, new HandlebarsTemplateEngine());
-
-
-
 
         //get: show a form to update a article
         get("/articles/:id/edit", (req, res) -> {
@@ -315,25 +262,57 @@ public class App {
             return new ModelAndView(model, "article-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
+/*
+API routes to communicate with the database
 
-        //FILTERS
-        exception(ApiException.class, (exception, req, res) -> {
-            ApiException err = exception;
-            Map<String, Object> jsonMap = new HashMap<>();
-            jsonMap.put("status", err.getStatusCode());
-            jsonMap.put("errorMessage", err.getMessage());
-            res.type("application/json");
-            res.status(err.getStatusCode());
-            res.body(gson.toJson(jsonMap));
+
+
+
+
+ */
+        //READ
+        get("/departments/api", "application/json", (req, res) -> {
+            System.out.println(departmentDao.getAll());
+
+            if(departmentDao.getAll().size() > 0){
+                return gson.toJson(departmentDao.getAll());
+            }
+            else {
+                return "{\"message\":\"I'm sorry, but no departments are currently listed in the database.\"}";
+            }
+        });
+
+        //CREATE
+        post("/departments/api/new", "application/json", (req, res) -> {
+            Department department = gson.fromJson(req.body(), Department.class);
+            departmentDao.add(department);
+            res.status(201);
+            return gson.toJson(department);
         });
 
 
-        after((req, res) ->{
-            res.type("application/json");
+        //READ
+        get("/employees/api", "application/json", (req, res) -> {
+            System.out.println(employeeDao.getAll());
+
+            if(employeeDao.getAll().size() > 0){
+                return gson.toJson(employeeDao.getAll());
+            }
+            else {
+                return "{\"message\":\"I'm sorry, but no employees are currently listed in the database.\"}";
+            }
         });
+
+        //CREATE
+        post("/employees/api/new", "application/json", (req, res) -> {
+            Employee employee = gson.fromJson(req.body(), Employee.class);
+            employeeDao.add(employee);
+            res.status(201);
+            return gson.toJson(employee);
+        });
+
 
 
     }
-
 
 }

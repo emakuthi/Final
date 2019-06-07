@@ -4,14 +4,14 @@ plugins {
 }
 
 
-group 'to-do-list'
+group 'SafNewsBanner'
 version '1.0-SNAPSHOT'
 
 
 
 sourceCompatibility = 1.8
 mainClassName = 'App'
-applicationName = "siteplanner"
+applicationName = "safnewsbanner"
 
 
 repositories {
