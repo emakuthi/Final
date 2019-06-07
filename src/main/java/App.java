@@ -2,7 +2,6 @@
 import com.google.gson.Gson;
 import dao.DB;
 import dao.Sql2OArticleDao;
-import exceptions.ApiException;
 import models.Article;
 import models.Department;
 import models.Employee;
