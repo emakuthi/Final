@@ -211,7 +211,7 @@ public class App {
 
         //task: process new content formString	uri()
         post("/content/new", "multipart/form-data" , (req, res)->{
-            String location = "/home/developer/IdeaProjects/SafNewsBanner/src/main/resources/public/docs";
+            String location = docs_uri;
             MultipartConfigElement multipartConfigElement = new MultipartConfigElement(location);
             req.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
             Collection<Part> parts = req.raw().getParts();
