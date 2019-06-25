@@ -228,6 +228,7 @@ public class App {
             System.out.println(uploadedFile);
             Path out = Paths.get(location + "/" + fName);
             try(final InputStream in = uploadedFile.getInputStream()){
+
                 Files.copy(in, out);
                 Map<String, Object> model = new HashMap<>();
             List<Coarses> allCoarses = coarsesDao.getAll();
@@ -300,7 +301,7 @@ API routes to communicate with the database
 
  */
         //READ
-        get("/coarses/api", "application/json", (req, res) -> {
+        get("/coarsesApi", "application/json", (req, res) -> {
             System.out.println(coarsesDao.getAll());
 
             if(coarsesDao.getAll().size() > 0){
@@ -312,7 +313,7 @@ API routes to communicate with the database
         });
 
         //CREATE
-        post("/coarses/api/new", "application/json", (req, res) -> {
+        post("/postCoarseApi", "application/json", (req, res) -> {
             Coarses coarses = gson.fromJson(req.body(), Coarses.class);
             coarsesDao.add(coarses);
             res.status(201);
@@ -321,7 +322,7 @@ API routes to communicate with the database
 
 
         //READ
-        get("/staff/api", "application/json", (req, res) -> {
+        get("/staffapi", "application/json", (req, res) -> {
             System.out.println(staffDao.getAll());
 
             if(staffDao.getAll().size() > 0){
@@ -333,7 +334,7 @@ API routes to communicate with the database
         });
 
         //CREATE
-        post("/staff/api/new", "application/json", (req, res) -> {
+        post("/postStaffApi", "application/json", (req, res) -> {
             Staff staff = gson.fromJson(req.body(), Staff.class);
             staffDao.add(staff);
             res.status(201);
@@ -341,12 +342,12 @@ API routes to communicate with the database
         });
 
 
-        get("/coarses/api/:id", "application/json", (req, res) -> {
+        get("/coarsesapi/:id", "application/json", (req, res) -> {
             int coarseId = Integer.parseInt(req.params("id"));
             return gson.toJson(coarsesDao.findById(coarseId));
         });
 
-        get("/content/api", "application/json", (req, res) -> {
+        get("/getContentApi", "application/json", (req, res) -> {
             System.out.println(contentDao.getAll());
 
             if(contentDao.getAll().size() > 0){
