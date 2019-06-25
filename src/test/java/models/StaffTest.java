@@ -1,36 +1,36 @@
 package models;
 
 import org.junit.Test;
-import java.time.LocalDateTime;
+
 import static org.junit.Assert.*;
 
-public class EmployeeTest {
+public class StaffTest {
     @Test
     public void NewEmployeeObjectGetsCorrectlyCreated_true() throws Exception {
-        Employee employee = setupNewEmployee();
-        assertEquals(true, employee instanceof Employee);
+        Staff staff = setupNewEmployee();
+        assertEquals(true, staff instanceof Staff);
     }
 
     @Test
     public void EmployeeInstantiatesWithDescription_true() throws Exception {
-        Employee employee = setupNewEmployee();
-        assertEquals("elvis", employee.getEmployee_name());
+        Staff staff = setupNewEmployee();
+        assertEquals("elvis", staff.getEmployee_name());
     }
 
     @Test
     public void isCompletedPropertyIsFalseAfterInstantiation() throws Exception {
-        Employee employee = setupNewEmployee();
-        assertEquals(false, employee.isCompleted()); //should never start as completed
+        Staff staff = setupNewEmployee();
+        assertEquals(false, staff.isCompleted()); //should never start as completed
     }
 
 //    @Test
 //    public void getCreatedAtInstantiatesWithCurrentTimeToday() throws Exception {
-//        Employee employee = setupNewEmployee();
+//        Staff employee = setupNewEmployee();
 //        assertEquals(LocalDateTime.now().getDayOfWeek(), employee.getCreatedAt().getDayOfWeek());
 //    }
 
     //helper methods
-    public Employee setupNewEmployee(){
-        return new Employee("elvis", "ek219", 1);
+    public Staff setupNewEmployee(){
+        return new Staff("elvis", "ek219", 1);
     }
 }

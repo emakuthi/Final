@@ -1,59 +1,59 @@
 package dao;
 
-import models.Article;
+import models.Content;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
 import java.util.List;
 
-public class Sql2OArticleDao implements ArticleDao {
+public class Sql2OContentDao implements ContentDao {
 
 
     private final Sql2o sql2o;
 
-    public Sql2OArticleDao(Sql2o sql2o){
+    public Sql2OContentDao(Sql2o sql2o){
         this.sql2o = sql2o; //making the sql2o object available everywhere so we can call methods in it
     }
     @Override
-    public void add(Article article) {
-        String sql = "INSERT INTO articles (content, departmentid) VALUES (:content, :departmentId)"; //raw sql
+    public void add(Content content) {
+        String sql = "INSERT INTO content (content, coarseid) VALUES (:content, :coarseid)"; //raw sql
         try(Connection con = DB.sql2o.open()){ //try to open a connection
             int id = (int) con.createQuery(sql, true) //make a new variable
-                    .bind(article)
+                    .bind(content)
                     .executeUpdate() //run it all
                     .getKey(); //int id is now the row number (row “key”) of db
-            article.setId(id); //update object to set id now from database
+            content.setId(id); //update object to set id now from database
         } catch (Sql2oException ex) {
             System.out.println(); //oops we have an error!
         }
     }
 
     @Override
-    public List<Article> getAll() {
+    public List<Content> getAll() {
         try(Connection con =DB.sql2o.open()){
-            return con.createQuery("SELECT * FROM articles") //raw sql
-                    .executeAndFetch(Article.class); //fetch a list
+            return con.createQuery("SELECT * FROM content") //raw sql
+                    .executeAndFetch(Content.class); //fetch a list
         }
     }
 
 
     @Override
-    public Article findById(int id) {
+    public Content findById(int id) {
         try(Connection con = DB.sql2o.open()){
-            return con.createQuery("SELECT * FROM articles WHERE id = :id")
+            return con.createQuery("SELECT * FROM content WHERE id = :id")
                     .addParameter("id", id) //key/value pair, key must match above
-                    .executeAndFetchFirst(Article.class); //fetch an individual item
+                    .executeAndFetchFirst(Content.class); //fetch an individual item
         }
     }
 
     @Override
-    public void update(String newContent, int newDepartmentId){
-        String sql = "UPDATE articles SET (content, departmentid) = (:content, :departmentid) WHERE id=:id"; //raw sql
+    public void update(String newContent, int newCoarseId){
+        String sql = "UPDATE content SET (content, coarseid) = (:content, :coarseid) WHERE id=:id"; //raw sql
         try(Connection con = DB.sql2o.open()){
             con.createQuery(sql)
                     .addParameter("content", newContent)
-                    .addParameter("departmentid", newDepartmentId)
+                    .addParameter("coarseid", newCoarseId)
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println();
@@ -62,7 +62,7 @@ public class Sql2OArticleDao implements ArticleDao {
 
     @Override
     public void deleteById(int id) {
-        String sql = "DELETE from articles WHERE id=:id";
+        String sql = "DELETE from content WHERE id=:id";
         try (Connection con = DB.sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("id", id)
@@ -73,8 +73,8 @@ public class Sql2OArticleDao implements ArticleDao {
     }
 
     @Override
-    public void clearAllArticles() {
-        String sql = "DELETE from articles";
+    public void clearAllCoarseContent() {
+        String sql = "DELETE from coarse_content";
         try (Connection con = DB.sql2o.open()) {
             con.createQuery(sql)
                     .executeUpdate();
@@ -82,5 +82,14 @@ public class Sql2OArticleDao implements ArticleDao {
             System.out.println();
         }
     }
+    @Override
+    public List<Content> getAllCoarseContentByCoarse(int coarseid) {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM coarse_content WHERE coarseid = :coarseid")
+                    .addParameter("coarseid", coarseid)
+                    .executeAndFetch(Content.class);
+        }
+    }
+
 
 }

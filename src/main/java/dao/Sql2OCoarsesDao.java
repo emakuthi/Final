@@ -1,31 +1,31 @@
 package dao;
 
-import models.Article;
-import models.Department;
-import models.Employee;
+import models.Content;
+import models.Coarses;
+import models.Staff;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 import java.util.List;
 
-public class Sql2ODepartmentDao implements DepartmentDao {
+public class Sql2OCoarsesDao implements CoarsesDao {
 
     private final Sql2o sql2o;
 
-    public Sql2ODepartmentDao(Sql2o sql2o){
+    public Sql2OCoarsesDao(Sql2o sql2o){
         this.sql2o = sql2o;
     }
 
     @Override
-    public void add(Department department) {
-        String sql = "INSERT INTO departments (name, description) VALUES (:name, :description);";
+    public void add(Coarses coarses) {
+        String sql = "INSERT INTO coarses (coarse_name, description, duration) VALUES (:coarse_name, :description, :duration);";
 
         try(Connection con = DB.sql2o.open()){
             int id = (int) con.createQuery(sql, true)
-                    .bind(department)
+                    .bind(coarses)
                     .executeUpdate()
                     .getKey();
-            department.setId(id);
+            coarses.setId(id);
             System.out.println(sql);
         } catch (Sql2oException ex) {
             System.out.println();
@@ -33,32 +33,33 @@ public class Sql2ODepartmentDao implements DepartmentDao {
     }
 
     @Override
-    public List<Department> getAll() {
+    public List<Coarses> getAll() {
         try(Connection con = DB.sql2o.open()){
-            return con.createQuery("SELECT * FROM departments")
+            return con.createQuery("SELECT * FROM coarses")
                     .throwOnMappingFailure(false)
-                    .executeAndFetch(Department.class);
+                    .executeAndFetch(Coarses.class);
         }
     }
 
     @Override
-    public Department findById(int id) {
+    public Coarses findById(int id) {
         try(Connection con = DB.sql2o.open()){
-            return con.createQuery("SELECT * FROM departments WHERE id = :id")
+            return con.createQuery("SELECT * FROM coarses WHERE id = :id")
                     .throwOnMappingFailure(false)
                     .addParameter("id", id)
-                    .executeAndFetchFirst(Department.class);
+                    .executeAndFetchFirst(Coarses.class);
         }
     }
 
     @Override
-    public void update(int id, String newName, String newDescription){
-        String sql = "UPDATE departments SET (name, description) = (:name, :description) WHERE id=:id";
+    public void update(int id, String newName,String newDuration, String newDescription){
+        String sql = "UPDATE coarses SET (coarse_name, description, duration) = (:coarse_name, :description, :duration) WHERE id=:id";
         try(Connection con = DB.sql2o.open()){
             con.createQuery(sql)
-                    .addParameter("name", newName)
+                    .addParameter("coarse_name", newName)
                     .addParameter("id", id)
                     .addParameter("description", newDescription)
+                    .addParameter("duration", newDuration)
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println();
@@ -67,7 +68,7 @@ public class Sql2ODepartmentDao implements DepartmentDao {
 
     @Override
     public void deleteById(int id) {
-        String sql = "DELETE from departments WHERE id=:id"; //raw sql
+        String sql = "DELETE from coarses WHERE id=:id"; //raw sql
         try (Connection con = DB.sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("id", id)
@@ -78,8 +79,8 @@ public class Sql2ODepartmentDao implements DepartmentDao {
     }
 
     @Override
-    public void clearAllDepartments() {
-        String sql = "DELETE from departments"; //raw sql
+    public void clearAllCoarses() {
+        String sql = "DELETE from coarses"; //raw sql
         try (Connection con = DB.sql2o.open()) {
             con.createQuery(sql)
                     .executeUpdate();
@@ -89,21 +90,21 @@ public class Sql2ODepartmentDao implements DepartmentDao {
     }
 
     @Override
-    public List<Employee> getAllEmployeesByDepartment(int departmentId) {
+    public List<Staff> getAllStaffByCoarse(int coarseid) {
         try(Connection con = DB.sql2o.open()){
-            return con.createQuery("SELECT * FROM employees WHERE departmentid = :departmentid")
-                    .addParameter("departmentid", departmentId)
-                    .executeAndFetch(Employee.class);
+            return con.createQuery("SELECT * FROM staff WHERE coarseid = :coarseid")
+                    .addParameter("coarseid", coarseid)
+                    .executeAndFetch(Staff.class);
         }
     }
 
 
     @Override
-    public List<Article> getAllArticlesByDepartment(int departmentId) {
+    public List<Content> getAllCoarseContentByCoarse(int coarseid) {
         try(Connection con = DB.sql2o.open()){
-            return con.createQuery("SELECT * FROM employees WHERE departmentid = :departmentid")
-                    .addParameter("departmentid", departmentId)
-                    .executeAndFetch(Article.class);
+            return con.createQuery("SELECT * FROM coarse_content WHERE coarseid = :coarseid")
+                    .addParameter("coarseid", coarseid)
+                    .executeAndFetch(Content.class);
         }
     }
 }

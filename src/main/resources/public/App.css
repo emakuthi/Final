@@ -21,11 +21,15 @@ float:right;
 width:100%;
 padding:5px;
 background: rgba(98,125,77,1);
+
 }
 .card-body{
 color:black;
 background: rgba(226,226,226,1);
 padding:5px;
+height:350px;
+overflow-y:auto;
+ overflow-x: hidden;
 
 }
 
@@ -67,7 +71,8 @@ table tr td:first-child::before {
 }
 
 textarea {
-    resize: none;
+    resize: auto;
+    height:100px;
 }
 
 .text {
@@ -186,7 +191,7 @@ textarea {
 /* Style the header */
 .header {
   padding: 10px 16px;
-  background: #555;
+  background: rgba(98,125,77,1);
   color: #f1f1f1;
 
 }

@@ -1,16 +1,16 @@
 {{#partial "content"}}
-    {{#if editDepartment}}
-        <h1>Edit this Department!</h1>
-        <form action="/departments/{{department.id}}" method="post">
+    {{#if editcoarse}}
+        <h1>Edit this coarse!</h1>
+        <form action="/coarses/{{coarses.id}}" method="post">
             <div class="form-group">
-                <label for="name">Edit this Department's name</label>
-                <input class="form-control" id="newName" name="newName" type="text" value="{{department.name}}">
+                <label for="name">Edit this coarse's name</label>
+                <input class="form-control" id="newName" name="newName" type="text" value="{{coarses.coarse_name}}">
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="form-group">
-                <label for="description">Edit this Department's Description</label>
-                <textarea class="form-control" id="newDescription" name="newDescription" type="text" value="{{department.description}}"></textarea>
+                <label for="description">Edit this coarse's Description</label>
+                <textarea class="form-control" id="newDescription" name="newDescription" type="text" value="{{coarses.description}}"></textarea>
 
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
@@ -25,17 +25,23 @@
             <button type="submit" class="btn btn-warning">submit</button>
         </form>
     {{else}}
-        <h5>Add a New Department!</h5>
-        <form action="/departments" method="post">
+        <h5>Add a New coarse!</h5>
+        <form action="/coarses" method="post">
             <div class="form-group">
                 <label for="name">NAME: </label>
-                <input class="form-control" id="name" placeholder="Enter the Department Name"  name="name" type="text" required>
+                <input class="form-control" id="coarse_name" placeholder="Enter the coarse Name"  name="coarse_name" type="text" required>
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="form-group">
                 <label for="description">DESCRIPTION:</label>
                 <textarea class="form-control rounded-0" id="description" name="description" rows="10" placeholder="Please Enter description" required></textarea>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <div class="form-group">
+                <label for="duration">DURATION:</label>
+                <input class="form-control" id="duration" placeholder="Enter the duration"  name="duration" type="text" required>
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>

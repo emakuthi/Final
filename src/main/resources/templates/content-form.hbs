@@ -1,0 +1,58 @@
+{{#partial "content"}}
+    {{#if editContent}}
+        <h1>edit this content</h1>
+        <form action="/content/{{content.id}}/edit" method="post">
+            <br>
+            <label for="article_name">edit this content details</label>
+            <textarea id="content" name="content" type="text" value="{{content.content}}"></textarea>
+            <br>
+            <label for="coarseid">Update this content's coarses:</label>
+            <select id="coarseid" name="coarseid">
+                {{#each coarses}}
+                    <option value="{{id}}">{{name}}</option>
+                {{/each}}
+            </select>
+            <p>Don't see the right coarses?<a href="/coarses/new">add a new one first.</a></p>
+            <button type="submit" class="btn btn-success">submit</button>
+        </form>
+    {{else}}
+        <h5>Add a new content!</h5>
+        <form action="/content/new" enctype="multipart/form-data" method="post">
+            {{#if coarses}}
+<!--                <div class="form-group">-->
+<!--                    <label for="content">Content</label>-->
+<!--                    <textarea class="form-control rounded-0" id="content" name="content" rows="10" placeholder="Please Enter Content" required></textarea>-->
+<!--                    <div class="valid-feedback">Valid.</div>-->
+<!--                    <div class="invalid-feedback">Please fill out this field.</div>-->
+<!--                </div>-->
+                <div class="form-group">
+                    <input type="file" name="content" value="content" id="content">
+                    <label for="content"> Select a file to upload</label>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+
+                <label for="coarseid">Select coarses for this staff:</label>
+                <select id="coarseid" name="coarseid">
+                    {{#each coarses}}
+                        <option value="{{id}}">{{coarse_name}}</option>
+                    {{/each}}
+                </select>
+
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="remember" required> I agree that information is valid
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Check this checkbox to submit.</div>
+                    </label>
+                </div>
+                <p>Don't see the right coarses?<a href="/coarses/new">Add a new one first.</a></p>
+            {{else}}
+                <h3> You'll need to add a coarses before you add a content. <a href="/coarses/new">Add one here.</a> </h3>
+            {{/if}}
+            <button type="submit" class="btn btn-success">submit</button>
+        </form>
+    {{/if}}
+{{/partial}}
+
+{{> layout.hbs}}

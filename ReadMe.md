@@ -1,15 +1,13 @@
-# Site Planner Application
+# Safaricom News Banner
 
- An app for a models.Employee Maintenance Manager. The models.Employee Maintenance Manager will be able to add a list of the maintenance departments, and for each department, add the employee that the department maintains. The departments work independently, so each employee only belongs to a single department.
-
-
+ an API app where user can add  coarses, add staff and News. a user should view only users and news for a particular coarses and also can view all general news all the users in the company.
 ## Behavior of the programm
 
  | Behavior                                       |  Input | Output    |
  | ---------------------------------------------- | ------ | --------- |
- |Adding new models.Department|  Click on the add models.Department tab   |  New record will be adde to the list of Engieers|
- |Adding a new models.Employee| click On add new employee tab  |  New form will be dispalayed to add more employee |
- |Displaying the list of Engineers| click on home page |  all the Engineers and thier details will be displayed|
+ |Adding new models.Coarses|  Click on the add models.Coarses tab   |  New record will be adde to the list of Engieers|
+ |Adding a new models.Staff| click On add new staff tab  |  New form will be dispalayed to add more staff |
+ |Displaying the list of News| click on home page |  all the news and thier details will be displayed|
  
 ## Setup/Installation Requirements
 
@@ -28,19 +26,22 @@ postgres=# create user elvis with password 'elvis';
 
 
 ###### Creating database
-postgres=# create database site_maintenance;
+postgres=# create database dept_news;
 
 
 ###### connecting into the created database
-postgres=# \c site_maintenance;
+postgres=# \c dept_news;
 
-###### Creating Engineers table.
+###### Creating coarses table.
 
-site_maintenance=# create table departments (id int PRIMARY KEY, name varchar, ek_Number varchar, site_id varchar, created_at date);
+dept_news=# create table coarses (id int PRIMARY KEY, name varchar, description varchar);
 
-###### Creating employee table
+###### Creating staff table
 
-site_maintenance=# create table employee (id int PRIMARY KEY, name varchar, engineer_id varchar, site_Number varchar, created_at date);
+dept_news=# create table staff (id int PRIMARY KEY, employee_name varchar, employee_number varchar, departmentid integer);
+
+###### Creating contents table
+dept_news=# create table staff (id int PRIMARY KEY, content varchar, departmentid integer);
 
 ## Known Bugs
 
@@ -51,6 +52,7 @@ there are currently no known bugs experienced on the website but feedback on bug
 * JUnit
 * Spark
 * postgressql
+* postman
 
 **Main Languages used:**
 
@@ -63,7 +65,7 @@ there are currently no known bugs experienced on the website but feedback on bug
 
 ## live link:
 
-$< https://powerful-mesa-27568.herokuapp.com/>
+<https://safarticles.herokuapp.com/>
 
 # clone into repository
 

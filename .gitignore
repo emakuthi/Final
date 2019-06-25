@@ -3,11 +3,11 @@
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/contents/206544839
 
 # User-specific stuff
 .idea/**/workspace.xml
-.idea/**/employee.xml
+.idea/**/staff.xml
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
