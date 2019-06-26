@@ -48,7 +48,6 @@ public class App {
 
         //get: delete all Coarses and all staff
         get("/coarses/delete", (req, res) -> {
-//            getInstance().getPaths();
             Map<String, Object> model = new HashMap<>();
             coarsesDao.clearAllCoarses();
             staffDao.clearAllStaff();
@@ -82,19 +81,7 @@ public class App {
             return new ModelAndView(model, "coarse-form.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //post: process new Coarses form
-//        post("/coarses", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-////            List<Coarses> coarses = coarsesDao.getAll();
-//            String name = req.queryParams("coarse_name");
-//            String description = req.queryParams("description");
-//            String duration = req.queryParams("duration");
-//            Coarses newCoarses = new Coarses(name, duration, description);
-//            System.out.println(name);
-//            coarsesDao.add(newCoarses);
-//            res.redirect("/");
-//            return null;
-//        }, new HandlebarsTemplateEngine());
+
 
         post("/coarses", "multipart/form-data" , (req, res)->{
             String location = docs_uri;
@@ -137,8 +124,6 @@ public class App {
             model.put("coarse", foundCoarses);
             List<Staff> allStaffByCoarse = coarsesDao.getAllStaffByCoarse(idOfCoarseToFind);
             model.put("staff", allStaffByCoarse);
-//            List<Content> allCoarseContentByCoarse = coarsesDao.getAllCoarseContentByCoarse(idOfCoarseToFind);
-//            model.put("content", allCoarseContentByCoarse);
             model.put("coarses", coarsesDao.getAll());
             return new ModelAndView(model, "coarse-detail.hbs");
         }, new HandlebarsTemplateEngine());
