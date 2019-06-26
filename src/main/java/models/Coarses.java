@@ -9,17 +9,21 @@ public class Coarses {
     private String coarse_name;
     private String duration;
     private String  description;
+    private String iconUrl;
     private ArrayList<Staff> staff;
     private ArrayList<Content> contents;
 
-    public Coarses(String coarse_name, String duration, String description) {
+    public Coarses(String iconUrl, String coarse_name, String duration, String description) {
         this.id = id;
         this.coarse_name = coarse_name;
         this.duration = duration;
         this.description = description;
+        this.iconUrl = iconUrl;
         this.staff = staff;
         this.contents = contents;
     }
+
+    public String getIconUrl() { return iconUrl;}
 
     public int getId() {
         return id;

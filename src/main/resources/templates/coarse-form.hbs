@@ -26,7 +26,7 @@
         </form>
     {{else}}
         <h5>Add a New coarse!</h5>
-        <form action="/coarses" method="post">
+        <form action="/coarses" enctype="multipart/form-data" method="post">
             <div class="form-group">
                 <label for="name">NAME: </label>
                 <input class="form-control" id="coarse_name" placeholder="Enter the coarse Name"  name="coarse_name" type="text" required>
@@ -42,6 +42,12 @@
             <div class="form-group">
                 <label for="duration">DURATION:</label>
                 <input class="form-control" id="duration" placeholder="Enter the duration"  name="duration" type="text" required>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <div class="form-group">
+                <input type="file" name="icon" value="icon" id="icon">
+                <label for="icon"> Select a file to upload</label>
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>

@@ -83,18 +83,50 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //post: process new Coarses form
-        post("/coarses", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-//            List<Coarses> coarses = coarsesDao.getAll();
-            String name = req.queryParams("coarse_name");
-            String description = req.queryParams("description");
-            String duration = req.queryParams("duration");
-            Coarses newCoarses = new Coarses(name, duration, description);
-            System.out.println(name);
-            coarsesDao.add(newCoarses);
+//        post("/coarses", (req, res) -> {
+//            Map<String, Object> model = new HashMap<>();
+////            List<Coarses> coarses = coarsesDao.getAll();
+//            String name = req.queryParams("coarse_name");
+//            String description = req.queryParams("description");
+//            String duration = req.queryParams("duration");
+//            Coarses newCoarses = new Coarses(name, duration, description);
+//            System.out.println(name);
+//            coarsesDao.add(newCoarses);
+//            res.redirect("/");
+//            return null;
+//        }, new HandlebarsTemplateEngine());
+
+        post("/coarses", "multipart/form-data" , (req, res)->{
+            String location = docs_uri;
+            MultipartConfigElement multipartConfigElement = new MultipartConfigElement(location);
+            req.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
+            Collection<Part> parts = req.raw().getParts();
+            for(Part part : parts){
+                System.out.println("Name:");
+                System.out.println(part.getName());
+                System.out.println("Size:");
+                System.out.println(part.getSize());
+                System.out.println("Filename:");
+                System.out.println(part.getSubmittedFileName());
+            }
+            String fName = req.raw().getPart("icon").getSubmittedFileName();
+            Part uploadedFile = req.raw().getPart("icon");
+            System.out.println(uploadedFile);
+            Path out = Paths.get(location + "/" + fName);
+            try(final InputStream in = uploadedFile.getInputStream()){
+
+                Files.copy(in, out);
+                String name = req.queryParams("coarse_name");
+                String description = req.queryParams("description");
+                String duration = req.queryParams("duration");
+                Coarses newCoarses = new Coarses(out.toString(), name, duration, description);
+                coarsesDao.add(newCoarses);
+
+            }
             res.redirect("/");
             return null;
-        }, new HandlebarsTemplateEngine());
+        });
+
 
 //        get: show an individual Coarses and staff it contains
 
