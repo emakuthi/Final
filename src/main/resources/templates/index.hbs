@@ -17,24 +17,20 @@
                 <th scope="col">NAME</th>
                 <th scope="col">DESCRIPTION</th>
                 <th scope="col">DURATION</th>
-                <th scope="col">IMAGE URL</th>
             </tr>
             </thead>
 
         {{#each coarses }}
-
                 <tbody>
                 <tr>
                     <td></td>
                     <td><a href="/coarses/{{id}}">{{coarse_name}}</td>
                     <td>{{description}}</td>
                     <td>{{duration}}</td>
-                    <td>{{icon}}</td>
                 </tr>
                 </tbody>
         {{/each}}
         </table>
-
     {{else}}
         <p>No Records</p>
     {{/if}}

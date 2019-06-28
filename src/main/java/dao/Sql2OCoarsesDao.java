@@ -18,7 +18,7 @@ public class Sql2OCoarsesDao implements CoarsesDao {
 
     @Override
     public void add(Coarses coarses) {
-        String sql = "INSERT INTO coarses (coarse_name, description, duration, iconUrl) VALUES (:coarse_name, :description, :duration, :iconUrl);";
+        String sql = "INSERT INTO coarses (coarse_name, description, duration, iconurl) VALUES (:coarse_name, :description, :duration, :iconUrl);";
 
         try(Connection con = DB.sql2o.open()){
             int id = (int) con.createQuery(sql, true)

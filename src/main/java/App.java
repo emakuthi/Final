@@ -1,4 +1,8 @@
 
+import com.cloudinary.Api;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
+import com.cloudinary.utils.ObjectUtils;
 import com.google.gson.Gson;
 import dao.DB;
 import dao.Sql2OContentDao;
@@ -12,13 +16,12 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collection;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
+import java.nio.file.StandardCopyOption;
+import java.util.*;
 
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
+
 
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
@@ -36,6 +39,13 @@ public class App {
         Sql2OContentDao contentDao = new Sql2OContentDao(DB.sql2o);
 
         Gson gson = new Gson();
+        Map config = ObjectUtils.asMap(
+                "cloud_name", Constants.cloudName,
+                "api_key", Constants.apiKey,
+                "api_secret", Constants.apiSecret
+        );
+
+        Cloudinary cloudinary = new Cloudinary(config);
 
         ProcessBuilder process = new ProcessBuilder();
         Integer port;
@@ -64,55 +74,95 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //get: show all staff in all coarses and show all Coarses
-        get("/", (req, res) -> {
+        get("/", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             List<Coarses> allCoarses = coarsesDao.getAll();
             model.put("coarses", allCoarses);
             List<Staff> staff = staffDao.getAll();
             model.put("staff", staff);
+            String url = cloudinary.url().format("pdf").generate("sample");
+            Transformation transform = new Transformation().width(250).height(168).crop("fit");
+            Api cloudinary_api = cloudinary.api();
+            List<String> img_urls = new ArrayList<>();
+            try {
+                Map result = cloudinary_api.resources(ObjectUtils.asMap("type", "upload"));
+                ArrayList resources = (ArrayList) result.get("resources");
+                // System.out.println(resources);
+                for (Object res : resources) {
+                    Map img_map = (Map) res;
+                    // System.out.println(img_map.get("url"));
+                    img_urls.add(img_map.get("secure_url").toString());
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            model.put("images", img_urls);
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
         //show new Coarses form
-        get("/coarses/new", (req, res) -> {
+        get("/coarses/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             List<Coarses> coarses = coarsesDao.getAll();
             model.put("coarses", coarses);
+            String url = cloudinary.url().format("pdf").generate("sample");
+            Transformation transform = new Transformation().width(250).height(168).crop("fit");
+            Api cloudinary_api = cloudinary.api();
+            List<String> img_urls = new ArrayList<>();
+            try {
+                Map result = cloudinary_api.resources(ObjectUtils.asMap("type", "upload"));
+                ArrayList resources = (ArrayList) result.get("resources");
+                // System.out.println(resources);
+                for (Object res : resources) {
+                    Map img_map = (Map) res;
+                    // System.out.println(img_map.get("url"));
+                    img_urls.add(img_map.get("secure_url").toString());
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            model.put("images", img_urls);
             return new ModelAndView(model, "coarse-form.hbs");
         }, new HandlebarsTemplateEngine());
 
-
-
-        post("/coarses", "multipart/form-data" , (req, res)->{
-            String location = docs_uri;
-            MultipartConfigElement multipartConfigElement = new MultipartConfigElement(location);
-            req.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
-            Collection<Part> parts = req.raw().getParts();
-            for(Part part : parts){
-                System.out.println("Name:");
-                System.out.println(part.getName());
-                System.out.println("Size:");
-                System.out.println(part.getSize());
-                System.out.println("Filename:");
-                System.out.println(part.getSubmittedFileName());
-            }
-            String fName = req.raw().getPart("icon").getSubmittedFileName();
-            Part uploadedFile = req.raw().getPart("icon");
-            System.out.println(uploadedFile);
-            Path out = Paths.get(location + "/" + fName);
-            try(final InputStream in = uploadedFile.getInputStream()){
-
-                Files.copy(in, out);
+        post("/coarses/new", (req, res)->{
+//            String location = docs_uri;
+//            MultipartConfigElement multipartConfigElement = new MultipartConfigElement(location);
+//            req.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
+//            Collection<Part> parts = req.raw().getParts();
+//
+//            String fName = req.raw().getPart("icon").getSubmittedFileName();
+//            Part uploadedFile = req.raw().getPart("icon");
+//            System.out.println(uploadedFile);
+//            Path out = Paths.get(location + "/" + fName);
+//            try(final InputStream in = uploadedFile.getInputStream()){
+//
+//                Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING);
+//                Map uploadResult = cloudinary.uploader()
+//                        .upload(out.toFile(), ObjectUtils.emptyMap());
+                String content = req.queryParams("iconUrl");
                 String name = req.queryParams("coarse_name");
                 String description = req.queryParams("description");
                 String duration = req.queryParams("duration");
-                Coarses newCoarses = new Coarses(out.toString(), name, duration, description);
+            System.out.println(content);
+                Coarses newCoarses = new Coarses(content, name, duration, description);
                 coarsesDao.add(newCoarses);
-
-            }
             res.redirect("/");
             return null;
-        });
+        }, new HandlebarsTemplateEngine());
+
+
+//        post("/coarses", (req, res) -> {
+//            Map<String, Object> model = new HashMap<>();
+//            String content = req.queryParams("iconUrl");
+//            String name = req.queryParams("coarse_name");
+//            String description = req.queryParams("description");
+//            String duration = req.queryParams("duration");
+//            Coarses newCoarses = new Coarses(content, name, duration, description);
+//            coarsesDao.add(newCoarses);
+//            res.redirect("/");
+//            return null;
+//        }, new HandlebarsTemplateEngine());
 
 
 //        get: show an individual Coarses and staff it contains
@@ -187,7 +237,6 @@ public class App {
         //post: process a form to update a staff
         post("/staff/:id/edit", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-//            int staffToEditId = Integer.parseInt(req.params("id"));
             String newSiteName = req.queryParams("name");
             String newSiteNumber = req.queryParams("ekNumber");
             int newCoarseId = Integer.parseInt(req.queryParams("coarseid"));
@@ -232,21 +281,15 @@ public class App {
             MultipartConfigElement multipartConfigElement = new MultipartConfigElement(location);
             req.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
             Collection<Part> parts = req.raw().getParts();
-            for(Part part : parts){
-                System.out.println("Name:");
-                System.out.println(part.getName());
-                System.out.println("Size:");
-                System.out.println(part.getSize());
-                System.out.println("Filename:");
-                System.out.println(part.getSubmittedFileName());
-            }
             String fName = req.raw().getPart("content").getSubmittedFileName();
             Part uploadedFile = req.raw().getPart("content");
             System.out.println(uploadedFile);
             Path out = Paths.get(location + "/" + fName);
             try(final InputStream in = uploadedFile.getInputStream()){
-
-                Files.copy(in, out);
+                Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING);
+                Map uploadResult = cloudinary.uploader().upload(out.toFile(), ObjectUtils.asMap(   "public_id", "content/pdf",
+                                "overwrite", true,
+                                "resource_type", "raw"));
                 Map<String, Object> model = new HashMap<>();
             List<Coarses> allCoarses = coarsesDao.getAll();
             model.put("coarses", allCoarses);
@@ -259,16 +302,31 @@ public class App {
             return null;
         });
 
-        get("/coarses/:id", (req, res) -> {
+        get("/test", (request, response)-> {
+            ///coarses/:Coarse_id/contents/:content_id
             Map<String, Object> model = new HashMap<>();
-            int idOfCoarseToFind = Integer.parseInt(req.params("id")); //new
-            Coarses foundCoarses = coarsesDao.findById(idOfCoarseToFind);
-            model.put("coarse", foundCoarses);
-            List<Content> allCoarseContentBy = coarsesDao.getAllCoarseContentByCoarse(idOfCoarseToFind);
-            model.put("content", allCoarseContentBy);
-            model.put("coarses", coarsesDao.getAll());
-            return new ModelAndView(model, "coarse-detail.hbs");
+            List<Content> contents = contentDao.getAll();
+            String url = cloudinary.url().format("pdf").generate("sample");
+            Transformation transform = new Transformation().width(250).height(168).crop("fit");
+            Api cloudinary_api = cloudinary.api();
+            List<String> img_urls = new ArrayList<>();
+            try {
+                Map result = cloudinary_api.resources(ObjectUtils.asMap("type", "upload"));
+                ArrayList resources = (ArrayList) result.get("resources");
+                // System.out.println(resources);
+                for (Object res : resources) {
+                    Map img_map = (Map) res;
+                    // System.out.println(img_map.get("url"));
+                    img_urls.add(img_map.get("secure_url").toString());
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            model.put("images", img_urls);
+            System.out.println(img_urls);
+            return new ModelAndView(model, "test.hbs");
         }, new HandlebarsTemplateEngine());
+
 
         //get: show a form to update a content
         get("/content/:id/edit", (req, res) -> {
@@ -281,17 +339,6 @@ public class App {
             return new ModelAndView(model, "content-form.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //post: process a form to update a content
-//        post("/content/:id", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            String newContent = req.queryParams("content");
-//            int newCoarseId = Integer.parseInt(req.queryParams("coarseid"));
-//            contentDao.update(newContent, newCoarseId);
-//            res.redirect("/");
-//            return null;
-//        }, new HandlebarsTemplateEngine());
-
-        //get: delete an individual content
         get("/coarses/:Coarse_id/content/:content_id/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfContentToDelete = Integer.parseInt(req.params("content_id"));
@@ -312,6 +359,8 @@ public class App {
             model.put("coarses", coarsesDao.getAll());
             return new ModelAndView(model, "content-detail.hbs");
         }, new HandlebarsTemplateEngine());
+
+
 
 /*
 API routes to communicate with the database

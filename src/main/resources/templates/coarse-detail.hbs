@@ -6,7 +6,7 @@
 
 
     <a class="btn btn-warning btn-sm" href="/coarses/{{coarses.id}}/edit">edit Coarse</a>
-    <a class="btn btn-warning btn-sm" href="/coarses/{{coarses.id}}/contents/{{content.id}}">View Content</a>
+    <a class="btn btn-warning btn-sm" href="/coarses/{{coarses.id}}/test">View Content</a>
 </div>
 
     <p>Here are all the Staff enrolled  in this Coarse:</p>
@@ -44,11 +44,11 @@
         </table>
     </div>
     <div class="col-sm-4">
-<!--        {{#if content}}-->
-<!--                {{#each contents}}-->
+        {{#if content}}
+                {{#each contents}}
                     <p>{{content.content}}</p>
-<!--                {{/each}}-->
-<!--        {{/if}}-->
+               {{/each}}
+       {{/if}}
     </div>
 </div>
         <div class="card-footer">
