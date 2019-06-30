@@ -4,7 +4,7 @@ plugins {
 }
 
 
-group 'eclass-portal'
+group 'e-class-portal'
 version '1.0-SNAPSHOT'
 
 
