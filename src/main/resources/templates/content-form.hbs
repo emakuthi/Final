@@ -1,45 +1,67 @@
 {{#partial "content"}}
-    {{#if editContent}}
-        <h1>edit this content</h1>
-        <form action="/content/{{content.id}}/edit" method="post">
-            <br>
-            <label for="article_name">edit this content details</label>
-            <textarea id="content" name="content" type="text" value="{{content.content}}"></textarea>
-            <br>
-            <label for="coarseid">Update this content's coarses:</label>
-            <select id="coarseid" name="coarseid">
-                {{#each coarses}}
-                    <option value="{{id}}">{{name}}</option>
-                {{/each}}
-            </select>
-            <p>Don't see the right coarses?<a href="/coarses/new">add a new one first.</a></p>
-            <button type="submit" class="btn btn-success">submit</button>
-        </form>
-    {{else}}
         <h5>Add a new content!</h5>
-        <form action="/content/new" enctype="multipart/form-data" method="post" id='file-catcher'>
-            {{#if coarses}}
-            <div class="form-group">
-                <label for="content"> Select a Content to upload to the E-class Repository</label><br>
-                Files: <input type="file" name="content" value="content"  id='file-input' multiple>
-                <div id='file-list-display'> here</div>
-                <div class="valid-feedback">Valid.</div>
-                <div class="invalid-feedback">Please fill out this field.</div>
-            </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="remember" required> I agree that information is valid
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Check this checkbox to submit.</div>
-                    </label>
-                </div>
-                <p>Don't see the right coarses?<a href="/coarses/new">Add a new one first.</a></p>
-            {{else}}
-                <h3> You'll need to add a coarses before you add a content. <a href="/coarses/new">Add one here.</a> </h3>
-            {{/if}}
-            <button type="submit" class="btn btn-success">submit</button>
+<!--        <form action="/content/new" method="post" id='file-catcher'>-->
+<!--            <div class="form-group">-->
+<!--                <label for="content"> Select a Content to upload to the E-class Repository</label><br>-->
+<!--                Files: <input type="file" name="content" value="content"  id='file-input' multiple>-->
+<!--                <div id='file-list-display'> here</div>-->
+<!--                <div class="valid-feedback">Valid.</div>-->
+<!--                <div class="invalid-feedback">Please fill out this field.</div>-->
+<!--            </div>-->
+<!--                <div class="form-group form-check">-->
+<!--                    <label class="form-check-label">-->
+<!--                        <input class="form-check-input" type="checkbox" name="remember" required> I agree that information is valid-->
+<!--                        <div class="valid-feedback">Valid.</div>-->
+<!--                        <div class="invalid-feedback">Check this checkbox to submit.</div>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--            <button type="submit" class="btn btn-success">submit</button>-->
+<!--        </form>-->
+
+
+        <form id="myForm" method="post" action="/content/new" enctype="multipart/form-data">
+
+            Files: <input type="file" id="files" name="files" multiple ><br/>
+
+            <div id="selectedFiles"></div>
+
+            <input type="submit">
         </form>
-    {{/if}}
+        <script>
+            var selDiv = "";
+
+            document.addEventListener("DOMContentLoaded", init, false);
+
+            function init() {
+                document.querySelector('#files').addEventListener('change', handleFileSelect, false);
+                selDiv = document.querySelector("#selectedFiles");
+            }
+
+            function handleFileSelect(e) {
+
+                if(!e.target.files || !window.FileReader) return;
+
+                selDiv.innerHTML = "";
+
+                var files = e.target.files;
+                var filesArr = Array.prototype.slice.call(files);
+                filesArr.forEach(function(f) {
+                    var f = files[i];
+                    if(!f.type.match("image.*")) {
+                        return;
+                    }
+
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var html = "<img src=\"" + e.target.result + "\">" + f.name + "<br clear=\"left\"/>";
+                        selDiv.innerHTML += html;
+                    }
+                    reader.readAsDataURL(f);
+                });
+
+            }
+        </script>
+
 {{/partial}}
 
 {{> layout.hbs}}

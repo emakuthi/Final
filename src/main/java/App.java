@@ -2,6 +2,7 @@
 import com.cloudinary.Api;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.Transformation;
+import com.cloudinary.api.exceptions.ApiException;
 import com.cloudinary.utils.ObjectUtils;
 import com.google.gson.Gson;
 import dao.*;
@@ -79,7 +80,7 @@ public class App {
             model.put("coarses", allCoarses);
             List<Staff> staff = staffDao.getAll();
             model.put("staff", staff);
-            String url = cloudinary.url().format("pdf").generate("sample");
+            String url = cloudinary.url().format("pdf").generate("Sample");
             Transformation transform = new Transformation().width(250).height(168).crop("fit");
             Api cloudinary_api = cloudinary.api();
             List<String> img_urls = new ArrayList<>();
@@ -104,23 +105,6 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             List<Coarses> coarses = coarsesDao.getAll();
             model.put("coarses", coarses);
-            String url = cloudinary.url().format("pdf").generate("sample");
-            Transformation transform = new Transformation().width(250).height(168).crop("fit");
-            Api cloudinary_api = cloudinary.api();
-            List<String> img_urls = new ArrayList<>();
-            try {
-                Map result = cloudinary_api.resources(ObjectUtils.asMap("type", "upload"));
-                ArrayList resources = (ArrayList) result.get("resources");
-                // System.out.println(resources);
-                for (Object res : resources) {
-                    Map img_map = (Map) res;
-                    // System.out.println(img_map.get("url"));
-                    img_urls.add(img_map.get("secure_url").toString());
-                }
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-            model.put("images", img_urls);
             return new ModelAndView(model, "coarse-form.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -236,29 +220,28 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //get: show new content form
-        get("/content/new", (req, res) -> {
+        get("/content", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Coarses> coarses = coarsesDao.getAll();
-            model.put("coarses", coarses);
+            List<SubCourse> subCourses = subCourseDao.getAll();
+            model.put("subcourses", subCourses);
             return new ModelAndView(model, "content-form.hbs");
         }, new HandlebarsTemplateEngine());
 
         //task: process new content formString	uri()
-        post("/content/new", "multipart/form-data" , (req, res)->{
+        post("/content/new", "multipart/form-data",(req, res)->{
             String location = docs_uri;
             MultipartConfigElement multipartConfigElement = new MultipartConfigElement(location);
             req.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
             Collection<Part> parts = req.raw().getParts();
-            String fName = req.raw().getPart("content").getSubmittedFileName();
-            Part uploadedFile = req.raw().getPart("content");
-            System.out.println(uploadedFile);
+            String fName = req.raw().getPart("files").getSubmittedFileName();
+            Part uploadedFile = req.raw().getPart("files");
             Path out = Paths.get(location + "/" + fName);
             try(final InputStream in = uploadedFile.getInputStream()){
                 Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING);
-                Map uploadResult = cloudinary.uploader().upload(out.toFile(), ObjectUtils.asMap(   "public_id", "content/pdf",
-                                "overwrite", true,
-                                "resource_type", "raw"));
-            System.out.println(out.toString());
+                Map uploadResult = cloudinary.uploader()
+                        .upload(out.toFile(), ObjectUtils
+                                .asMap("use_filename", true, "unique_filename", false));
+                System.out.println(out);
             }
             res.redirect("/");
             return null;
@@ -287,7 +270,6 @@ public class App {
                 exception.printStackTrace();
             }
             model.put("images", img_urls);
-            System.out.println(img_urls);
             return new ModelAndView(model, "subcourses-form.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -423,17 +405,15 @@ API routes to communicate with the database
             return gson.toJson(staff);
         });
 
-
         get("/coarsesapi/:id", "application/json", (req, res) -> {
             int coarseId = Integer.parseInt(req.params("id"));
             return gson.toJson(coarsesDao.findById(coarseId));
         });
-
         get("/getContentApi", "application/json", (req, res) -> {
-            System.out.println(contentDao.getAll());
+            System.out.println(subCourseDao.getAll());
 
-            if(contentDao.getAll().size() > 0){
-                return gson.toJson(contentDao.getAll());
+            if(subCourseDao.getAll().size() > 0){
+                return gson.toJson(subCourseDao.getAll());
             }
             else {
                 return "{\"message\":\"I'm sorry, but no coarses are currently listed in the database.\"}";
@@ -447,81 +427,54 @@ API routes to communicate with the database
             return gson.toJson(content);
         });
 
-        get("/coarses/:id/content", "application/json", (req, res) -> {
-            int coarseId = Integer.parseInt(req.params("id"));
+//        get("/subCourse/:id/content", "application/json", (req, res) -> {
+//            int subcourseId = Integer.parseInt(req.params("id"));
+//
+////            Coarses coarseToFind = coarsesDao.findById(coarseId);
+//            List<Content> allContents;
+//
+////            if (coarseToFind == null){
+////                throw new ApiException(404, String.format("No restaurant with the id: \"%s\" exists", req.params("id")));
+////            }
+//
+//            allContents = contentDao.getAllCoarseContentByCoarse(coarseId);
+//
+//            return gson.toJson(allContents);
+//        });
 
-//            Coarses coarseToFind = coarsesDao.findById(coarseId);
-            List<Content> allContents;
+//
+        //CREATE
+        post("/coarses/:coarseId/staff/:staffId", "application/json", (req, res) -> {
 
-//            if (coarseToFind == null){
-//                throw new ApiException(404, String.format("No restaurant with the id: \"%s\" exists", req.params("id")));
-//            }
+            int coarseId = Integer.parseInt(req.params("coarseid"));
+            int staffId = Integer.parseInt(req.params("staffid"));
+           Coarses coarses= coarsesDao.findById(coarseId);
+           Staff staff= staffDao.findById(staffId);
 
-            allContents = contentDao.getAllCoarseContentByCoarse(coarseId);
-
-            return gson.toJson(allContents);
+            if (coarses != null && staff != null){
+                //both exist and can be associated
+               staffDao.addStaffToCoarse(staff, coarses);
+                res.status(201);
+                return gson.toJson(String.format("staff'%s' and coarse'%s' have been associated", staff.getName(), coarses.getCoarse_name()));
+            }
+            else {
+                throw new ApiException(String.format("Coarse or staff does not exist"));
+            }
         });
 
-//
-//        //CREATE
-//        post("/departments/:departmentId/user/:userId", "application/json", (req, res) -> {
-//
-//            int departmentId = Integer.parseInt(req.params("departmentId"));
-//            int userId = Integer.parseInt(req.params("userId"));
-//            Department department = departmentDao.findById(departmentId);
-//            User user = userDao.findById(userId);
-//
-//
-//            if (department != null && user != null){
-//                //both exist and can be associated
-//                userDao.addUserToDepartment(user, department);
-//                res.status(201);
-//                return gson.toJson(String.format("User'%s' and Department'%s' have been associated", user.getName(), department.getName()));
-//            }
-//            else {
-//                throw new ApiException(404, String.format("Department or User does not exist"));
-//            }
-//        });
-//
-//        get("/departments/:id/users", "application/json", (req, res) -> {
-//            int departmentId = Integer.parseInt(req.params("id"));
-//            Department departmentToFind = departmentDao.findById(departmentId);
-//            if (departmentToFind == null){
-//                throw new ApiException(404, String.format("No department with the id: \"%s\" exists", req.params("id")));
-//            }
-//            else if (departmentDao.getAllUsersByDepartment(departmentId).size()==0){
-//                return "{\"message\":\"I'm sorry, but no users are listed for this department.\"}";
-//            }
-//            else {
-//                return gson.toJson(departmentDao.getAllUsersByDepartment(departmentId));
-//            }
-//        });
-//
-//        get("/users/:id/departments", "application/json", (req, res) -> {
-//            int userId = Integer.parseInt(req.params("id"));
-//            User userToFind = userDao.findById(userId);
-//            if (userToFind == null){
-//                throw new ApiException(404, String.format("No user with the id: \"%s\" exists", req.params("id")));
-//            }
-//            else if (userDao.getAllDepartmentsForAUser(userId).size()==0){
-//                return "{\"message\":\"I'm sorry, but no departments are listed for this user.\"}";
-//            }
-//            else {
-//                return gson.toJson(userDao.getAllDepartmentsForAUser(userId));
-//            }
-//        });
-//
-//
-//        post("/departments/:departmentId/articles/new", "application/json", (req, res) -> {
-//            int departmentId = Integer.parseInt(req.params("departmentId"));
-//            Article article = gson.fromJson(req.body(), Article.class);
-//
-//            article.setDepartmentId(departmentId);
-//            articleDao.add(article);
-//            res.status(201);
-//            return gson.toJson(article);
-//        });
-
+        get("/coarses/:id/staff", "application/json", (req, res) -> {
+            int coarseId = Integer.parseInt(req.params("id"));
+            Coarses coarsesToFind = coarsesDao.findById(coarseId);
+            if (coarsesToFind == null){
+                throw new ApiException(String.format("No department with the id: \"%s\" exists", req.params("id")));
+            }
+            else if (coarsesDao.getAllStaffByCoarse(coarseId).size()==0){
+                return "{\"message\":\"I'm sorry, but no users are listed for this department.\"}";
+            }
+            else {
+                return gson.toJson(coarsesDao.getAllStaffByCoarse(coarseId));
+            }
+        });
 
     }
 

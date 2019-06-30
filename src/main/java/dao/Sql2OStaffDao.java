@@ -1,5 +1,6 @@
 package dao;
 
+import models.Coarses;
 import models.Staff;
 import org.sql2o.*;
 import java.util.List;
@@ -24,6 +25,11 @@ public class Sql2OStaffDao implements StaffDao { //implementing our interface
         } catch (Sql2oException ex) {
             System.out.println(); //oops we have an error!
         }
+    }
+
+    @Override
+    public void addStaffToCoarse(Staff staff, Coarses coarses) {
+
     }
 
     @Override
@@ -79,4 +85,5 @@ public class Sql2OStaffDao implements StaffDao { //implementing our interface
             System.out.println();
         }
     }
+
 }
