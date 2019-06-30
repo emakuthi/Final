@@ -4,51 +4,39 @@ import java.util.Objects;
 
 public class Content {
     int id;
-    String content;
-    int coarseid;
+    String url;
+    int subCourseid;
 
-    public Content(String content, int coarseid) {
+    public Content(String url, int subCourseid) {
         this.id = id;
-        this.content = content;
-        this.coarseid = coarseid;
-    }
-
-    public int getId() {
-        return id;
+        this.url = url;
+        this.subCourseid = subCourseid;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public String getUrl() {
+        return url;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public int getCoarseId() {
-        return coarseid;
-    }
-
-    public void setCoarseId(int coarseid) {
-        this.coarseid = coarseid;
+    public int getSubCourseid() {
+        return subCourseid;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Content that = (Content) o;
-        return getId() == that.getId() &&
-                getCoarseId() == that.getCoarseId() &&
-                getContent().equals(that.getContent());
+        Content content = (Content) o;
+        return id == content.id &&
+                getSubCourseid() == content.getSubCourseid() &&
+                getUrl().equals(content.getUrl());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getContent(), getCoarseId());
+        return Objects.hash(id, getUrl(), getSubCourseid());
     }
 }

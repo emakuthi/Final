@@ -17,7 +17,7 @@ public class Sql2OContentDao implements ContentDao {
     }
     @Override
     public void add(Content content) {
-        String sql = "INSERT INTO content (content, coarseid) VALUES (:content, :coarseid)"; //raw sql
+        String sql = "INSERT INTO content (url, subCourseid) VALUES (:url, :subCourseid)"; //raw sql
         try(Connection con = DB.sql2o.open()){ //try to open a connection
             int id = (int) con.createQuery(sql, true) //make a new variable
                     .bind(content)
@@ -49,11 +49,10 @@ public class Sql2OContentDao implements ContentDao {
 
     @Override
     public void update(String newContent, int newCoarseId){
-        String sql = "UPDATE content SET (content, coarseid) = (:content, :coarseid) WHERE id=:id"; //raw sql
+        String sql = "UPDATE content SET (url, subcourseid) = (:url, :subcoarseid) WHERE id=:id"; //raw sql
         try(Connection con = DB.sql2o.open()){
             con.createQuery(sql)
                     .addParameter("content", newContent)
-                    .addParameter("coarseid", newCoarseId)
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println();
@@ -73,7 +72,7 @@ public class Sql2OContentDao implements ContentDao {
     }
 
     @Override
-    public void clearAllCoarseContent() {
+    public void clearAllsubCourseContent() {
         String sql = "DELETE from coarse_content";
         try (Connection con = DB.sql2o.open()) {
             con.createQuery(sql)

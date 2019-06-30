@@ -17,10 +17,10 @@ public interface ContentDao {
     Content findById(int id);
 
     // UPDATE
-    void update(String content,int coarseid);
+    void update(String url,int subCourseid);
 
     // DELETE
     void deleteById(int id);
 
-    void clearAllCoarseContent();
+    void clearAllsubCourseContent();
 }

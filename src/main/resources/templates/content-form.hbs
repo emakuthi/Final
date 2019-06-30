@@ -17,22 +17,15 @@
         </form>
     {{else}}
         <h5>Add a new content!</h5>
-        <form action="/content/new" enctype="multipart/form-data" method="post">
+        <form action="/content/new" enctype="multipart/form-data" method="post" id='file-catcher'>
             {{#if coarses}}
-                <div class="form-group">
-                    <input type="file" name="content" value="content" id="content">
-                    <label for="content"> Select a file to upload</label>
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-
-                <label for="coarseid">Select coarses for this staff:</label>
-                <select id="coarseid" name="coarseid">
-                    {{#each coarses}}
-                        <option value="{{id}}">{{coarse_name}}</option>
-                    {{/each}}
-                </select>
-
+            <div class="form-group">
+                <label for="content"> Select a Content to upload to the E-class Repository</label><br>
+                Files: <input type="file" name="content" value="content"  id='file-input' multiple>
+                <div id='file-list-display'> here</div>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
                 <div class="form-group form-check">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="remember" required> I agree that information is valid

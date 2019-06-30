@@ -9,68 +9,44 @@ public class Coarses {
     private String coarse_name;
     private String duration;
     private String  description;
-    private String iconUrl;
     private ArrayList<Staff> staff;
     private ArrayList<Content> contents;
 
-    public Coarses(String iconUrl, String coarse_name, String duration, String description) {
+    public Coarses(String coarse_name, String description,  String duration) {
         this.id = id;
         this.coarse_name = coarse_name;
         this.duration = duration;
         this.description = description;
-        this.iconUrl = iconUrl;
         this.staff = staff;
         this.contents = contents;
     }
 
-    public String getIconUrl() { return iconUrl;}
-
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getCoarse_name() {
         return coarse_name;
     }
 
-    public void setCoarse_name(String coarse_name) {
-        this.coarse_name = coarse_name;
-    }
-
     public String getDuration() {
         return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public ArrayList<Staff> getStaff() {
         return staff;
-    }
-
-    public void setStaff(ArrayList<Staff> staff) {
-        this.staff = staff;
     }
 
     public ArrayList<Content> getContents() {
         return contents;
     }
 
-    public void setContents(ArrayList<Content> contents) {
-        this.contents = contents;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

@@ -4,13 +4,10 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 import com.google.gson.Gson;
-import dao.DB;
-import dao.Sql2OContentDao;
+import dao.*;
 import models.Content;
 import models.Coarses;
 import models.Staff;
-import dao.Sql2OCoarsesDao;
-import dao.Sql2OStaffDao;
 
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -19,6 +16,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
 
+import models.SubCourse;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -37,6 +35,7 @@ public class App {
         Sql2OStaffDao staffDao = new Sql2OStaffDao(DB.sql2o);
         Sql2OCoarsesDao coarsesDao = new Sql2OCoarsesDao(DB.sql2o);
         Sql2OContentDao contentDao = new Sql2OContentDao(DB.sql2o);
+        Sql2OSubCourseDao subCourseDao = new Sql2OSubCourseDao(DB.sql2o);
 
         Gson gson = new Gson();
         Map config = ObjectUtils.asMap(
@@ -126,46 +125,15 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         post("/coarses/new", (req, res)->{
-//            String location = docs_uri;
-//            MultipartConfigElement multipartConfigElement = new MultipartConfigElement(location);
-//            req.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
-//            Collection<Part> parts = req.raw().getParts();
-//
-//            String fName = req.raw().getPart("icon").getSubmittedFileName();
-//            Part uploadedFile = req.raw().getPart("icon");
-//            System.out.println(uploadedFile);
-//            Path out = Paths.get(location + "/" + fName);
-//            try(final InputStream in = uploadedFile.getInputStream()){
-//
-//                Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING);
-//                Map uploadResult = cloudinary.uploader()
-//                        .upload(out.toFile(), ObjectUtils.emptyMap());
-                String content = req.queryParams("iconUrl");
+
                 String name = req.queryParams("coarse_name");
                 String description = req.queryParams("description");
                 String duration = req.queryParams("duration");
-            System.out.println(content);
-                Coarses newCoarses = new Coarses(content, name, duration, description);
+                Coarses newCoarses = new Coarses(name,description, duration);
                 coarsesDao.add(newCoarses);
-            res.redirect("/");
+            res.redirect("/subcourses");
             return null;
         }, new HandlebarsTemplateEngine());
-
-
-//        post("/coarses", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            String content = req.queryParams("iconUrl");
-//            String name = req.queryParams("coarse_name");
-//            String description = req.queryParams("description");
-//            String duration = req.queryParams("duration");
-//            Coarses newCoarses = new Coarses(content, name, duration, description);
-//            coarsesDao.add(newCoarses);
-//            res.redirect("/");
-//            return null;
-//        }, new HandlebarsTemplateEngine());
-
-
-//        get: show an individual Coarses and staff it contains
 
         get("/coarses/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
@@ -290,21 +258,17 @@ public class App {
                 Map uploadResult = cloudinary.uploader().upload(out.toFile(), ObjectUtils.asMap(   "public_id", "content/pdf",
                                 "overwrite", true,
                                 "resource_type", "raw"));
-                Map<String, Object> model = new HashMap<>();
-            List<Coarses> allCoarses = coarsesDao.getAll();
-            model.put("coarses", allCoarses);
-            int coarseid = Integer.parseInt(req.queryParams("coarseid"));
-            Content newContent = new Content(out.toString(), coarseid);
-            contentDao.add(newContent);
             System.out.println(out.toString());
             }
             res.redirect("/");
             return null;
         });
 
-        get("/test", (request, response)-> {
+        get("/subcourses", (request, response)-> {
             ///coarses/:Coarse_id/contents/:content_id
             Map<String, Object> model = new HashMap<>();
+            List<Coarses> coarses = coarsesDao.getAll();
+            model.put("coarses", coarses);
             List<Content> contents = contentDao.getAll();
             String url = cloudinary.url().format("pdf").generate("sample");
             Transformation transform = new Transformation().width(250).height(168).crop("fit");
@@ -324,7 +288,7 @@ public class App {
             }
             model.put("images", img_urls);
             System.out.println(img_urls);
-            return new ModelAndView(model, "test.hbs");
+            return new ModelAndView(model, "subcourses-form.hbs");
         }, new HandlebarsTemplateEngine());
 
 
@@ -360,6 +324,58 @@ public class App {
             return new ModelAndView(model, "content-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
+
+        get("/coarses/:Coarse_id/content/:content_id", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfContentToFind = Integer.parseInt(req.params("content_id"));
+            Content foundContent= contentDao.findById(idOfContentToFind);
+            int idOfCoarseToFind = Integer.parseInt(req.params("Coarseid"));
+            Coarses foundCoarses = coarsesDao.findById(idOfCoarseToFind);
+            model.put("content", foundContent);
+            model.put("coarse", foundCoarses);
+            model.put("coarses", coarsesDao.getAll());
+            return new ModelAndView(model, "staff-detail.hbs");
+        }, new HandlebarsTemplateEngine());
+
+
+        /*Posting ccontent urls into the db*/
+
+        post("/subcourse/new", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Coarses> allCoarses = coarsesDao.getAll();
+            model.put("coarses", allCoarses);
+            String subCourseName = req.queryParams("name");
+            String newUrl = req.queryParams("url");
+            int CoarseId = Integer.parseInt(req.queryParams("coarseid"));
+            SubCourse newSubCourse = new SubCourse(subCourseName, newUrl,CoarseId );
+            subCourseDao.add(newSubCourse);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        get("/subcourses", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Coarses> coarses = coarsesDao.getAll();
+            model.put("coarses", coarses);
+            String url = cloudinary.url().format("pdf").generate("sample");
+            Transformation transform = new Transformation().width(250).height(168).crop("fit");
+            Api cloudinary_api = cloudinary.api();
+            List<String> img_urls = new ArrayList<>();
+            try {
+                Map result = cloudinary_api.resources(ObjectUtils.asMap("type", "upload"));
+                ArrayList resources = (ArrayList) result.get("resources");
+                // System.out.println(resources);
+                for (Object res : resources) {
+                    Map img_map = (Map) res;
+                    // System.out.println(img_map.get("url"));
+                    img_urls.add(img_map.get("secure_url").toString());
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            model.put("images", img_urls);
+            return new ModelAndView(model, "sub-courses-form.hbs.hbs");
+        }, new HandlebarsTemplateEngine());
 
 
 /*

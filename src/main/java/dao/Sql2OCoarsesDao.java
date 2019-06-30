@@ -18,7 +18,7 @@ public class Sql2OCoarsesDao implements CoarsesDao {
 
     @Override
     public void add(Coarses coarses) {
-        String sql = "INSERT INTO coarses (coarse_name, description, duration, iconurl) VALUES (:coarse_name, :description, :duration, :iconUrl);";
+        String sql = "INSERT INTO coarses (coarse_name, description, duration) VALUES (:coarse_name, :description, :duration);";
 
         try(Connection con = DB.sql2o.open()){
             int id = (int) con.createQuery(sql, true)
@@ -53,7 +53,7 @@ public class Sql2OCoarsesDao implements CoarsesDao {
 
     @Override
     public void update(int id, String newName,String newDuration, String newDescription){
-        String sql = "UPDATE coarses SET (coarse_name, description, duration, iconUrl) = (:coarse_name, :description, :duration, :iconUrl) WHERE id=:id";
+        String sql = "UPDATE coarses SET (coarse_name, description, duration) = (:coarse_name, :description, :duration, :iconUrl) WHERE id=:id";
         try(Connection con = DB.sql2o.open()){
             con.createQuery(sql)
                     .addParameter("coarse_name", newName)
