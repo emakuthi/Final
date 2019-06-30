@@ -52,8 +52,24 @@ public class App {
         }
         port(port);
 
+        //get: delete all Coarses and all staff
+        get("/coarses/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            coarsesDao.clearAllCoarses();
+            staffDao.clearAllStaff();
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
+        //get: delete all staff
+        get("/staff/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            staffDao.clearAllStaff();
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
+        //get: show all staff in all coarses and show all Coarses
         get("/", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             List<Coarses> allCoarses = coarsesDao.getAll();
@@ -79,26 +95,6 @@ public class App {
             model.put("images", img_urls);
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
-
-
-        //get: delete all Coarses and all staff
-        get("/coarses/delete", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            coarsesDao.clearAllCoarses();
-            staffDao.clearAllStaff();
-            res.redirect("/");
-            return null;
-        }, new HandlebarsTemplateEngine());
-
-        //get: delete all staff
-        get("/staff/delete", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            staffDao.clearAllStaff();
-            res.redirect("/");
-            return null;
-        }, new HandlebarsTemplateEngine());
-
-        //get: show all staff in all coarses and show all Coarses
 
         //show new Coarses form
         get("/coarses/new", (request, response) -> {
