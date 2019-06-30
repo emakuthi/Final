@@ -1,1 +1,1 @@
-web: ./build/install/safnewsbanner/bin/safnewsbanner
+web: ./build/install/e-class-portal/bin/e-class-portal

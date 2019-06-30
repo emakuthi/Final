@@ -9,19 +9,15 @@ import dao.*;
 import models.Content;
 import models.Coarses;
 import models.Staff;
-
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
-
 import models.SubCourse;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
-
-
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
 

@@ -4,14 +4,14 @@ plugins {
 }
 
 
-group 'SafNewsBanner'
+group 'eclass-portal'
 version '1.0-SNAPSHOT'
 
 
 
 sourceCompatibility = 1.8
 mainClassName = 'App'
-applicationName = "safnewsbanner"
+applicationName = "eclass-portal"
 
 
 repositories {
