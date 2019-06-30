@@ -3,9 +3,9 @@ package models;
 import java.util.Objects;
 
 public class Content {
-    int id;
-    String url;
-    int subCourseid;
+   private int id;
+   private   String url;
+   private int subCourseid;
 
     public Content(String url, int subCourseid) {
         this.id = id;
