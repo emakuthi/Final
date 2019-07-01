@@ -423,6 +423,19 @@ API routes to communicate with the database
             return gson.toJson(content);
         });
 
+        // get all subcourses with the content
+
+        get("/subcoursesApi", "application/json", (req, res) -> {
+            System.out.println(subCourseDao.getAll());
+
+            if(subCourseDao.getAll().size() > 0){
+                return gson.toJson(subCourseDao.getAll());
+            }
+            else {
+                return "{\"message\":\"I'm sorry, but no subcourses are currently listed in the database.\"}";
+            }
+        });
+
 //        get("/subCourse/:id/content", "application/json", (req, res) -> {
 //            int subcourseId = Integer.parseInt(req.params("id"));
 //
