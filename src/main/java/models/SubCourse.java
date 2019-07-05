@@ -6,12 +6,12 @@ public class SubCourse {
     private int id;
     private String name;
     private String url;
-    private int coarseid;
+    private String coarse_name;
 
-    public SubCourse(String name, String url, int coarseid) {
+    public SubCourse(String coarse_name,String name, String url) {
         this.id = id;
         this.name = name;
-        this.coarseid = coarseid;
+        this.coarse_name = coarse_name;
         this.url = url;
     }
 
@@ -27,9 +27,7 @@ public class SubCourse {
         return url;
     }
 
-    public int getCoarseid() {
-        return coarseid;
-    }
+    public String getCoarse_name() { return coarse_name; }
 
     public void setId(int id) {
         this.id = id;
@@ -41,13 +39,13 @@ public class SubCourse {
         if (o == null || getClass() != o.getClass()) return false;
         SubCourse subCourse = (SubCourse) o;
         return getId() == subCourse.getId() &&
-                getCoarseid() == subCourse.getCoarseid() &&
                 getName().equals(subCourse.getName()) &&
-                getUrl().equals(subCourse.getUrl());
+                getUrl().equals(subCourse.getUrl()) &&
+                getCoarse_name().equals(subCourse.getCoarse_name());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getUrl(), getCoarseid());
+        return Objects.hash(getId(), getName(), getUrl(), getCoarse_name());
     }
 }

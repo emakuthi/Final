@@ -16,10 +16,10 @@
         </select>
         </div>
         <div class = "form-group">
-            <label for="coarseid">Select coarses for this staff:</label>
-            <select id="coarseid" name="coarseid">
+            <label for="coarse_name">Select coarses for this staff:</label>
+            <select id="coarse_name" name="coarse_name">
                 {{#each coarses}}
-                    <option value="{{id}}">{{coarse_name}}</option>
+                    <option value="{{coarse_name}}">{{coarse_name}}</option>
                 {{/each}}
             </select>
         </div>

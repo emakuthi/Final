@@ -324,8 +324,8 @@ public class App {
             model.put("coarses", allCoarses);
             String subCourseName = req.queryParams("name");
             String newUrl = req.queryParams("url");
-            int CoarseId = Integer.parseInt(req.queryParams("coarseid"));
-            SubCourse newSubCourse = new SubCourse(subCourseName, newUrl,CoarseId );
+            String coarseName = req.queryParams("coarse_name");
+            SubCourse newSubCourse = new SubCourse(coarseName, subCourseName, newUrl);
             subCourseDao.add(newSubCourse);
             res.redirect("/");
             return null;

@@ -27,10 +27,10 @@ public class Sql2OSubCourseDao implements SubCourseDao {
     }
 
     @Override
-    public List<Content> getAllSubCoarsesByCoarse(int coarseid) {
+    public List<Content> getAllSubCoarsesByCoarse(String coarse_name) {
         try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM subcourses WHERE coarseid = :coarseid")
-                    .addParameter("coarseid", coarseid)
+            return con.createQuery("SELECT * FROM subcourses WHERE coarse_name = :coarse_name")
+                    .addParameter("coarseid", coarse_name)
                     .executeAndFetch(Content.class);
         }
 
@@ -39,7 +39,7 @@ public class Sql2OSubCourseDao implements SubCourseDao {
     @Override
     public void add(SubCourse subCourse) {
 
-        String sql = "INSERT INTO subcourses(name, url, coarseid) VALUES (:name, :url, :coarseid)"; //raw sql
+        String sql = "INSERT INTO subcourses(coarse_name, name, url) VALUES (:coarse_name, :name, :url)"; //raw sql
         try(Connection con = DB.sql2o.open()){ //try to open a connection
             int id = (int) con.createQuery(sql, true) //make a new variable
                     .bind(subCourse)
@@ -62,14 +62,14 @@ public class Sql2OSubCourseDao implements SubCourseDao {
     }
 
     @Override
-    public void update(String newName, String newUrl, int newCoarseId) {
+    public void update(String newName, String newUrl,String newCoarse_Name) {
 
-        String sql = "UPDATE subcourses SET (name, url, coarseid) = (:name, :url, :coarseid) WHERE id=:id"; //raw sql
+        String sql = "UPDATE subcourses SET (coarse_name, name, url) = (:coarse_name, :name, :url) WHERE id=:id"; //raw sql
         try(Connection con = DB.sql2o.open()){
             con.createQuery(sql)
+                    .addParameter("coarse_name",newCoarse_Name)
                     .addParameter("name", newName)
                     .addParameter("url", newUrl)
-                    .addParameter("coarseid",newCoarseId)
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println();

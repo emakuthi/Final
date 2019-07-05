@@ -9,7 +9,7 @@ public interface SubCourseDao {
 
     // LIST
     List<SubCourse> getAll();
-    List<Content> getAllSubCoarsesByCoarse(int coarseid);
+    List<Content> getAllSubCoarsesByCoarse(String coarse_name);
 
     // CREATE
     void add(SubCourse subCourse);
@@ -18,7 +18,7 @@ public interface SubCourseDao {
     SubCourse findById(int id);
 
     // UPDATE
-    void update(String name, String url, int courseid);
+    void update(String coarse_name, String name, String url);
 
     // DELETE
     void deleteById(int id);
