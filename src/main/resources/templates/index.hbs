@@ -2,31 +2,37 @@
 
     <p> List of Field Operation Coarses</p>
 
-    {{#if coarses}}
+    {{#if logs}}
      <p> click on the Coarse's Name to view the staff Allocated !!</p>
         {{else}}
-        <p>click<a href="/coarses/new">here</a>to add an Coarse</p>
+        <p>click<a href="/visitor">here</a>to add an visitor</p>
     {{/if}}
 
-    {{#if coarses}}
+    {{#if logs}}
 
         <table class="table">
             <thead>
             <tr>
                 <th scope="col">No.</th>
                 <th scope="col">NAME</th>
-                <th scope="col">DESCRIPTION</th>
-                <th scope="col">DURATION</th>
+                <th scope="col">ID/STAFF NUMBER</th>
+                <th scope="col">CRQ NUMBER</th>
+                <th scope="col">PHONE NUMBER</th>
+                <th scope="col">TIME IN</th>
+                <th scope="col">TIME OUT</th>
             </tr>
             </thead>
 
-        {{#each coarses }}
+        {{#each visitor }}
                 <tbody>
                 <tr>
                     <td></td>
-                    <td><a href="/coarses/{{id}}">{{coarse_name}}</td>
-                    <td>{{description}}</td>
-                    <td>{{duration}}</td>
+                    <td>{{fullname}}</td>
+                    <td>{{idnumber}}</td>
+                    <td>{{crqnumber}}</td>
+                    <td>{{phonenumber}}</td>
+                    <td>{{checkedin}}</td>
+                    <td>{{checkedout}}</td>
                 </tr>
                 </tbody>
         {{/each}}
