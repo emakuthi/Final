@@ -1,1 +1,1 @@
-web: ./build/install/e-class-portal/bin/e-class-portal
+web: ./build/install/data-center-access-portal/bin/data-center-access-portal

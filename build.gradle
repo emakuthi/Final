@@ -4,14 +4,14 @@ plugins {
 }
 
 
-group 'e-class-portal'
+group 'data-center-access-portal'
 version '1.0-SNAPSHOT'
 
 
 
 sourceCompatibility = 1.8
 mainClassName = 'App'
-applicationName = "e-class-portal"
+applicationName = "data-center-access-portal"
 
 
 repositories {
