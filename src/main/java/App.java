@@ -1,27 +1,11 @@
 
-import com.cloudinary.Api;
-import com.cloudinary.Cloudinary;
-import com.cloudinary.Transformation;
-import com.cloudinary.api.exceptions.ApiException;
-import com.cloudinary.utils.ObjectUtils;
 import com.google.gson.Gson;
 import dao.*;
 import models.*;
-
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.*;
-
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.http.Part;
-
 import static spark.Spark.*;
-
 public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
@@ -49,22 +33,36 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             List<Visitor> visitors = visitorDao.getAll();
             model.put("logs", visitors);
-            return new ModelAndView(model, "visitor_form");
+            return new ModelAndView(model, "visitors_form");
         }, new HandlebarsTemplateEngine());
 
         //task: process new staff form
         post("/visitor/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Visitor> allVisitor = visitorDao.getAll();
-            model.put("logs", allVisitor);
-            String fullName = req.queryParams("fullname");
-            String idNumber = req.queryParams("idnumber");
-            String crqNumber = req.queryParams("crqnumber");
+            String fullName = req.queryParams("fullName");
+            String company = req.queryParams("company");
+            String idNumber = req.queryParams("idNumber");
             String phoneNumber = req.queryParams("phonenumber");
-            Visitor newVisitor = new Visitor(fullName, idNumber,crqNumber,phoneNumber );
+            String location = req.queryParams("location");
+            String crqNumber = req.queryParams("crqNumber");
+            String reason = req.queryParams("reason");
+            Visitor newVisitor = new Visitor(fullName, company, idNumber,phoneNumber,location,crqNumber,reason);
             visitorDao.add(newVisitor);
+            model.put("logs", allVisitor);
             res.redirect("/");
+
             return null;
+        }, new HandlebarsTemplateEngine());
+
+        // locating visitor by id
+
+        get("/visitor/:id", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfVisitorToFind = Integer.parseInt(request.params("id"));
+            Visitor foundVisitor = visitorDao.findById(idOfVisitorToFind);
+            model.put("logs", foundVisitor);   //add it to model for template to display
+            return new ModelAndView(model, "visitor_details.hbs");  //individual post page.
         }, new HandlebarsTemplateEngine());
 
 /*

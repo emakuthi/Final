@@ -1,11 +1,11 @@
 {{#partial "content"}}
 
-    <p> List of Field Operation Coarses</p>
+    <p> List of Visitors to the Data Center</p>
 
     {{#if logs}}
-     <p> click on the Coarse's Name to view the staff Allocated !!</p>
+     <p> click on the visitors Name to view the Details</p>
         {{else}}
-        <p>click<a href="/visitor">here</a>to add an visitor</p>
+        <p>click<a href="/visitors">here</a>to add an visitor</p>
     {{/if}}
 
     {{#if logs}}
@@ -15,24 +15,30 @@
             <tr>
                 <th scope="col">No.</th>
                 <th scope="col">NAME</th>
-                <th scope="col">ID/STAFF NUMBER</th>
-                <th scope="col">CRQ NUMBER</th>
-                <th scope="col">PHONE NUMBER</th>
+                <th scope="col">COMPANY</th>
+
+                <th scope="col">ID/STAFF NO.</th>
+                <th scope="col">PHONE NO.</th>
+                <th scope="col">CRQ NO.</th>
+                <th scope="col">LOCATION</th>
+                <th scope="col">REASON TO VISIT</th>
                 <th scope="col">TIME IN</th>
                 <th scope="col">TIME OUT</th>
             </tr>
             </thead>
-
-        {{#each visitor }}
+        {{#each logs }}
                 <tbody>
                 <tr>
                     <td></td>
-                    <td>{{fullname}}</td>
-                    <td>{{idnumber}}</td>
-                    <td>{{crqnumber}}</td>
+                    <td><a href="/visitor/{{id}}">{{fullName}}</a></td>
+                    <td>{{company}}</td>
+                    <td>{{idNumber}}</td>
                     <td>{{phonenumber}}</td>
-                    <td>{{checkedin}}</td>
-                    <td>{{checkedout}}</td>
+                    <td>{{crqNumber}}</td>
+                    <td>{{location}}</td>
+                    <td>{{reason}}</td>
+                    <td>{{timeIn}}</td>
+                    <td>{{timeOut}}</td>
                 </tr>
                 </tbody>
         {{/each}}

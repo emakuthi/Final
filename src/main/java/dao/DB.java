@@ -18,7 +18,6 @@ public class DB {
             } else {
                 dbUri = new URI(System.getenv("DATABASE_URL"));
             }
-
             int port = dbUri.getPort();
             String host = dbUri.getHost();
             String path = dbUri.getPath();
