@@ -1,5 +1,6 @@
 package com.data_center_watchman.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.sql.Timestamp;
@@ -8,22 +9,31 @@ import java.sql.Timestamp;
 public class Visitor {
     private Integer id;
     @SerializedName("fullName")
+    @Expose
     private String fullName;
     @SerializedName("idNumber")
+    @Expose
     private String idNumber;
     @SerializedName("crqNumber")
+    @Expose
     private String crqNumber;
     @SerializedName("company")
+    @Expose
     private  String company;
     @SerializedName("phonenumber")
+    @Expose
     private String phonenumber;
     @SerializedName("location")
+    @Expose
     private String location;
     @SerializedName("reason")
+    @Expose
     private String reason;
     @SerializedName("timein")
+    @Expose
     private Timestamp timeIn;
     @SerializedName("timeout")
+    @Expose
     private Timestamp timeOut;
 
     public Visitor(String fullName,String company, String idNumber,String phonenumber,String location, String crqNumber, String reason) {

@@ -1,0 +1,62 @@
+package com.data_center_watchman.adapter;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.data_center_watchman.R;
+import com.data_center_watchman.model.Visitor;
+
+import java.util.List;
+
+public class VisitorListAdapter extends RecyclerView.Adapter<VisitorListAdapter.VisitorViewHolder>{
+
+    private List<Visitor> visitorList;
+
+
+    public VisitorListAdapter(List<Visitor> visitorList) {
+        this.visitorList = visitorList;
+    }
+
+    @NonNull
+    @Override
+    public VisitorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View view = layoutInflater.inflate(R.layout.card_view, parent, false);
+
+        return new VisitorViewHolder(view);
+
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull VisitorViewHolder holder, int position) {
+
+        holder.fullName.setText(visitorList.get(position).getFullName());
+        holder.idNumber.setText(visitorList.get(position).getIdNumber());
+        holder.reason.setText(visitorList.get(position).getReason());
+    }
+
+    @Override
+    public int getItemCount() {
+        return visitorList.size();
+    }
+
+    public class VisitorViewHolder extends RecyclerView.ViewHolder {
+        TextView fullName, idNumber, reason;
+        CardView cardView1;
+
+        public VisitorViewHolder(@NonNull View itemView) {
+            super(itemView);
+            fullName = itemView.findViewById(R.id.visitor_Name);
+            idNumber = itemView.findViewById(R.id.idnumber);
+            reason = itemView.findViewById(R.id.reason_for_visit);
+            cardView1 = itemView.findViewById(R.id.cardviewContent);
+        }
+    }
+}
