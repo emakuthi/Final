@@ -1,0 +1,1 @@
+web: ./build/install/data-center-access-portal/bin/data-center-access-portal

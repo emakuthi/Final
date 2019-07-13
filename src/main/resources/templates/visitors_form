@@ -1,0 +1,78 @@
+{{#partial "content"}}
+    <form action="/visitor/new"  method="post">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="fullName">Full Name</label>
+                <input type="text" class="form-control" id="fullName" name="fullName"  placeholder="Full Name  ">
+            </div>
+            <div class="form-group col-md-6" >
+                <label for="company">Company</label>
+                <input type="text" class="form-control" id="company" name="company" placeholder="company">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="idNumber">ID or EK Number</label>
+                <input type="text" class="form-control" id="idNumber" name="idNumber" placeholder="Id or EK Number">
+            </div>
+            <div class="form-group col-md-6" >
+                <label for="phonenumber">Phone Number</label>
+                <input type="text" class="form-control" id="phonenumber" name="phonenumber" placeholder="Phone Number">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" id="location" name="location"  placeholder="location of the data-center">
+            </div>
+            <div class="form-group col-md-6" >
+                <label for="reason">Reason for the visit</label>
+                <input type="text" class="form-control" id="reason" name="reason" placeholder="Reason for the Visit">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="inputWorksOrder">Works Order/ CRQ No.</label>
+                <input type="text" class="form-control" name="crqNumber" id="inputWorksOrder">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputTime">Time In</label>
+                <input type="text" class="form-control" id="inputTime">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputTime">Time Out</label>
+                <input type="text" class="form-control" id="inputTime">
+            </div>
+        </div>
+<!--        <div class="form-row">-->
+<!--            <div class="form-group col-md-6">-->
+<!--                <label for="inputVerifier">Verified by</label>-->
+<!--                <input type="text" class="form-control" id="inputVerifier">-->
+<!--            </div>-->
+<!--            <div class="form-group col-md-6">-->
+<!--                <div class="form-check">-->
+<!--                    <input class="form-check-input" type="checkbox" id="gridCheck">-->
+<!--                    <label class="form-check-label" for="gridCheck">-->
+<!--                        Verify details-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <button type="submit" class="btn btn-success btn-lg">Approve</button>
+            </div>
+            <div class="form-group col-md-6">
+                <button type="submit" class="btn btn-danger btn-lg">Reject</button>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="inputComment">Comments</label>
+                <textarea input type="textarea" rows="7" class="form-control" id="inputComment"></textarea>
+            </div>
+        </div>
+    </form>
+{{/partial}}
+
+{{> layout.hbs}}
