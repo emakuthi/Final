@@ -1,5 +1,6 @@
 package com.data_center_watchman.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.data_center_watchman.R;
 import com.data_center_watchman.model.Visitor;
 
+import java.util.Date;
 import java.util.List;
 
 public class VisitorListAdapter extends RecyclerView.Adapter<VisitorListAdapter.VisitorViewHolder>{
@@ -34,12 +36,16 @@ public class VisitorListAdapter extends RecyclerView.Adapter<VisitorListAdapter.
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull VisitorViewHolder holder, int position) {
 
-        holder.fullName.setText(visitorList.get(position).getFullName());
-        holder.idNumber.setText(visitorList.get(position).getIdNumber());
-        holder.reason.setText(visitorList.get(position).getReason());
+        holder.fullName.setText("Name: "+visitorList.get(position).getFullName());
+        holder.idNumber.setText("IdNo/EkNO: "+visitorList.get(position).getIdNumber());
+        holder.reason.setText("Reason: "+visitorList.get(position).getReason());
+        holder.checkedIn.setText("checked In: "+ visitorList.get(position).getTimeIn());
+        holder.company.setText("Type Of Visitor: "+ visitorList.get(position).getCompany());
+
     }
 
     @Override
@@ -48,7 +54,7 @@ public class VisitorListAdapter extends RecyclerView.Adapter<VisitorListAdapter.
     }
 
     public class VisitorViewHolder extends RecyclerView.ViewHolder {
-        TextView fullName, idNumber, reason;
+        TextView fullName, idNumber, reason, company, checkedIn;
         CardView cardView1;
 
         public VisitorViewHolder(@NonNull View itemView) {
@@ -56,6 +62,8 @@ public class VisitorListAdapter extends RecyclerView.Adapter<VisitorListAdapter.
             fullName = itemView.findViewById(R.id.visitor_Name);
             idNumber = itemView.findViewById(R.id.idnumber);
             reason = itemView.findViewById(R.id.reason_for_visit);
+            company = itemView.findViewById(R.id.visitor_type);
+            checkedIn = itemView.findViewById(R.id.checkedIn);
             cardView1 = itemView.findViewById(R.id.cardviewContent);
         }
     }

@@ -12,24 +12,60 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="5dp">
-        <TextView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/visitor_Name"
-            android:textStyle="bold"
-            android:textColor="#000"/>
-        <TextView
-            android:layout_width="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/visitor_Name"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:textSize="18sp"
+                android:textColor="#000"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:id="@+id/visitor_type"
+                android:textColor="#000"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:id="@+id/idnumber"
+                android:textColor="#000"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:id="@+id/reason_for_visit"
+                android:textColor="#000"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:id="@+id/checkedIn"
+                android:textColor="#000"/>
+        </LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/idnumber"
-            android:textColor="#000"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/reason_for_visit"
-            android:textColor="#000"/>
+            android:text="@string/check_out"
+            android:textColor="#fff"
+            android:fontFamily="serif-monospace"
+            android:textStyle="normal"
+            android:background="@drawable/btnproceed"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
