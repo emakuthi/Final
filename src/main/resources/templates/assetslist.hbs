@@ -1,0 +1,56 @@
+{{#partial "content"}}
+
+    <p> <h2>List of Assets to and from the Data Center</h2></p>
+
+    {{#if assets}}
+        <p> Click on the equipment name to view the details.</p>
+    {{else}}
+        <p>Click <a href="/assets/">here </a>to add an equipment movement.</p>
+    {{/if}}
+
+    {{#if assets}}
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-dark table-sm">
+
+                <thead>
+                <tr>
+                    <th scope="col">NO.</th>
+                    <th scope="col">SERIAL NO.</th>
+                    <th scope="col">EQUIPMENT NAME</th>
+                    <th scope="col">PERSON MOVING</th>
+                    <th scope="col">ID OF PERSON.</th>
+                    <th scope="col">INCOMING/ OUTGOING</th>
+                    <th scope="col">PHONE NO.</th>
+                    <th scope="col">DESTINATION</th>
+                    <th scope="col">VERIFIER</th>
+                    <th scope="col">TIME IN/ OUT</th>
+
+                </tr>
+                </thead>
+                {{#each assets }}
+                    <tbody>
+                    <tr>
+
+                        <td>{{id}}</td>
+                        <td>{{equipmentSerialNumber}}</td>
+                        <td><a href="/asset/{{id}}">{{equipmentName}}</a></td>
+                        <td>{{personWithEquipment}}</td>
+                        <td>{{moverId}}</td>
+                        <td>{{typeOfMovement}}</td>
+                        <td>{{phonenumber}}</td>
+                        <td>{{destination}}</td>
+                        <td>{{verifier}}</td>
+                        <td>{{timeOut}}</td>
+                        <td>{{time}}</td>
+                    </tr>
+                    </tbody>
+                {{/each}}
+            </table>
+    {{else}}
+            <p>No Records</p>
+    {{/if}}
+    {{name}}
+{{/partial}}
+
+{{> layout.hbs}}

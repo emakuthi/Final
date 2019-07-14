@@ -10,6 +10,7 @@ public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
         Sql2oVisitorDao visitorDao = new Sql2oVisitorDao(DB.sql2o);
+        Sql2oAssetDao assetDao = new Sql2oAssetDao(DB.sql2o);
         Gson gson = new Gson();
 
         ProcessBuilder process = new ProcessBuilder();
@@ -64,6 +65,68 @@ public class App {
             model.put("logs", foundVisitor);   //add it to model for template to display
             return new ModelAndView(model, "visitor_details.hbs");  //individual post page.
         }, new HandlebarsTemplateEngine());
+
+
+        //get: show assets
+        get("/assetslist", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Asset> assets = assetDao.getAll();
+            model.put("assets", assets);
+            return new ModelAndView(model, "assetslist.hbs");
+        }, new HandlebarsTemplateEngine());
+
+
+        //get: show new ASSET form
+        get("/assets/new", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Asset> assets = assetDao.getAll();
+            model.put("assets", assets);
+            return new ModelAndView(model, "index.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/assets", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Asset> assets = assetDao.getAll();
+            model.put("assets", assets);
+            return new ModelAndView(model, "asset_form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //task: process new staff form
+        post("/asset/new", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Asset> allAsset = assetDao.getAll();
+            String equipmentSerialNumber = req.queryParams("equipmentSerialNumber");
+            String equipmentName = req.queryParams("equipmentName");
+            String personWithEquipment = req.queryParams("personWithEquipment");
+            String moverId = req.queryParams("moverId");
+            String typeOfMovement = req.queryParams("typeOfMovement");
+            String phonenumber = req.queryParams("phonenumber");
+            String destination = req.queryParams("destination");
+            String verifier = req.queryParams("verifier");
+            Asset newAsset = new Asset(equipmentSerialNumber, equipmentName, personWithEquipment,moverId,typeOfMovement,phonenumber,destination,verifier);
+            assetDao.add(newAsset);
+            model.put("assets", allAsset);
+            res.redirect("/assetslist");
+
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        // locating asset by id
+
+        get("/asset/:id", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfAssetToFind = Integer.parseInt(request.params("id"));
+            Asset foundAsset = assetDao.findById(idOfAssetToFind);
+            model.put("logs", foundAsset);   //add it to model for template to display
+            return new ModelAndView(model, "asset_details.hbs");  //individual post page.
+        }, new HandlebarsTemplateEngine());
+
+
+        get("/dashboard.hbs", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "dashboard.hbs");
+        }, new HandlebarsTemplateEngine());
+
 
 /*
 API routes to communicate with the database

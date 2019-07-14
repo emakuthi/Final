@@ -27,8 +27,8 @@ public class Sql2oAssetDao implements AssetDao {
     @Override
     public void add(Asset asset) {
 
-        String sql = "INSERT INTO assets () " +
-                "VALUES ();";
+        String sql = "INSERT INTO assets (equipmentSerialNumber, equipmentName, personWithEquipment, moverId, typeOfMovement, phonenumber, destination, verifier) " +
+                "VALUES (:equipmentSerialNumber, :equipmentName, :personWithEquipment, :moverId, :typeOfMovement, :phonenumber, :destination, :verifier);";
 
         try(Connection con = DB.sql2o.open()){
             int id = (int) con.createQuery(sql, true)

@@ -1,4 +1,6 @@
 {{#partial "content"}}
+
+<h3>Visitor Information Capture</h3>
     <form action="/visitor/new"  method="post">
         <div class="form-row">
             <div class="form-group col-md-6">

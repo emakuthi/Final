@@ -15,7 +15,7 @@ public class Visitor {
     private String reason;
     private Timestamp timeIn;
     private Timestamp timeOut;
-    private boolean approvalStatus;
+
 
     public Visitor(String fullName, String company, String idNumber, String phonenumber, String location, String crqNumber,  String reason) {
         this.fullName = fullName;
@@ -25,7 +25,7 @@ public class Visitor {
         this.phonenumber = phonenumber;
         this.location = location;
         this.reason = reason;
-        this.approvalStatus = approvalStatus;
+
 
     }
     public int getId() { return id; }

@@ -1,5 +1,6 @@
 package models;
 
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Asset {
@@ -12,6 +13,7 @@ public class Asset {
     private String phonenumber;
     private String destination;
     private String verifier;
+    private Timestamp time;
 
     public Asset(String equipmentSerialNumber, String equipmentName, String personWithEquipment, String moverId, String typeOfMovement, String phonenumber, String destination, String verifier) {
         this.equipmentSerialNumber = equipmentSerialNumber;
@@ -22,6 +24,7 @@ public class Asset {
         this.phonenumber = phonenumber;
         this.destination = destination;
         this.verifier = verifier;
+
 
     }
 
@@ -97,6 +100,10 @@ public class Asset {
         this.verifier = verifier;
     }
 
+    public Timestamp getTime() { return time; }
+
+    public void setTime(Timestamp time) { this.time = time; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -110,12 +117,13 @@ public class Asset {
                 Objects.equals(getTypeOfMovement(), asset.getTypeOfMovement()) &&
                 Objects.equals(getPhonenumber(), asset.getPhonenumber()) &&
                 Objects.equals(getDestination(), asset.getDestination()) &&
+                getTime().equals(asset.getTime()) &&
                 Objects.equals(getVerifier(), asset.getVerifier());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getEquipmentSerialNumber(), getEquipmentName(), getPersonWithEquipment(), getMoverId(), getTypeOfMovement(), getPhonenumber(), getDestination(), getVerifier());
+        return Objects.hash(getId(), getEquipmentSerialNumber(), getEquipmentName(), getPersonWithEquipment(), getMoverId(), getTypeOfMovement(), getPhonenumber(), getDestination(), getVerifier(), getTime());
     }
 }
 
