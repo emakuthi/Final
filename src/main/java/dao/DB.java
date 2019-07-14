@@ -13,7 +13,7 @@ public class DB {
 
         try {
             if (System.getenv("DATABASE_URL") == null) {
-                dbUri = new URI("postgres://localhost:5432/visitors");
+                dbUri = new URI("postgres://localhost:5432/data_center_access");
                 logger.info("Using local database.");
             } else {
                 dbUri = new URI(System.getenv("DATABASE_URL"));
@@ -21,8 +21,8 @@ public class DB {
             int port = dbUri.getPort();
             String host = dbUri.getHost();
             String path = dbUri.getPath();
-            String username = (dbUri.getUserInfo() == null) ? "developer" : dbUri.getUserInfo().split(":")[0];
-            String password = (dbUri.getUserInfo() == null) ? "elvis" : dbUri.getUserInfo().split(":")[1];
+            String username = (dbUri.getUserInfo() == null) ? "postgres" : dbUri.getUserInfo().split(":")[0];
+            String password = (dbUri.getUserInfo() == null) ? "postgres" : dbUri.getUserInfo().split(":")[1];
 
             sql2o = new Sql2o("jdbc:postgresql://" + host + ":" + port + path, username, password);
         } catch (URISyntaxException e ) {
