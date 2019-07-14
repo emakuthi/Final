@@ -64,22 +64,23 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             int idOfVisitorToFind = Integer.parseInt(request.params("id"));
             Visitor foundVisitor = visitorDao.findById(idOfVisitorToFind);
-            model.put("logs", foundVisitor);   //add it to model for template to display
-            return new ModelAndView(model, "visitor_details.hbs");  //individual post page.
+            model.put("visitor", foundVisitor);   //add it to model for template to display
+            return new ModelAndView(model, "visitor_details");  //individual post page.
         }, new HandlebarsTemplateEngine());
 
-        put("/visitor/:id", (request, response) -> {
-           int id = Integer.parseInt(request.params(":id"));
-           Visitor visitor = visitorDao.findById(id);
-            if (visitor != null) {
+        put("/visitorOut", (request, response) -> {
+//           int id = Integer.parseInt(request.params(":id"));
+//           Visitor visitor = visitorDao.findById(id);
+//            if (visitor != null) {
                 Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
                 visitorDao.update(timestamp);
+                response.redirect("/");
                 return null;
-            } else {
-                response.status(404);
-                return null;
-            }
-        });
+//            } else {
+//                response.status(404);
+//                return null;
+//            }
+        }, new HandlebarsTemplateEngine());
 
 /*
 API routes to communicate with the database

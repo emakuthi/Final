@@ -17,4 +17,7 @@ public class Sql2oVisitorDaoTest {
     @Test
     public void findById() {
     }
+    @Test
+    public void update() {
+    }
 }

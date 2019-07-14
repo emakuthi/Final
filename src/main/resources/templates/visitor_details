@@ -1,20 +1,11 @@
 {{#partial "content"}}
     <div >
-        <p>{{coarses.coarse_name}}</p>
-        <p>{{coarses.description}}</p>
-        <p>{{coarses.duration}}</p>
 
+        <a class="btn btn-warning btn-sm" href="/visitorOut">checkout</a>
 
-        <a class="btn btn-warning btn-sm" href="/coarses/{{coarses.id}}/edit">edit Coarse</a>
-        <a class="btn btn-warning btn-sm" href="/coarses/{{coarses.id}}/content/{{content.id}}">View Content</a>
-        <a class="btn btn-warning btn-sm" href="/subcourses">Add Coarse Units</a>
     </div>
 
     <p>Vistor Details</p>
-
-    <div>
-        Vistor Details
-    </div>
 
     <div class="row">
         <div class="col-sm-8">
@@ -22,26 +13,20 @@
                 <thead>
                 <tr>
                     <th scope="col">No.</th>
-                    <th scope="col">staff name</th>
-                    <th scope="col">staff number</th>
+                    <th scope="col">visitor name</th>
+                    <th scope="col">Id number</th>
+                    <th scope="col">Time IN</th>
 
                 </tr>
                 </thead>
-                {{#if staff}}
-                    {{#each staff}}
-                        <tbody>
-                        <tr>
-                            <td></td>
-                            <td>{{name}}</td>
-                            <td>{{ekNumber}}</td>
-                        </tr>
-                        </tbody>
-                    {{/each}}
-                {{else}}
-                    <div >
-                        <p>No records</p>
-                    </div>
-                {{/if}}
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td>{{visitor.fullName}}</td>
+                        <td>{{visitor.idNumber}}</td>
+                        <td>{{visitor.timeIn}}</td>
+                    </tr>
+                    </tbody>
             </table>
         </div>
         <div class="col-sm-4">
