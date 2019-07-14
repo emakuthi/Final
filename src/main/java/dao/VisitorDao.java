@@ -2,6 +2,7 @@ package dao;
 
 import models.Visitor;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface VisitorDao {
@@ -12,4 +13,8 @@ public interface VisitorDao {
 
     //READ
     Visitor findById(int id);
+
+    //Update
+
+    void update(Timestamp timestamp);
 }

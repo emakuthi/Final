@@ -2,6 +2,9 @@
 import com.google.gson.Gson;
 import dao.*;
 import models.*;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.*;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -65,6 +68,19 @@ public class App {
             return new ModelAndView(model, "visitor_details.hbs");  //individual post page.
         }, new HandlebarsTemplateEngine());
 
+        put("/visitor/:id", (request, response) -> {
+           int id = Integer.parseInt(request.params(":id"));
+           Visitor visitor = visitorDao.findById(id);
+            if (visitor != null) {
+                Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+                visitorDao.update(timestamp);
+                return null;
+            } else {
+                response.status(404);
+                return null;
+            }
+        });
+
 /*
 API routes to communicate with the database
 
@@ -88,6 +104,23 @@ API routes to communicate with the database
             res.status(201);
             return gson.toJson(visitor);
         });
+
+        put("/visitor/:id","application/json", (request, response) -> {
+            int id = Integer.parseInt(request.params(":id"));
+            Visitor visitor = gson.fromJson(request.body(), Visitor.class);
+            visitorDao.findById(id);
+            if (visitor != null) {
+                Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+                visitorDao.update(timestamp);
+                return null;
+            } else {
+                response.status(404);
+                return null;
+            }
+        });
+
+
+
 
 
     }
