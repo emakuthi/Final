@@ -1,0 +1,51 @@
+{{#partial "content"}}
+    <form action="/assets/new"  method="post">
+        <div class="form-row">
+            <div class="form-group col-md-6" >
+                <label for="equipmentSerialNumber">Serial No.</label>
+                <input type="text" class="form-control" id="equipmentSerialNumber" name="company" placeholder="Serial No.">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="equipmentName">Equipment Name</label>
+                <input type="text" class="form-control" id="equipmentName" name="equipmentName"  placeholder="Equipment Name">
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="personWithEquipment">Person with Equipment</label>
+                <input type="text" class="form-control" id="idNumber" name="personWithEquipment" placeholder="Person with Equipment">
+            </div>
+            <div class="form-group col-md-6" >
+                <label for="typeOfMovement">Incoming or Outgoing</label>
+                <input type="text" class="form-control" id="typeOfMovement" name="typeOfMovement" placeholder="Incoming or Outgoing">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="destination">Destination</label>
+                <input type="text" class="form-control" id="destination" name="destination"  placeholder="Equipment Destination">
+            </div>
+            <div class="form-group col-md-6" >
+                <label for="verifier">Verified by</label>
+                <input type="text" class="form-control" id="verifier" name="verifier" placeholder="Verified by">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <button type="submit" class="btn btn-success btn-lg">Confirmed</button>
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="inputComment">Comments</label>
+                <textarea input type="textarea" rows="7" class="form-control" id="inputComment"></textarea>
+            </div>
+        </div>
+    </form>
+{{/partial}}
+
+{{> layout.hbs}}
