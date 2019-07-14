@@ -205,6 +205,10 @@ body {
 
 }
 
+.footer {
+  background: lightgreen;
+}
+
 /*!* Page content *!*/
 /*.content {*/
 /*  padding: 16px;*/
