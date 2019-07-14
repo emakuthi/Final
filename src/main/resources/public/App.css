@@ -227,6 +227,7 @@ body {
   padding-top: 102px;
 }
 
-.logo{
-  align-content: flex-start;
+.card-header{
+  text-align: justify;
 }
+

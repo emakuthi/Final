@@ -1,18 +1,20 @@
 {{#partial "content"}}
 
-    <p> List of Visitors to the Data Center</p>
+    <p> <h2>List of Visitors to the Data Center</h2></p>
 
     {{#if logs}}
-     <p> click on the visitors Name to view the Details</p>
+     <p> Click on the visitors name to view the details.</p>
         {{else}}
-        <p>click<a href="/visitors">here</a>to add an visitor</p>
+        <p>Click<a href="/visitors">here</a>to add a visitor.</p>
     {{/if}}
 
     {{#if logs}}
 
-        <table class="table">
-            <thead>
-            <tr>
+        <div class="table-responsive">
+            <table class="table table-bordered table-dark table-sm">
+
+                <thead>
+                <tr>
                 <th scope="col">NO.</th>
                 <th scope="col">NAME</th>
                 <th scope="col">COMPANY</th>
@@ -21,7 +23,7 @@
                 <th scope="col">PHONE NO.</th>
                 <th scope="col">CRQ NO.</th>
                 <th scope="col">LOCATION</th>
-                <th scope="col">REASON OF VISIT</th>
+                <th scope="col">REASON FOR VISIT</th>
                 <th scope="col">TIME IN</th>
                 <th scope="col">TIME OUT</th>
             </tr>
