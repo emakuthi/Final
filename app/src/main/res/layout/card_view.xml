@@ -14,6 +14,50 @@
         android:layout_margin="5dp"
         android:orientation="horizontal"
         android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textAlignment="textEnd"
+                android:padding="5dp"
+                android:textColor="#000"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/category"
+                android:textAlignment="textEnd"
+                android:padding="5dp"
+                android:textColor="#000"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/idno_ekno"
+                android:textAlignment="textEnd"
+                android:padding="5dp"
+                android:textColor="#000"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/reason"
+                android:textAlignment="textEnd"
+                android:textColor="#000"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textAlignment="textEnd"
+                android:text="@string/check_in_time"
+                android:textColor="#000"/>
+
+
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,49 +66,59 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/visitor_Name"
-                android:textStyle="bold"
                 android:padding="5dp"
                 android:textSize="18sp"
                 android:textColor="#000"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:padding="5dp"
                 android:id="@+id/visitor_type"
                 android:textColor="#000"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:padding="5dp"
                 android:id="@+id/idnumber"
                 android:textColor="#000"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:padding="5dp"
                 android:id="@+id/reason_for_visit"
                 android:textColor="#000"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:padding="5dp"
+                android:text="27-december-2017"
                 android:id="@+id/checkedIn"
                 android:textColor="#000"/>
         </LinearLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <Button
+
+        <TextView
             android:layout_width="wrap_content"
+            android:layout_marginTop="3dp"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/open_in_browser"
             android:text="@string/check_out"
             android:textColor="#fff"
+            android:background="@color/colorPrimary"
             android:fontFamily="serif-monospace"
-            android:textStyle="normal"
-            android:background="@drawable/btnproceed"
+            android:padding="5dp"
+            android:layout_marginBottom="0dp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"/>
-
+            android:layout_alignParentEnd="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/checkout"/>
     </RelativeLayout>
 
     </LinearLayout>

@@ -29,12 +29,12 @@ public class Visitor {
     @SerializedName("reason")
     @Expose
     private String reason;
-    @SerializedName("timein")
+    @SerializedName("timeIn")
     @Expose
-    private Timestamp timeIn;
-    @SerializedName("timeout")
+    private String timeIn;
+    @SerializedName("timeOut")
     @Expose
-    private Timestamp timeOut;
+    private String timeOut;
 
     public Visitor(String fullName,String company, String idNumber,String phonenumber,String location, String crqNumber, String reason) {
         this.fullName = fullName;
@@ -110,19 +110,19 @@ public class Visitor {
         this.reason = reason;
     }
 
-    public Timestamp getTimeIn() {
+    public String getTimeIn() {
         return timeIn;
     }
 
-    public void setTimeIn(Timestamp timeIn) {
+    public void setTimeIn(String timeIn) {
         this.timeIn = timeIn;
     }
 
-    public Timestamp getTimeOut() {
+    public String getTimeOut() {
         return timeOut;
     }
 
-    public void setTimeOut(Timestamp timeOut) {
+    public void setTimeOut(String timeOut) {
         this.timeOut = timeOut;
     }
 

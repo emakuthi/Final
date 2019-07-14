@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.data_center_watchman.R;
 import com.data_center_watchman.model.Visitor;
 
-import java.util.Date;
 import java.util.List;
 
 public class VisitorListAdapter extends RecyclerView.Adapter<VisitorListAdapter.VisitorViewHolder>{
 
     private List<Visitor> visitorList;
+
 
 
     public VisitorListAdapter(List<Visitor> visitorList) {
@@ -31,7 +31,6 @@ public class VisitorListAdapter extends RecyclerView.Adapter<VisitorListAdapter.
 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.card_view, parent, false);
-
         return new VisitorViewHolder(view);
 
     }
@@ -40,14 +39,13 @@ public class VisitorListAdapter extends RecyclerView.Adapter<VisitorListAdapter.
     @Override
     public void onBindViewHolder(@NonNull VisitorViewHolder holder, int position) {
 
-        holder.fullName.setText("Name: "+visitorList.get(position).getFullName());
-        holder.idNumber.setText("IdNo/EkNO: "+visitorList.get(position).getIdNumber());
-        holder.reason.setText("Reason: "+visitorList.get(position).getReason());
-        holder.checkedIn.setText("checked In: "+ visitorList.get(position).getTimeIn());
-        holder.company.setText("Type Of Visitor: "+ visitorList.get(position).getCompany());
+        holder.fullName.setText(visitorList.get(position).getFullName());
+        holder.idNumber.setText(visitorList.get(position).getIdNumber());
+        holder.reason.setText(visitorList.get(position).getReason());
+        holder.checkedIn.setText(visitorList.get(position).getTimeIn());
+        holder.company.setText(visitorList.get(position).getCompany());
 
     }
-
     @Override
     public int getItemCount() {
         return visitorList.size();
@@ -57,6 +55,7 @@ public class VisitorListAdapter extends RecyclerView.Adapter<VisitorListAdapter.
         TextView fullName, idNumber, reason, company, checkedIn;
         CardView cardView1;
 
+
         public VisitorViewHolder(@NonNull View itemView) {
             super(itemView);
             fullName = itemView.findViewById(R.id.visitor_Name);
@@ -65,6 +64,7 @@ public class VisitorListAdapter extends RecyclerView.Adapter<VisitorListAdapter.
             company = itemView.findViewById(R.id.visitor_type);
             checkedIn = itemView.findViewById(R.id.checkedIn);
             cardView1 = itemView.findViewById(R.id.cardviewContent);
+
         }
     }
 }
