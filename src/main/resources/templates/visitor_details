@@ -1,8 +1,8 @@
 {{#partial "content"}}
     <div >
-
-        <a class="btn btn-warning btn-sm" href="/visitorOut">checkout</a>
-
+        <form action="/visitor/{{visitor.id}}"  method="post">
+            <button type="submit" class="btn btn-success btn-lg">CHECKOUT</button>
+        </form>
     </div>
 
     <p>Vistor Details</p>
@@ -38,7 +38,6 @@
         </div>
     </div>
     <div class="card-footer">
-
         <a class="btn btn-warning btn-sm" href="/coarses/{{editCoarse.id}}/edit">edit Coarse</a>
         <a class="btn btn-warning btn-sm" href="/staff/{{staff.id}}/edit">edit Site</a>
         <a class="btn btn-warning btn-sm" href="/coarses/{{staff.coarseid}}/staff/{{staff.id}}/delete">delete</a>

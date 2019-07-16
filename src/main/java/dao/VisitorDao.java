@@ -16,5 +16,5 @@ public interface VisitorDao {
 
     //Update
 
-    void update(Timestamp timestamp);
+    void update(int id,Timestamp timestamp);
 }

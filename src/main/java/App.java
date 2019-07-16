@@ -68,19 +68,18 @@ public class App {
             return new ModelAndView(model, "visitor_details");  //individual post page.
         }, new HandlebarsTemplateEngine());
 
-        put("/visitorOut", (request, response) -> {
-//           int id = Integer.parseInt(request.params(":id"));
-//           Visitor visitor = visitorDao.findById(id);
-//            if (visitor != null) {
-                Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
-                visitorDao.update(timestamp);
-                response.redirect("/");
-                return null;
-//            } else {
-//                response.status(404);
-//                return null;
-//            }
+
+       //checkout the visitor;
+
+        post("/visitor/:id", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfCategoryToEdit = Integer.parseInt(req.params(":id"));
+            Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+            visitorDao.update(idOfCategoryToEdit, timestamp);
+            res.redirect("/");
+            return null;
         }, new HandlebarsTemplateEngine());
+
 
 /*
 API routes to communicate with the database
@@ -106,24 +105,13 @@ API routes to communicate with the database
             return gson.toJson(visitor);
         });
 
-        put("/visitor/:id","application/json", (request, response) -> {
-            int id = Integer.parseInt(request.params(":id"));
-            Visitor visitor = gson.fromJson(request.body(), Visitor.class);
-            visitorDao.findById(id);
-            if (visitor != null) {
-                Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
-                visitorDao.update(timestamp);
-                return null;
-            } else {
-                response.status(404);
-                return null;
-            }
+        // Checking out the visitor
+        post("/checkout","application/json", (req, res) -> {
+            Visitor visitor = gson.fromJson(req.body(), Visitor.class);
+            int idOfVisitorToCheckout = Integer.parseInt(req.params(":id"));
+            Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+            visitorDao.update(idOfVisitorToCheckout, timestamp);
+            return gson.toJson(visitor);
         });
-
-
-
-
-
     }
-
 }

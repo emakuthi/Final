@@ -27,8 +27,8 @@ public class Sql2oVisitorDao implements VisitorDao {
 
     @Override
     public void add(Visitor visitor) {
-        String sql = "INSERT INTO logs (fullName, company, idNumber, phoneNumber, location, crqNumber, reason, timeIn) " +
-                "VALUES (:fullName,:company, :idNumber, :phonenumber, :location, :crqNumber, :reason, now());";
+        String sql = "INSERT INTO logs (fullName, company, idNumber, phoneNumber, location, crqNumber, reason, timeIn, timeOut) " +
+                "VALUES (:fullName,:company, :idNumber, :phonenumber, :location, :crqNumber, :reason, now(), null);";
 
         try(Connection con = DB.sql2o.open()){
             int id = (int) con.createQuery(sql, true)
@@ -52,11 +52,11 @@ public class Sql2oVisitorDao implements VisitorDao {
     }
 
     @Override
-    public void update(Timestamp newtime) {
-        String sql = "UPDATE logs SET (timeOut) = (now()) WHERE id=:id";
+    public void update(int id,Timestamp newtime) {
+        String sql = "UPDATE logs SET timeOut = now() WHERE id = :id";
         try(Connection con = DB.sql2o.open()){
             con.createQuery(sql)
-                    .addParameter("timeOut",newtime)
+                    .addParameter("id", id)
                     .executeUpdate();
         }catch (Sql2oException ex){
             System.out.println(ex);
