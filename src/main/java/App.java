@@ -99,6 +99,7 @@ API routes to communicate with the database
         //CREATE
         post("/postVisitor", "application/json", (req, res) -> {
             Visitor visitor = gson.fromJson(req.body(), Visitor.class);
+            System.out.println("CREATE: " +visitor.getFullName());
             visitorDao.add(visitor);
             res.status(201);
             return gson.toJson(visitor);
@@ -107,7 +108,7 @@ API routes to communicate with the database
         // Checking out the visitor
         post("/checkout","application/json", (req, res) -> {
             Visitor visitor = gson.fromJson(req.body(), Visitor.class);
-            System.out.println(visitor.getFullName());
+            System.out.println("UPDATE: " + visitor.getFullName());
             int idOfVisitorToCheckout = Integer.parseInt(req.params(":id"));
             Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
             visitorDao.update(idOfVisitorToCheckout, timestamp);
