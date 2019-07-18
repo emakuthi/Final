@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,10 +15,13 @@ import com.data_center_watchman.adapter.VisitorAdapter;
 import com.data_center_watchman.adapter.VisitorListAdapter;
 import com.data_center_watchman.model.Visitor;
 import com.data_center_watchman.model.VisitorService;
+
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 
 public class VisitorList extends AppCompatActivity {
@@ -61,7 +63,7 @@ public class VisitorList extends AppCompatActivity {
     }
     private void generateVisitorsList(List<Visitor> visitorList){
         RecyclerView recyclerView = findViewById(R.id.resultsView);
-        VisitorListAdapter adapter = new VisitorListAdapter(visitorList);
+        VisitorListAdapter adapter = new VisitorListAdapter(this,visitorList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(VisitorList.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -77,5 +79,4 @@ public class VisitorList extends AppCompatActivity {
 
         return  super.onOptionsItemSelected(item);
     }
-
 }
