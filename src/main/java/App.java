@@ -72,7 +72,6 @@ public class App {
        //checkout the visitor;
 
         post("/visitor/:id", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
             int idOfCategoryToEdit = Integer.parseInt(req.params(":id"));
             Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
             visitorDao.update(idOfCategoryToEdit, timestamp);
@@ -108,6 +107,7 @@ API routes to communicate with the database
         // Checking out the visitor
         post("/checkout","application/json", (req, res) -> {
             Visitor visitor = gson.fromJson(req.body(), Visitor.class);
+            System.out.println(visitor.getFullName());
             int idOfVisitorToCheckout = Integer.parseInt(req.params(":id"));
             Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
             visitorDao.update(idOfVisitorToCheckout, timestamp);
