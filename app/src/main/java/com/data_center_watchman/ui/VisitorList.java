@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.data_center_watchman.R;
 import com.data_center_watchman.adapter.VisitorAdapter;
 import com.data_center_watchman.adapter.VisitorListAdapter;
@@ -27,6 +29,7 @@ import retrofit2.Response;
 public class VisitorList extends AppCompatActivity {
     private List<Visitor> visitors;
     Toolbar toolbar;
+    VisitorAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +39,7 @@ public class VisitorList extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        VisitorAdapter adapter = VisitorService.getRetrofitInstance().create(VisitorAdapter.class);
+        adapter = VisitorService.getRetrofitInstance().create(VisitorAdapter.class);
         Call<List<Visitor>> call = adapter.getAll();
         final ProgressDialog progressDialog;
         progressDialog = new ProgressDialog(VisitorList.this);
@@ -79,4 +82,5 @@ public class VisitorList extends AppCompatActivity {
 
         return  super.onOptionsItemSelected(item);
     }
+
 }

@@ -75,7 +75,6 @@ public class VisitorDetailView extends AppCompatActivity {
         tv6.setText(crqNumber);tv7.setText(location);
 
     }
-
     public void checkoutVisitor(Visitor visitor){
         Log.d("VISITOR DETAIL","UPDATE: " + visitor.getId());
         Retrofit.Builder builder = new Retrofit.Builder()
