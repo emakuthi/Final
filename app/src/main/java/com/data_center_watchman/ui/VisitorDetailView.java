@@ -55,9 +55,7 @@ public class VisitorDetailView extends AppCompatActivity {
            setVistorDetails(fullName,idNumber,company,reason,checkedIn,crqNumber,location);
            Visitor visitor = new Visitor(fullName, idNumber,crqNumber,company,phoneNumber,location,reason);
            visitor.setId(id);
-
            return visitor;
-
         } else {
             return null;
         }

@@ -11,16 +11,17 @@ public interface VisitorAdapter {
 
     @POST("postVisitor")
     Call<Visitor> createVisitor(@Body Visitor visitor);
-
     @GET("getVisitor")
     Call<List<Visitor>> getAll();
+    @GET("getCheckedIn")
+    Call<Visitor> getAllCheckedIn();
+    @GET("getRequests")
+    Call<List<Visitor>> getAllRequests();
+    @GET("getCheckedOut")
+    Call<Visitor> getAllCheckedOut();
 
-//    @POST("checkout")
-//    Call<Visitor> checkoutVisitor(@Body Visitor visitor);
     @POST("checkout")
     Call<Visitor> checkout(@Body Visitor visitor);
-//    @PUT("checkout")
-//    @FormUrlEncoded
-//    Call<Visitor> checkout(@Body Visitor visitor);
+
 
 }

@@ -9,7 +9,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/back"
         android:orientation="horizontal">
         <TextView
             android:layout_width="120dp"
@@ -35,7 +34,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/back"
         android:orientation="horizontal">
 
         <TextView
@@ -61,7 +59,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/back"
         android:orientation="horizontal">
         <TextView
             android:layout_width="120dp"
@@ -87,7 +84,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/back"
         android:orientation="horizontal">
         <TextView
             android:layout_width="120dp"
@@ -112,7 +108,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/back"
+
         android:orientation="horizontal">
 
         <TextView
@@ -137,7 +133,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/back"
         android:orientation="horizontal">
         <TextView
             android:layout_width="120dp"
@@ -162,7 +157,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/back"
         android:orientation="horizontal">
         <TextView
             android:layout_width="120dp"
