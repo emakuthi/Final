@@ -8,6 +8,9 @@ import java.util.List;
 public interface VisitorDao {
     //LIST
     List<Visitor> getAll();
+    List<Visitor> getAllRequests();
+    List<Visitor> getAllCheckedIn();
+    List<Visitor> getAllCheckedOut();
     //CREATE
     void add (Visitor visitor);
 

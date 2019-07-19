@@ -79,6 +79,26 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+        get("/requests", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Visitor> visitors = visitorDao.getAllRequests();
+            model.put("logs", visitors);
+            return new ModelAndView(model, "index.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/checkedIn", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Visitor> visitors = visitorDao.getAllCheckedIn();
+            model.put("logs", visitors);
+            return new ModelAndView(model, "index.hbs");
+        }, new HandlebarsTemplateEngine());
+        get("/checkedOut", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Visitor> visitors = visitorDao.getAllCheckedOut();
+            model.put("logs", visitors);
+            return new ModelAndView(model, "index.hbs");
+        }, new HandlebarsTemplateEngine());
+
 
 /*
 API routes to communicate with the database
@@ -95,7 +115,6 @@ API routes to communicate with the database
                 return "{\"message\":\"I'm sorry, but no logs are currently listed in the database.\"}";
             }
         });
-
         //CREATE
         post("/postVisitor", "application/json", (req, res) -> {
             Visitor visitor = gson.fromJson(req.body(), Visitor.class);
@@ -113,6 +132,37 @@ API routes to communicate with the database
             Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
             visitorDao.update(idOfVisitorToCheckout, timestamp);
             return gson.toJson(visitor);
+        });
+
+        get("/getRequests", "application/json", (req, res) -> {
+            System.out.println(visitorDao.getAllRequests());
+
+            if(visitorDao.getAll().size() > 0){
+                return gson.toJson(visitorDao.getAllRequests());
+            }
+            else {
+                return "{\"message\":\"I'm sorry, but no logs are currently listed in the database.\"}";
+            }
+        });
+        get("/getCheckedIn", "application/json", (req, res) -> {
+            System.out.println(visitorDao.getAllCheckedIn());
+
+            if(visitorDao.getAll().size() > 0){
+                return gson.toJson(visitorDao.getAllCheckedIn());
+            }
+            else {
+                return "{\"message\":\"I'm sorry, but no logs are currently listed in the database.\"}";
+            }
+        });
+        get("/getCheckedOut", "application/json", (req, res) -> {
+            System.out.println(visitorDao.getAllCheckedOut());
+
+            if(visitorDao.getAll().size() > 0){
+                return gson.toJson(visitorDao.getAllCheckedOut());
+            }
+            else {
+                return "{\"message\":\"I'm sorry, but no logs are currently listed in the database.\"}";
+            }
         });
     }
 }
