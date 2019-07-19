@@ -68,13 +68,21 @@ public class App {
             return new ModelAndView(model, "visitor_details");  //individual post page.
         }, new HandlebarsTemplateEngine());
 
+        //checkin Visitor
+        post("/visitorIn/:id", (req, res) -> {
+            int idOfCategoryToEdit = Integer.parseInt(req.params(":id"));
+            Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+            visitorDao.updateTimeIn(idOfCategoryToEdit, timestamp);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
        //checkout the visitor;
 
         post("/visitor/:id", (req, res) -> {
             int idOfCategoryToEdit = Integer.parseInt(req.params(":id"));
             Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
-            visitorDao.update(idOfCategoryToEdit, timestamp);
+            visitorDao.updateTimeOut(idOfCategoryToEdit, timestamp);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -130,7 +138,15 @@ API routes to communicate with the database
             System.out.println("UPDATE: " +visitor.getFullName());
             int idOfVisitorToCheckout = visitor.getId();
             Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
-            visitorDao.update(idOfVisitorToCheckout, timestamp);
+            visitorDao.updateTimeOut(idOfVisitorToCheckout, timestamp);
+            return gson.toJson(visitor);
+        });
+        post("/checkin","application/json", (req, res) -> {
+            Visitor visitor = gson.fromJson(req.body(), Visitor.class);
+            System.out.println("UPDATE: " +visitor.getFullName());
+            int idOfVisitorToCheckin = visitor.getId();
+            Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+            visitorDao.updateTimeIn(idOfVisitorToCheckin, timestamp);
             return gson.toJson(visitor);
         });
 
