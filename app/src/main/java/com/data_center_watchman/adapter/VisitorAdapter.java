@@ -10,16 +10,17 @@ import retrofit2.http.POST;
 public interface VisitorAdapter {
 
     @POST("postVisitor")
-    Call<Visitor> createVisitor(@Body Visitor visitor);
+    Call<Visitor> sendRequest(@Body Visitor visitor);
     @GET("getVisitor")
     Call<List<Visitor>> getAll();
     @GET("getCheckedIn")
-    Call<Visitor> getAllCheckedIn();
+    Call<List<Visitor>> getAllCheckedIn();
     @GET("getRequests")
     Call<List<Visitor>> getAllRequests();
     @GET("getCheckedOut")
     Call<Visitor> getAllCheckedOut();
-
+    @POST("checkin")
+    Call<Visitor> checkin(@Body Visitor visitor);
     @POST("checkout")
     Call<Visitor> checkout(@Body Visitor visitor);
 
