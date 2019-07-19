@@ -150,11 +150,13 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/logs" />
+                    android:src="@mipmap/signout"
+                    />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="View Logs"
+
+                    android:text="@string/checkout_visitors"
                     android:padding="10dp"
                     android:gravity="center"/>
 
@@ -182,12 +184,13 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/signout" />
+                    android:src="@mipmap/logs"
+                    />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Checkout Visitors"
                     android:padding="10dp"
+                    android:text="@string/view_logs"
                     android:gravity="center"/>
             </LinearLayout>
 

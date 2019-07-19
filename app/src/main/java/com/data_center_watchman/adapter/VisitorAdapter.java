@@ -18,7 +18,7 @@ public interface VisitorAdapter {
     @GET("getRequests")
     Call<List<Visitor>> getAllRequests();
     @GET("getCheckedOut")
-    Call<Visitor> getAllCheckedOut();
+    Call<List<Visitor>> getAllCheckedOut();
     @POST("checkin")
     Call<Visitor> checkin(@Body Visitor visitor);
     @POST("checkout")
