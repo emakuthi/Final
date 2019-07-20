@@ -4,6 +4,11 @@
             <button type="submit" class="btn btn-success btn-lg">CHECKOUT</button>
         </form>
     </div>
+    <div >
+        <form action="/visitorIn/{{visitor.id}}"  method="post">
+            <button type="submit" class="btn btn-success btn-lg">CHECKIN</button>
+        </form>
+    </div>
 
     <p>Vistor Details</p>
 

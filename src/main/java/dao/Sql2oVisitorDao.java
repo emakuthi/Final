@@ -33,7 +33,7 @@ public class Sql2oVisitorDao implements VisitorDao {
     @Override
     public List<Visitor> getAllCheckedIn() {
         try(Connection con = DB.sql2o.open()){
-        return con.createQuery("SELECT * FROM logs WHERE timeIn is not null")
+        return con.createQuery("SELECT * FROM logs WHERE timeOut is null and timeIn is not null")
                     .throwOnMappingFailure(false)
                     .executeAndFetch(Visitor.class);
         }
