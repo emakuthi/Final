@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.data_center_watchman.R;
 import com.data_center_watchman.adapter.VisitorAdapter;
+import com.data_center_watchman.service.CheckInAdapter;
+import com.data_center_watchman.service.CheckOutAdapter;
 import com.data_center_watchman.service.VisitorListAdapter;
 import com.data_center_watchman.model.Visitor;
 import com.data_center_watchman.model.VisitorService;
@@ -68,7 +70,7 @@ public class CheckedInActivity extends AppCompatActivity {
         }
         private void generateVisitorsList(List<Visitor> visitorList){
             RecyclerView recyclerView = findViewById(R.id.resultsView);
-            VisitorListAdapter adapter = new VisitorListAdapter(this,visitorList);
+            CheckOutAdapter adapter = new CheckOutAdapter(this,visitorList);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(CheckedInActivity.this);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(adapter);

@@ -15,6 +15,11 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:titleMarginStart="40dp"
         android:layout_marginBottom="50dp"/>
+    <!--<androidx.appcompat.widget.SearchView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/search">-->
+    <!--</androidx.appcompat.widget.SearchView>-->
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

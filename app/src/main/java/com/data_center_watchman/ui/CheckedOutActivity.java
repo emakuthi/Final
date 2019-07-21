@@ -48,7 +48,6 @@ public class CheckedOutActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading.Please Wait.......");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
-
         call.enqueue(new Callback<List<Visitor>>() {
             @Override
             public void onResponse(Call<List<Visitor>> call, Response<List<Visitor>> response) {

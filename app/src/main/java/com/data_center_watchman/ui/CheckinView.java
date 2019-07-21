@@ -17,6 +17,7 @@ import com.data_center_watchman.Constants;
 import com.data_center_watchman.R;
 import com.data_center_watchman.adapter.VisitorAdapter;
 import com.data_center_watchman.model.Visitor;
+import com.data_center_watchman.service.VisitorListAdapter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +29,7 @@ public class CheckinView extends AppCompatActivity {
 
     Button btnCheckin;
     Visitor checkinVisitor;
+    VisitorListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +40,9 @@ public class CheckinView extends AppCompatActivity {
         btnCheckin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 checkinVisitor(checkinVisitor);
+
+
             }
         });
     }

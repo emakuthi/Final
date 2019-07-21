@@ -58,7 +58,6 @@ public class CheckInAdapter extends RecyclerView.Adapter<CheckInAdapter.CheckInV
                 intent.putExtra("location", checkinList.get(position).getLocation());
                 intent.putExtra("timeOut", checkinList.get(position).getTimeOut());
                 intent.putExtra("id", checkinList.get(position).getId());
-
                 mContext.startActivity(intent);
             }
         });
