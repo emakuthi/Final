@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.data_center_watchman.R;
 import com.data_center_watchman.adapter.VisitorAdapter;
-import com.data_center_watchman.adapter.VisitorListAdapter;
+import com.data_center_watchman.service.VisitorListAdapter;
 import com.data_center_watchman.model.Visitor;
 import com.data_center_watchman.model.VisitorService;
 
@@ -33,7 +33,7 @@ public class CheckedOutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checked_out);
         toolbar = findViewById(R.id.contentToolbar);
-        toolbar.setTitle("CheckedIn List");
+        toolbar.setTitle("CheckedOut List");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -72,7 +72,7 @@ public class CheckedOutActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if (item.getItemId() == android.R.id.home){
-            Intent intent = new Intent(CheckedOutActivity.this, MainActivity.class);
+            Intent intent = new Intent(CheckedOutActivity.this, Splash.class);
             startActivity(intent);
         }
         return  super.onOptionsItemSelected(item);

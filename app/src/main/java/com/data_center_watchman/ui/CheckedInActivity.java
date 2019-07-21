@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.data_center_watchman.R;
 import com.data_center_watchman.adapter.VisitorAdapter;
-import com.data_center_watchman.adapter.VisitorListAdapter;
+import com.data_center_watchman.service.VisitorListAdapter;
 import com.data_center_watchman.model.Visitor;
 import com.data_center_watchman.model.VisitorService;
 
@@ -72,7 +72,7 @@ public class CheckedInActivity extends AppCompatActivity {
         @Override
         public boolean onOptionsItemSelected(MenuItem item){
             if (item.getItemId() == android.R.id.home){
-                Intent intent = new Intent(CheckedInActivity.this, MainActivity.class);
+                Intent intent = new Intent(CheckedInActivity.this, Splash.class);
                 startActivity(intent);
             }
             return  super.onOptionsItemSelected(item);

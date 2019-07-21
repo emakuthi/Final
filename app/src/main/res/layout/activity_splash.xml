@@ -14,186 +14,181 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@mipmap/datacenter3">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/data_center_access_manager"
-                android:gravity="center_horizontal"
-                android:background="@drawable/button3d"
-                android:padding="10dp"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:textColor="#fff"/>
+            android:background="@mipmap/databanner">
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="130dp"
                 android:text="@string/send_request"
                 android:background="@drawable/button3d"
                 android:layout_marginStart="110dp"
                 android:id="@+id/sendRequest"
-                android:paddingTop="10dp"
+                android:paddingTop="15dp"
+                android:layout_marginBottom="20dp"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:textColor="#fff"
                 android:textSize="15sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-    <GridLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:alignmentMode="alignMargins"
-        android:columnCount="2"
-        android:layout_gravity="center"
-        android:columnOrderPreserved="false"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:rowCount="10">
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="20dp"
-            android:id="@+id/cardRequest"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="6dp">
-            <LinearLayout
-                android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#C4FFFFFF">
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:alignmentMode="alignMargins"
+            android:columnCount="2"
+            android:layout_gravity="center"
+            android:columnOrderPreserved="false"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:rowCount="10">
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="20dp"
+                android:id="@+id/cardRequest"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <ImageView
-                    android:id="@+id/profile_image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/request"
-                    android:contentDescription="@string/send_request" />
-                <TextView
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="@string/view_requests"/>
-            </LinearLayout>
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/imgRequest"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/request"
+                        android:contentDescription="@string/send_request" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/view_requests"/>
+                </LinearLayout>
 
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="20dp"
-            android:id="@+id/cardCheckedIn"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="6dp">
-            <LinearLayout
-                android:layout_width="match_parent"
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="20dp"
+                android:id="@+id/cardCheckedIn"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <ImageView
-                    android:id="@+id/profile_image2"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/signin"
-                    android:contentDescription="@string/common_signin_button_text" />
-                <TextView
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="@string/checkin_visitors"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </GridLayout>
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:alignmentMode="alignMargins"
-        android:columnCount="2"
-        android:layout_gravity="center"
-        android:columnOrderPreserved="false"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:rowCount="10">
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="20dp"
-            android:id="@+id/cardCheckout"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="6dp">
-            <LinearLayout
-                android:layout_width="match_parent"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/imgSignin"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/signin"
+                        android:contentDescription="@string/common_signin_button_text" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/checkin_visitors"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </GridLayout>
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:alignmentMode="alignMargins"
+            android:columnCount="2"
+            android:layout_gravity="center"
+            android:columnOrderPreserved="false"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:rowCount="10">
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="20dp"
+                android:id="@+id/cardCheckout"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <ImageView
-                    android:id="@+id/profile_image3"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/signout"
-                    />
-                <TextView
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/imgSignout"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/signout"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
-                    android:text="@string/checkout_visitors"
-                    android:padding="10dp"
-                    android:gravity="center"/>
+                        android:text="@string/checkout_visitors"
+                        android:padding="10dp"
+                        android:gravity="center"/>
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="20dp"
-            android:id="@+id/cardViewLogs"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="6dp">
-            <LinearLayout
-                android:layout_width="match_parent"
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="20dp"
+                android:id="@+id/cardViewLogs"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/profile_image4"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/logs"
-                    />
-                <TextView
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="@string/view_logs"
-                    android:gravity="center"/>
-            </LinearLayout>
+                    android:orientation="vertical">
 
-        </androidx.cardview.widget.CardView>
-    </GridLayout>
+                    <ImageView
+                        android:id="@+id/imgLogs"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/logs"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="@string/view_logs"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </GridLayout>
+    </LinearLayout>
 </LinearLayout>

@@ -14,7 +14,8 @@ import android.widget.Toast;
 
 import com.data_center_watchman.R;
 import com.data_center_watchman.adapter.VisitorAdapter;
-import com.data_center_watchman.adapter.VisitorListAdapter;
+import com.data_center_watchman.service.CheckInAdapter;
+import com.data_center_watchman.service.VisitorListAdapter;
 import com.data_center_watchman.model.Visitor;
 import com.data_center_watchman.model.VisitorService;
 
@@ -64,7 +65,7 @@ public class RequestsActivity extends AppCompatActivity {
     }
     private void generateVisitorsList(List<Visitor> visitorList){
         RecyclerView recyclerView = findViewById(R.id.resultsView);
-        VisitorListAdapter adapter = new VisitorListAdapter(this,visitorList);
+        CheckInAdapter adapter = new CheckInAdapter(this,visitorList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RequestsActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -72,9 +73,11 @@ public class RequestsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if (item.getItemId() == android.R.id.home){
-            Intent intent = new Intent(RequestsActivity.this, MainActivity.class);
+            Intent intent = new Intent(RequestsActivity.this, Splash.class);
             startActivity(intent);
         }
         return  super.onOptionsItemSelected(item);
     }
+
+
 }

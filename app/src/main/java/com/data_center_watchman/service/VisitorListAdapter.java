@@ -1,4 +1,4 @@
-package com.data_center_watchman.adapter;
+package com.data_center_watchman.service;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.data_center_watchman.R;
 import com.data_center_watchman.model.Visitor;
-import com.data_center_watchman.ui.VisitorDetailView;
+import com.data_center_watchman.ui.CheckoutView;
 
 import java.util.List;
 
@@ -47,13 +47,15 @@ public class VisitorListAdapter extends RecyclerView.Adapter<VisitorListAdapter.
         holder.idNumber.setText(visitorList.get(position).getIdNumber());
         holder.reason.setText(visitorList.get(position).getReason());
         holder.checkedIn.setText(visitorList.get(position).getTimeIn());
+        holder.checkedOut.setText(visitorList.get(position).getTimeOut());
         holder.company.setText(visitorList.get(position).getCompany());
+        holder.crqNumber.setText(visitorList.get(position).getCrqNumber());
         Animation animation = AnimationUtils.loadAnimation(mContext, android.R.anim.slide_in_left);
         holder.itemView.startAnimation(animation);
         holder.visitorDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, VisitorDetailView.class);
+                Intent intent = new Intent(mContext, CheckoutView.class);
                 intent.putExtra("fullName",visitorList.get(position).getFullName());
                 intent.putExtra("idNumber", visitorList.get(position).getIdNumber());
                 intent.putExtra("reason", visitorList.get(position).getReason());
@@ -76,7 +78,7 @@ public class VisitorListAdapter extends RecyclerView.Adapter<VisitorListAdapter.
     }
 
     public class VisitorViewHolder extends RecyclerView.ViewHolder {
-        TextView fullName, idNumber, reason, company, checkedIn,visitorDetail;
+        TextView fullName, idNumber, reason, company, checkedIn,visitorDetail, checkedOut, crqNumber;
 
         private VisitorViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -85,6 +87,8 @@ public class VisitorListAdapter extends RecyclerView.Adapter<VisitorListAdapter.
             reason = itemView.findViewById(R.id.reason_for_visit);
             company = itemView.findViewById(R.id.visitor_type);
             checkedIn = itemView.findViewById(R.id.checkedIn);
+            checkedOut = itemView.findViewById(R.id.checkedOut);
+            crqNumber = itemView.findViewById(R.id.crqNumber);
             visitorDetail= itemView.findViewById(R.id.visitorDetails);
 
         }

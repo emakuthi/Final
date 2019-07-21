@@ -7,23 +7,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.data_center_watchman.R;
 
 public class Splash extends AppCompatActivity {
-
-    CardView cardRequest, cardCheckIn,cardCheckedOut, allLogs;
     Button sendRequest;
+    ImageView imgReq, imgSout, imgSin, imgLog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        imgReq = findViewById(R.id.imgRequest);
+        imgSin = findViewById(R.id.imgSignin);
+        imgSout = findViewById(R.id.imgSignout);
+        imgLog = findViewById(R.id.imgLogs);
 
-        cardCheckIn = findViewById(R.id.cardCheckedIn);
-        cardCheckedOut = findViewById(R.id.cardCheckout);
-        cardRequest = findViewById(R.id.cardRequest);
-        allLogs = findViewById(R.id.cardViewLogs);
         sendRequest = findViewById(R.id.sendRequest);
 
         sendRequest.setOnClickListener(new View.OnClickListener() {
@@ -35,7 +35,7 @@ public class Splash extends AppCompatActivity {
             }
         });
 
-        cardRequest.setOnClickListener(new View.OnClickListener() {
+        imgReq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Splash.this, RequestsActivity.class);
@@ -44,7 +44,7 @@ public class Splash extends AppCompatActivity {
 
             }
         });
-        cardCheckIn.setOnClickListener(new View.OnClickListener() {
+        imgSin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Splash.this, CheckedInActivity.class);
@@ -53,7 +53,7 @@ public class Splash extends AppCompatActivity {
 
             }
         });
-        cardCheckedOut.setOnClickListener(new View.OnClickListener() {
+        imgSout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Splash.this, CheckedOutActivity.class);
@@ -62,10 +62,10 @@ public class Splash extends AppCompatActivity {
 
             }
         });
-        allLogs.setOnClickListener(new View.OnClickListener() {
+        imgLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Splash.this, VisitorList.class);
+                Intent intent = new Intent(Splash.this, AllLogsActivity.class);
 
                 startActivity(intent);
 

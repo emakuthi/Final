@@ -1,7 +1,11 @@
 package com.data_center_watchman.ui;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,14 +24,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class VisitorDetailView extends AppCompatActivity {
+public class CheckoutView extends AppCompatActivity {
     Button btnCheckout;
     Visitor checkoutVisitor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_visitor_detail_view);
+        setContentView(R.layout.checkoutview);
         btnCheckout = findViewById(R.id.SignOutVisitor);
         checkoutVisitor = getIncomingIntent();
         btnCheckout.setOnClickListener(new View.OnClickListener() {
@@ -84,20 +88,43 @@ public class VisitorDetailView extends AppCompatActivity {
         VisitorAdapter adapter = retrofit.create(VisitorAdapter.class);
 
         Call<Visitor> call = adapter.checkout(visitor);
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(CheckoutView.this);
+        progressDialog.setMessage("Updating Time out.Please Wait.......");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
 
         call.enqueue(new Callback<Visitor>() {
             @Override
             public void onResponse(Call<Visitor> call, Response<Visitor> response) {
-                Toast.makeText(VisitorDetailView.this, "successfully updated! User-ID: " + response.body().getId(), Toast.LENGTH_SHORT).show();
-
+                AlertDialog.Builder builder = new AlertDialog.Builder(CheckoutView.this);
+                builder.setMessage("Visitor Checked out, Successfully\n\nDo you want to checkout another visitor?").setCancelable(false)
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                               Intent intent = new Intent(CheckoutView.this, CheckedInActivity.class);
+                               startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(CheckoutView.this, Splash.class);
+                                startActivity(intent);
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.setTitle("CHECK OUT");
+                alert.show();
             }
 
             @Override
             public void onFailure(Call<Visitor> call, Throwable t) {
-                Toast.makeText(VisitorDetailView.this, "creation failed!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CheckoutView.this, "creation failed!", Toast.LENGTH_SHORT).show();
 
             }
         });
+
     }
 
 }

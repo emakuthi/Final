@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.data_center_watchman.R;
 import com.data_center_watchman.adapter.VisitorAdapter;
-import com.data_center_watchman.adapter.VisitorListAdapter;
+import com.data_center_watchman.service.VisitorListAdapter;
 import com.data_center_watchman.model.Visitor;
 import com.data_center_watchman.model.VisitorService;
 import java.util.List;
@@ -22,7 +22,7 @@ import retrofit2.Response;
 
 
 
-public class VisitorList extends AppCompatActivity {
+public class AllLogsActivity extends AppCompatActivity {
     private List<Visitor> visitors;
     Toolbar toolbar;
     VisitorAdapter adapter;
@@ -38,7 +38,7 @@ public class VisitorList extends AppCompatActivity {
         adapter = VisitorService.getRetrofitInstance().create(VisitorAdapter.class);
         Call<List<Visitor>> call = adapter.getAll();
         final ProgressDialog progressDialog;
-        progressDialog = new ProgressDialog(VisitorList.this);
+        progressDialog = new ProgressDialog(AllLogsActivity.this);
         progressDialog.setMessage("Loading.Please Wait.......");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
@@ -54,7 +54,7 @@ public class VisitorList extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<List<Visitor>> call, Throwable t) {
-                Toast.makeText(VisitorList.this, "Something went wrong......try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AllLogsActivity.this, "Something went wrong......try again", Toast.LENGTH_SHORT).show();
                 Log.d("Test", t.toString());
                 progressDialog.dismiss();
             }
@@ -63,14 +63,14 @@ public class VisitorList extends AppCompatActivity {
     private void generateVisitorsList(List<Visitor> visitorList){
         RecyclerView recyclerView = findViewById(R.id.resultsView);
         VisitorListAdapter adapter = new VisitorListAdapter(this,visitorList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(VisitorList.this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(AllLogsActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if (item.getItemId() == android.R.id.home){
-            Intent intent = new Intent(VisitorList.this, MainActivity.class);
+            Intent intent = new Intent(AllLogsActivity.this, Splash.class);
             startActivity(intent);
         }
         return  super.onOptionsItemSelected(item);

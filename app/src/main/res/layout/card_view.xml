@@ -9,108 +9,141 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="5dp"
     app:cardUseCompatPadding="true">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="228dp"
         android:layout_margin="5dp"
         android:orientation="horizontal"
         android:padding="5dp">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:text="@string/name"
                 android:textAlignment="textEnd"
-                android:padding="5dp"
-                android:textColor="#000"/>
+                android:textColor="#000" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:text="@string/category"
                 android:textAlignment="textEnd"
-                android:padding="5dp"
-                android:textColor="#000"/>
+                android:textColor="#000" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:text="@string/idno_ekno"
                 android:textAlignment="textEnd"
-                android:padding="5dp"
-                android:textColor="#000"/>
+                android:textColor="#000" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="@string/reason"
                 android:textAlignment="textEnd"
-                android:textColor="#000"/>
+                android:textColor="#000" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:textAlignment="textEnd"
-                android:text="@string/check_in_time"
-                android:textColor="#000"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:textAlignment="textEnd"
                 android:text="@string/work_order_number"
-                android:textColor="#000"/>
+                android:textAlignment="textEnd"
+                android:textColor="#000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/check_in_time"
+                android:textAlignment="textEnd"
+                android:textColor="#000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/check_out_time"
+                android:textAlignment="textEnd"
+                android:textColor="#000" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/visitor_Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:padding="3dp"
-                android:textSize="18sp"
-                android:textColor="#000"/>
+                android:textColor="#000"
+                android:textSize="18sp" />
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:padding="5dp"
                 android:id="@+id/visitor_type"
-                android:textColor="#000"/>
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:padding="5dp"
+                android:textColor="#000"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/idnumber"
-                android:textColor="#000"/>
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:padding="5dp"
+                android:textColor="#000"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/reason_for_visit"
-                android:textColor="#000"/>
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:padding="5dp"
-                android:text="27-december-2017"
-                android:id="@+id/checkedIn"
-                android:textColor="#000"/>
+                android:textColor="#000"
+                android:textStyle="bold" />
+
             <TextView
+                android:id="@+id/crqNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:padding="5dp"
                 android:text=""
-                android:id="@+id/crqNumber"
-                android:textColor="#000"/>
+                android:textColor="#000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/checkedIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text=""
+                android:textColor="#000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/checkedOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text=""
+                android:textColor="#000"
+                android:textStyle="bold" />
+
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
