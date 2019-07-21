@@ -1,7 +1,10 @@
 package com.data_center_watchman.ui;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -37,6 +40,7 @@ public class AllLogsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         adapter = VisitorService.getRetrofitInstance().create(VisitorAdapter.class);
         Call<List<Visitor>> call = adapter.getAll();
+        isOnline();
         final ProgressDialog progressDialog;
         progressDialog = new ProgressDialog(AllLogsActivity.this);
         progressDialog.setMessage("Loading.Please Wait.......");
@@ -74,6 +78,16 @@ public class AllLogsActivity extends AppCompatActivity {
             startActivity(intent);
         }
         return  super.onOptionsItemSelected(item);
+    }
+    public boolean isOnline() {
+        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+
+        if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+            Toast.makeText(AllLogsActivity.this, "No Internet connection!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
 }
