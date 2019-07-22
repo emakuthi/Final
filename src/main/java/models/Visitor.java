@@ -1,6 +1,7 @@
 package models;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -16,7 +17,6 @@ public class Visitor {
     private Timestamp timeIn;
     private Timestamp timeOut;
 
-
     public Visitor(String fullName, String company, String idNumber, String phonenumber, String location, String crqNumber,  String reason) {
         this.fullName = fullName;
         this.idNumber = idNumber;
@@ -25,7 +25,8 @@ public class Visitor {
         this.phonenumber = phonenumber;
         this.location = location;
         this.reason = reason;
-
+        this.timeIn = Timestamp.valueOf(LocalDateTime.now());
+        this.timeOut = Timestamp.valueOf(LocalDateTime.now());
 
     }
     public int getId() { return id; }

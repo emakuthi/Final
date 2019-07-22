@@ -1,1 +1,1 @@
-web: ./build/install/data-center-access-portal/bin/data-center-access-portal
+web: ./build/install/mlinzi-project/bin/mlinzi-project

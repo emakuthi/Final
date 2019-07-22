@@ -1,63 +1,66 @@
 {{#partial "content"}}
-    <div >
-        <p>{{coarses.coarse_name}}</p>
-        <p>{{coarses.description}}</p>
-        <p>{{coarses.duration}}</p>
-
-
-        <a class="btn btn-warning btn-sm" href="/coarses/{{coarses.id}}/edit">edit Coarse</a>
-        <a class="btn btn-warning btn-sm" href="/coarses/{{coarses.id}}/content/{{content.id}}">View Content</a>
-        <a class="btn btn-warning btn-sm" href="/subcourses">Add Coarse Units</a>
-    </div>
-
-    <p>Vistor Details</p>
 
     <div>
-        Vistor Details
+        <h2>Visitor Details</h2>
     </div>
 
+    {{#if logs}}
+        <p>Please find details of {{visitor.name}} in the table below.</p>
+    {{else}}
+        <p>Click <a href="/visitors">here</a> to add a visitor.</p>
+    {{/if}}
+
     <div class="row">
-        <div class="col-sm-8">
-            <table class="table">
+        <div class="col-md-8">
+            <table class="table table-bordered table-hover">
                 <thead>
-                <tr>
+                <tr class="bg-info text-white">
                     <th scope="col">No.</th>
-                    <th scope="col">staff name</th>
-                    <th scope="col">staff number</th>
+                    <th scope="col">Visitor's name</th>
+                    <th scope="col">ID No.</th>
+                    <th scope="col">Time in</th>
+                    <th scope="col">Time out</th>
 
                 </tr>
                 </thead>
-                {{#if staff}}
-                    {{#each staff}}
+
                         <tbody>
-                        <tr>
-                            <td></td>
-                            <td>{{name}}</td>
-                            <td>{{ekNumber}}</td>
+                        <tr class="">
+
+                            <td>{{visitor.id}}</td>
+                            <td>{{visitor.fullName}}</td>
+                            <td>{{visitor.idNumber}}</td>
+                            <td>{{visitor.timeIn}}</td>
+                            <td>{{visitor.timeOut}}</td>
+
+
                         </tr>
                         </tbody>
-                    {{/each}}
-                {{else}}
-                    <div >
-                        <p>No records</p>
-                    </div>
-                {{/if}}
             </table>
-        </div>
-        <div class="col-sm-4">
-            {{#if content}}
-                {{#each contents}}
-                    <p>{{content.content}}</p>
-                {{/each}}
-            {{/if}}
-        </div>
-    </div>
-    <div class="card-footer">
 
-        <a class="btn btn-warning btn-sm" href="/coarses/{{editCoarse.id}}/edit">edit Coarse</a>
-        <a class="btn btn-warning btn-sm" href="/staff/{{staff.id}}/edit">edit Site</a>
-        <a class="btn btn-warning btn-sm" href="/coarses/{{staff.coarseid}}/staff/{{staff.id}}/delete">delete</a>
+        </div>
+
     </div>
+
+        <div class="row">
+            <div class="column col-md-4">
+                <form action="/visitor/{{visitor.id}}"  method="post">
+                    <button type="submit" class="btn btn-success btn-sm">CHECK OUT</button>
+                </form>
+            </div>
+
+        <div class="column col-md-4">
+            <form action="/visitor/{{visitor.id}}"  method="post">
+                <button type="submit" class="btn btn-warning btn-sm" href="/">CHECK IN</button>
+            </form>
+        </div>
+
+        </div>
+
+        </div>
+
+
+
 
 {{/partial}}
 

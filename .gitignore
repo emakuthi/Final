@@ -90,3 +90,4 @@ build/
 gradle/
 gradlew*
 settings.gradle
+!gradle-wrapper.jar

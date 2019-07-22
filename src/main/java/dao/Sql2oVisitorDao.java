@@ -3,7 +3,7 @@ import models.Visitor;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
-
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Sql2oVisitorDao implements VisitorDao {
@@ -11,9 +11,9 @@ public class Sql2oVisitorDao implements VisitorDao {
     private final Sql2o sql2o;
 
     public Sql2oVisitorDao(Sql2o sql2o) {
+
         this.sql2o = sql2o;
     }
-
     @Override
     public List<Visitor> getAll() {
         try(Connection con = DB.sql2o.open()){
@@ -24,10 +24,34 @@ public class Sql2oVisitorDao implements VisitorDao {
     }
 
     @Override
-    public void add(Visitor visitor) {
-        String sql = "INSERT INTO logs (fullName, company, idNumber, phoneNumber, location, crqNumber, reason, timeIn) " +
-                "VALUES (:fullName,:company, :idNumber, :phonenumber, :location, :crqNumber, :reason, now());";
+    public List<Visitor> getAllRequests() {
+        try(Connection con = DB.sql2o.open()){
+            return con.createQuery("SELECT * FROM logs WHERE timeIn is null")
+                    .throwOnMappingFailure(false)
+                    .executeAndFetch(Visitor.class);
+        }
+    }
+    @Override
+    public List<Visitor> getAllCheckedIn() {
+        try(Connection con = DB.sql2o.open()){
+            return con.createQuery("SELECT * FROM logs WHERE timeOut is null and timeIn is not null")
+                    .throwOnMappingFailure(false)
+                    .executeAndFetch(Visitor.class);
+        }
+    }
 
+    @Override
+    public List<Visitor> getAllCheckedOut() {
+        try(Connection con = DB.sql2o.open()){
+            return con.createQuery("SELECT * FROM logs WHERE timeOut is not null")
+                    .throwOnMappingFailure(false)
+                    .executeAndFetch(Visitor.class);
+        }
+    }
+    @Override
+    public void add(Visitor visitor) {
+        String sql = "INSERT INTO logs (fullName, company, idNumber, phoneNumber, location, crqNumber, reason, timeIn, timeOut) " +
+                "VALUES (:fullName,:company, :idNumber, :phonenumber, :location, :crqNumber, :reason, null, null);";
         try(Connection con = DB.sql2o.open()){
             int id = (int) con.createQuery(sql, true)
                     .bind(visitor)
@@ -38,7 +62,6 @@ public class Sql2oVisitorDao implements VisitorDao {
         } catch (Sql2oException ex) {
             System.out.println();
         }
-
     }
     @Override
     public Visitor findById(int id) {
@@ -49,4 +72,27 @@ public class Sql2oVisitorDao implements VisitorDao {
                     .executeAndFetchFirst(Visitor.class);
         }
     }
+    @Override
+    public void updateTimeOut(int id,Timestamp newtime) {
+        String sql = "UPDATE logs SET timeOut = now() WHERE id = :id";
+        try(Connection con = DB.sql2o.open()){
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        }catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+    }
+    @Override
+    public void updateTimeIn(int id,Timestamp newtime) {
+        String sql = "UPDATE logs SET timeIn = now() WHERE id = :id";
+        try(Connection con = DB.sql2o.open()){
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        }catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+    }
+
 }
