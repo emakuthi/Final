@@ -32,7 +32,7 @@ public class Splash extends AppCompatActivity {
         sendRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Splash.this, MainActivity.class);
+                Intent intent = new Intent(Splash.this, ValidateCrq.class);
                 startActivity(intent);
 
             }

@@ -1,52 +1,70 @@
 package com.data_center_watchman.ui;
 
-import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.data_center_watchman.Constants;
 import com.data_center_watchman.R;
 import com.data_center_watchman.adapter.VisitorAdapter;
 import com.data_center_watchman.model.OauthToken;
 import com.data_center_watchman.model.Remedy;
 import com.data_center_watchman.model.RemedyService;
-import com.data_center_watchman.model.Visitor;
-import com.data_center_watchman.model.VisitorService;
 import com.data_center_watchman.test.ApiUtils;
-import com.data_center_watchman.test.Crq;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
-import java.io.IOException;
-import java.util.List;
-
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ValidateCrq extends AppCompatActivity {
-
+    TextInputLayout crqInput;
     VisitorAdapter adapter;
+    TextView rFname, rLname, summary, approval, status, reason;
+    TextInputEditText crqCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_validate_crq);
         Button btn = findViewById(R.id.btnValidate);
+        crqInput = findViewById(R.id.crqInput);
+        crqCheck = findViewById(R.id.crqCheck);
+        rFname = findViewById(R.id.rFname);
+        rLname = findViewById(R.id.rLname);
+        summary = findViewById(R.id.summary);
+        approval = findViewById(R.id.approval);
+        status = findViewById(R.id.status);
+        reason = findViewById(R.id.crqReason);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                if(!validateCrq()){
+//
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(ValidateCrq.this);
+//                    builder.setMessage("please enter your crq number as 1234...").setCancelable(false)
+//                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialogInterface, int i) {
+//                                    finish();
+//                                }
+//                            });
+//                    AlertDialog alert = builder.create();
+//                    alert.setTitle("ERROR INFO");
+//                    alert.show();
+//                }
                 authenticate();
+
             }
         });
 
@@ -63,7 +81,7 @@ public class ValidateCrq extends AppCompatActivity {
                         Log.i(ValidateCrq.class.getSimpleName(), response.body().getToken());
                         token=response.body().getToken();
 
-                        Crq crq = new Crq("CRQ000000369301");
+//                        Crq crq = new Crq("CRQ000000369301");
 
                         getCrq();
 
@@ -79,23 +97,47 @@ public class ValidateCrq extends AppCompatActivity {
         });
     }
     public void getCrq() {
+       final String crq = crqInput.getEditText().getText().toString();
         adapter = RemedyService.getRemedyService().create(VisitorAdapter.class);
-        Call<Remedy> call = adapter.getStatus("CRQ000000369301");
+        Call<Remedy> call = adapter.getStatus("CRQ000000"+crq);
         call.enqueue(new Callback<Remedy>() {
             @Override
             public void onResponse(Call<Remedy> call, Response<Remedy> response) {
                 Log.d("Test", response.body().getRequestStatus());
+                rFname.setText(response.body().getFirstName());
+                rLname.setText(response.body().getLastName());
+                summary.setText(response.body().getSummary());
+                status.setText(response.body().getRequestStatus());
+                approval.setText(response.body().getApprovalPahse());
+                reason.setText(response.body().getReasonForChange());
+                Intent intent = new Intent(ValidateCrq.this, MainActivity.class);
+                intent.putExtra("crqNumber",crq);
+                startActivity(intent);
             }
             @Override
             public void onFailure(Call<Remedy> call, Throwable t) {
                 Toast.makeText(ValidateCrq.this, "Something went wrong......try again", Toast.LENGTH_SHORT).show();
                 Log.d("Test", t.toString());
             }
+
+
         });
-
     }
+    private  boolean validateCrq(){
+        String crqNumber = crqInput.getEditText().getText().toString().trim();
 
-
+        if(crqNumber .isEmpty()){
+            crqInput.setError("Field can't be empty");
+            return false;
+        }else if(crqNumber .length() > 8){
+            crqInput.setError("The work order number is too long");
+            return false;
+        }else{
+            crqInput.setError(null);
+            crqInput.setErrorEnabled(false);
+            return true;
+        }
+    }
 
 
 }
