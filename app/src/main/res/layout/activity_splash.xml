@@ -69,7 +69,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:scaleType="fitXY"
-                        android:src="@mipmap/request"
+                        android:src="@mipmap/send"
                         android:contentDescription="@string/send_request" />
                     <TextView
                         android:layout_width="match_parent"

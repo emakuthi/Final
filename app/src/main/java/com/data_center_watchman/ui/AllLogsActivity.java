@@ -27,8 +27,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-
 public class AllLogsActivity extends AppCompatActivity {
     private List<Visitor> visitors;
     Toolbar toolbar;
@@ -60,6 +58,7 @@ public class AllLogsActivity extends AppCompatActivity {
                 Log.d("Test", response.body().toString());
 
                 generateVisitorsList(response.body());
+
                 progressDialog.dismiss();
             }
             @Override

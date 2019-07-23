@@ -30,8 +30,7 @@ public interface VisitorAdapter {
     @POST("checkout")
     Call<Visitor> checkout(@Body Visitor visitor);
     @POST("crqtestapi/crqQuery")
-    @FormUrlEncoded
-    Call<Remedy> getStatus(@Field("CRQNumber") String crq);
+    Call<Remedy> getStatus(@Body Crq crq);
     @GET("oauth/v1/generate?grant_type=client_credentials")
     Call<OauthToken> getToken();
 }
