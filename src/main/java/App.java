@@ -25,6 +25,12 @@ public class App {
         }
         port(port);
 
+
+        get("/home", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "home.hbs");
+        }, new HandlebarsTemplateEngine());
+
 //        get: show new visitor form
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
