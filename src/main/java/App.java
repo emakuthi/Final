@@ -72,7 +72,7 @@ public class App {
             int idOfVisitorToFind = Integer.parseInt(request.params("id"));
             Visitor foundVisitor = visitorDao.findById(idOfVisitorToFind);
             model.put("visitor", foundVisitor);   //add it to model for template to display
-            return new ModelAndView(model, "visitor_details");  //individual post page.
+            return new ModelAndView(model, "visitor_details.hbs");  //individual post page.
         }, new HandlebarsTemplateEngine());
 
         //checkin Visitor
