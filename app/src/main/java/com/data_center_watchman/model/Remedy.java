@@ -4,9 +4,12 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Remedy {
-    @SerializedName("ApprovalPhase")
+    @SerializedName("ResponseRefId")
     @Expose
-    private String approvalPhase;
+    private String responseRefId;
+    @SerializedName("ApprovalPahse")
+    @Expose
+    private String approvalPahse;
     @SerializedName("RequestStatus")
     @Expose
     private String requestStatus;
@@ -21,23 +24,22 @@ public class Remedy {
     private String lastName;
     @SerializedName("Reason For Change")
     @Expose
-    private String reasonChange;
+    private String reasonForChange;
 
-    public Remedy(String approvalPhase, String requestStatus, String summary, String firstName, String lastName, String reasonChange) {
-        this.approvalPhase = approvalPhase;
-        this.requestStatus = requestStatus;
-        this.summary = summary;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.reasonChange = reasonChange;
+    public String getResponseRefId() {
+        return responseRefId;
     }
 
-    public String getApprovalPhase() {
-        return approvalPhase;
+    public void setResponseRefId(String responseRefId) {
+        this.responseRefId = responseRefId;
     }
 
-    public void setApprovalPhase(String approvalPhase) {
-        this.approvalPhase = approvalPhase;
+    public String getApprovalPahse() {
+        return approvalPahse;
+    }
+
+    public void setApprovalPahse(String approvalPahse) {
+        this.approvalPahse = approvalPahse;
     }
 
     public String getRequestStatus() {
@@ -72,11 +74,11 @@ public class Remedy {
         this.lastName = lastName;
     }
 
-    public String getReasonChange() {
-        return reasonChange;
+    public String getReasonForChange() {
+        return reasonForChange;
     }
 
-    public void setReasonChange(String reasonChange) {
-        this.reasonChange = reasonChange;
+    public void setReasonForChange(String reasonForChange) {
+        this.reasonForChange = reasonForChange;
     }
 }
