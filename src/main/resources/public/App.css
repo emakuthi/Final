@@ -192,6 +192,7 @@
 .header {
   padding: 10px 16px;
   background: rgba(98,125,77,1);
+  background-image: url("assets/images/mainbg.jpeg");
   color: #f1f1f1;
   text-align: center;
 
@@ -205,9 +206,14 @@ body {
   background-color: palegoldenrod
 
 }
+#myHeader{
+  height: fit-content;
+}
+
 
 .footer {
   background: lightgreen;
+  color: #FFFFFF;
 }
 
 /*!* Page content *!*/

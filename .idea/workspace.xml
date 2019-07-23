@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="63aa0ef3-2c19-4e27-abf9-b29ce8920024" name="Default Changelist" comment="worked on the visitor's details page.">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/About.hbs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/home.hbs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/landing.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="63aa0ef3-2c19-4e27-abf9-b29ce8920024" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/layout.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/layout.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/App.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -61,20 +55,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/public/App.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="94">
-              <caret line="214" column="16" lean-forward="true" selection-start-line="214" selection-start-column="16" selection-end-line="214" selection-end-column="16" />
+            <state relative-caret-position="252">
+              <caret line="215" column="17" selection-start-line="215" selection-start-column="17" selection-end-line="215" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/layout.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="35" lean-forward="true" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+            <state relative-caret-position="48">
+              <caret line="62" column="41" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -82,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/public/assets/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="19" column="15" lean-forward="true" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+            <state relative-caret-position="204">
+              <caret line="24" column="15" lean-forward="true" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -120,6 +114,9 @@
       <find>visito</find>
       <find>visi</find>
       <find>/css/bootstrap-theme.m</find>
+      <find>/css</find>
+      <find>myH</find>
+      <find>car</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -128,7 +125,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/public/App.css" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/asset.hbs" />
         <option value="$PROJECT_DIR$/src/main/java/models/Assets.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/AssetDao.java" />
@@ -155,6 +151,7 @@
         <option value="$PROJECT_DIR$/src/main/java/App.java" />
         <option value="$PROJECT_DIR$/src/main/resources/public/assets/css/style.css" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/layout.hbs" />
+        <option value="$PROJECT_DIR$/src/main/resources/public/App.css" />
       </list>
     </option>
   </component>
@@ -179,25 +176,25 @@
             <path>
               <item name="dataCenterAccess" type="58d84e3e:PackageViewProjectNode" />
               <item name="dataCenterAccess" type="eaaa3913:PackageViewModuleGroupNode" />
-              <item name="dataCenterAccess.main" type="616d4139:PackageViewModuleNode" />
+              <item name="dataCenterAccess.test" type="616d4139:PackageViewModuleNode" />
             </path>
             <path>
               <item name="dataCenterAccess" type="58d84e3e:PackageViewProjectNode" />
               <item name="dataCenterAccess" type="eaaa3913:PackageViewModuleGroupNode" />
-              <item name="dataCenterAccess.main" type="616d4139:PackageViewModuleNode" />
+              <item name="dataCenterAccess.test" type="616d4139:PackageViewModuleNode" />
+              <item name="dao" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="dataCenterAccess" type="58d84e3e:PackageViewProjectNode" />
+              <item name="dataCenterAccess" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="dataCenterAccess.test" type="616d4139:PackageViewModuleNode" />
               <item name="models" type="1f31426a:PackageElementNode" />
             </path>
             <path>
               <item name="dataCenterAccess" type="58d84e3e:PackageViewProjectNode" />
               <item name="dataCenterAccess" type="eaaa3913:PackageViewModuleGroupNode" />
-              <item name="dataCenterAccess.main" type="616d4139:PackageViewModuleNode" />
-              <item name="public" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="dataCenterAccess" type="58d84e3e:PackageViewProjectNode" />
-              <item name="dataCenterAccess" type="eaaa3913:PackageViewModuleGroupNode" />
-              <item name="dataCenterAccess.main" type="616d4139:PackageViewModuleNode" />
-              <item name="templates" type="1f31426a:PackageElementNode" />
+              <item name="dataCenterAccess.test" type="616d4139:PackageViewModuleNode" />
+              <item name="Libraries" type="5c3f07af:PackageViewLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -369,7 +366,7 @@
       <workItem from="1563682632879" duration="1100000" />
       <workItem from="1563738500737" duration="571000" />
       <workItem from="1563779731011" duration="22076000" />
-      <workItem from="1563853605123" duration="7588000" />
+      <workItem from="1563853605123" duration="10074000" />
     </task>
     <task id="LOCAL-00001" summary="formatted the layout (header) and the table to pick visitor's serial id.">
       <created>1563079104393</created>
@@ -434,11 +431,18 @@
       <option name="project" value="LOCAL" />
       <updated>1563801607959</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="modified the layout and added an about-us page.">
+      <created>1563887972330</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1563887972331</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78129000" />
+    <option name="totallyTimeSpent" value="80615000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -529,7 +533,8 @@
     <MESSAGE value="added the SqlDao for asset class." />
     <MESSAGE value="added the get and post methods for assets." />
     <MESSAGE value="worked on the visitor's details page." />
-    <option name="LAST_COMMIT_MESSAGE" value="worked on the visitor's details page." />
+    <MESSAGE value="modified the layout and added an about-us page." />
+    <option name="LAST_COMMIT_MESSAGE" value="modified the layout and added an about-us page." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/dataCenterAccess$final2.ic" NAME="final2 Coverage Results" MODIFIED="1563049374816" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
@@ -745,24 +750,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/public/App.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="214" column="16" lean-forward="true" selection-start-line="214" selection-start-column="16" selection-end-line="214" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/public/assets/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="19" column="15" lean-forward="true" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+        <state relative-caret-position="204">
+          <caret line="24" column="15" lean-forward="true" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/layout.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="35" lean-forward="true" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+        <state relative-caret-position="48">
+          <caret line="62" column="41" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/public/App.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="215" column="17" selection-start-line="215" selection-start-column="17" selection-end-line="215" selection-end-column="17" />
         </state>
       </provider>
     </entry>
