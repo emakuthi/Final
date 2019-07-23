@@ -26,13 +26,13 @@ public class App {
         port(port);
 
 
-        get("/home", (req, res) -> {
+        get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             return new ModelAndView(model, "home.hbs");
         }, new HandlebarsTemplateEngine());
 
 //        get: show new visitor form
-        get("/", (req, res) -> {
+        get("/home", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Visitor> visitors = visitorDao.getAll();
             model.put("logs", visitors);
@@ -60,7 +60,7 @@ public class App {
             Visitor newVisitor = new Visitor(fullName, company, idNumber,phoneNumber,location,crqNumber,reason);
             visitorDao.add(newVisitor);
             model.put("logs", allVisitor);
-            res.redirect("/");
+            res.redirect("/home");
 
             return null;
         }, new HandlebarsTemplateEngine());
