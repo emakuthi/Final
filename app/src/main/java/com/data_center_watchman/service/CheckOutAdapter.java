@@ -43,6 +43,7 @@ public class CheckOutAdapter extends RecyclerView.Adapter<CheckOutAdapter.CheckO
         holder.reason.setText(checkOutList.get(position).getReason());
         holder.checkedIn.setText(checkOutList.get(position).getTimeIn());
         holder.company.setText(checkOutList.get(position).getCompany());
+        holder.crqNumber.setText(checkOutList.get(position).getCrqNumber());
         Animation animation = AnimationUtils.loadAnimation(mContext, android.R.anim.slide_in_left);
         holder.itemView.startAnimation(animation);
         holder.visitorDetail.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +71,7 @@ public class CheckOutAdapter extends RecyclerView.Adapter<CheckOutAdapter.CheckO
 
     public class CheckOutViewHolder extends RecyclerView.ViewHolder{
 
-        TextView fullName, idNumber, reason, company, checkedIn,visitorDetail, checkedOut;
+        TextView fullName, idNumber, reason, company, checkedIn,visitorDetail, checkedOut,crqNumber;
 
         private CheckOutViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +79,7 @@ public class CheckOutAdapter extends RecyclerView.Adapter<CheckOutAdapter.CheckO
             idNumber = itemView.findViewById(R.id.idnumber);
             reason = itemView.findViewById(R.id.reason_for_visit);
             company = itemView.findViewById(R.id.visitor_type);
+            crqNumber = itemView.findViewById(R.id.crqNumber);
             checkedIn = itemView.findViewById(R.id.checkedIn);
             checkedOut = itemView.findViewById(R.id.checkedOut);
             visitorDetail= itemView.findViewById(R.id.visitorDetails);

@@ -23,9 +23,7 @@ public class VisitorService {
         if(retrofit == null){
 
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-
             httpClient.addInterceptor(new Interceptor(){
-
                 @Override
                 public Response intercept(Chain chain) throws IOException {
 

@@ -48,8 +48,7 @@ public class CheckinView extends AppCompatActivity {
     }
     private Visitor getIncomingIntent(){
         if(getIntent().hasExtra("fullName") && getIntent().hasExtra("idNumber") && getIntent().hasExtra("company")
-                && getIntent().hasExtra("company")  && getIntent().hasExtra("reason")&& getIntent().hasExtra("crqNumber")
-                && getIntent().hasExtra("location")&&getIntent().hasExtra("id")){
+                && getIntent().hasExtra("reason")&& getIntent().hasExtra("crqNumber") && getIntent().hasExtra("location")&&getIntent().hasExtra("id")){
             String fullName = getIntent().getStringExtra("fullName");
             Integer id = getIntent().getIntExtra("id", 0);
             String idNumber = getIntent().getStringExtra("idNumber");
@@ -105,6 +104,7 @@ public class CheckinView extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent(CheckinView.this, RequestsActivity.class);
                                 startActivity(intent);
+                                finish();
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
