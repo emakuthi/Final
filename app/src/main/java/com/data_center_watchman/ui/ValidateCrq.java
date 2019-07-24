@@ -115,10 +115,24 @@ public class ValidateCrq extends AppCompatActivity {
                 intent.putExtra("crqNumber",crq);
                 startActivity(intent);
             }else{
-
-
-                    Intent intent = new Intent(ValidateCrq.this, Splash.class);
-                    startActivity(intent);
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(ValidateCrq.this);
+                    builder.setMessage("Kindly Enter a Correct CRQ Number").setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    builder.getContext();
+                                }
+                            })
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent intent = new Intent(ValidateCrq.this, Splash.class);
+                                    startActivity(intent);
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.setTitle("ERR");
+                    alert.show();
                 }
             }
             @Override
