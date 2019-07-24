@@ -67,7 +67,7 @@
             android:textAlignment="textEnd"
             android:textAllCaps="true"
             android:layout_gravity="end"
-            android:text="@string/check_in_time"/>
+            android:text="@string/visitor_type"/>
         <TextView
             android:id="@+id/tv3"
             android:layout_width="match_parent"
@@ -165,7 +165,8 @@
             android:textAlignment="textEnd"
             android:textAllCaps="true"
             android:layout_gravity="end"
-            android:text="@string/visitor_type"/>
+            android:text="@string/check_in_time"/>
+
         <TextView
             android:id="@+id/tv7"
             android:layout_width="match_parent"
