@@ -103,6 +103,7 @@ public class ValidateCrq extends AppCompatActivity {
         call.enqueue(new Callback<Remedy>() {
             @Override
             public void onResponse(Call<Remedy> call, Response<Remedy> response) {
+                if(response.isSuccessful()){
                 Log.d("Test", response.body().getRequestStatus());
                 rFname.setText(response.body().getFirstName());
                 rLname.setText(response.body().getLastName());
@@ -113,14 +114,20 @@ public class ValidateCrq extends AppCompatActivity {
                 Intent intent = new Intent(ValidateCrq.this, MainActivity.class);
                 intent.putExtra("crqNumber",crq);
                 startActivity(intent);
+            }else{
+
+
+                    Intent intent = new Intent(ValidateCrq.this, Splash.class);
+                    startActivity(intent);
+                }
             }
             @Override
             public void onFailure(Call<Remedy> call, Throwable t) {
                 Toast.makeText(ValidateCrq.this, "Something went wrong......try again", Toast.LENGTH_SHORT).show();
                 Log.d("Test", t.toString());
+                Intent intent = new Intent(ValidateCrq.this, Splash.class);
+                startActivity(intent);
             }
-
-
         });
     }
     private  boolean validateCrq(){

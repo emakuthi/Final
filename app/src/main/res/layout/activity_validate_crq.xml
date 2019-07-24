@@ -30,7 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/crq_number"
-
             android:id="@+id/crqCheck"
             android:inputType="number"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -89,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="Request Status"
+                android:text="@string/request_status"
                 android:textAlignment="textEnd"
                 android:textColor="#000" />
 
@@ -97,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="Reason For Change"
+                android:text="@string/reason_for_change"
                 android:textAlignment="textEnd"
                 android:textColor="#000" />
         </LinearLayout>
@@ -106,7 +105,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <TextView
                 android:id="@+id/rFname"
                 android:layout_width="match_parent"
@@ -122,7 +120,6 @@
                 android:padding="5dp"
                 android:textColor="#000"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/summary"
                 android:layout_width="match_parent"
@@ -130,7 +127,6 @@
                 android:padding="5dp"
                 android:textColor="#000"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/approval"
                 android:layout_width="match_parent"
@@ -138,7 +134,6 @@
                 android:padding="5dp"
                 android:textColor="#000"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/status"
                 android:layout_width="match_parent"
@@ -147,7 +142,6 @@
                 android:text=""
                 android:textColor="#000"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/crqReason"
                 android:layout_width="match_parent"

@@ -83,14 +83,12 @@ public class CheckoutView extends AppCompatActivity {
         Retrofit retrofit = builder.build();
 
         VisitorAdapter adapter = retrofit.create(VisitorAdapter.class);
-
         Call<Visitor> call = adapter.checkout(visitor);
         final ProgressDialog progressDialog;
         progressDialog = new ProgressDialog(CheckoutView.this);
         progressDialog.setMessage("Updating Time out.Please Wait.......");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
-
         call.enqueue(new Callback<Visitor>() {
             @Override
             public void onResponse(Call<Visitor> call, Response<Visitor> response) {
@@ -118,7 +116,6 @@ public class CheckoutView extends AppCompatActivity {
             @Override
             public void onFailure(Call<Visitor> call, Throwable t) {
                 Toast.makeText(CheckoutView.this, "creation failed!", Toast.LENGTH_SHORT).show();
-
             }
         });
 
