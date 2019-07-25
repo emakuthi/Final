@@ -71,19 +71,6 @@ public class App {
         //checkin Visitor
         post("/visitorIn/:id", (req, res) -> {
             int idOfCategoryToEdit = Integer.parseInt(req.params(":id"));
-            Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
-            visitorDao.updateTimeIn(idOfCategoryToEdit, timestamp);
-            res.redirect("/");
-            return null;
-        }, new HandlebarsTemplateEngine());
-
-       //checkout the visitor;
-
-        post("/visitor/:id", (req, res) -> {
-            int idOfCategoryToEdit = Integer.parseInt(req.params(":id"));
-            Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
-            visitorDao.updateTimeOut(idOfCategoryToEdit, timestamp);
-            res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
 
